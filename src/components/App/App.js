@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AboutProject from '../Main/AboutProject/AboutProject';
+import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
@@ -11,10 +11,9 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Привет</h1>
+    <div className="app">
       <Routes>
-        <Route path='/' element={<AboutProject />} />
+        <Route path='/' element={<Main />} />
         <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
         <Route path='/profile' element={<Profile />} />

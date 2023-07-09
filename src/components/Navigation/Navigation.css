@@ -1,0 +1,16 @@
+.navigation {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  column-gap: 16px;
+}
+
+.navigation__item {
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+}

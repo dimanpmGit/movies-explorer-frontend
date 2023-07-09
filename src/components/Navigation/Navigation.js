@@ -3,7 +3,14 @@ import './Navigation.css';
 
 const Navigation = () => {
   return (
-    <h2>компонент, который отвечает за меню навигации на сайте</h2>
+    <ul className='navigation'>
+      <li className='navigation__item'>
+        Регистрация
+      </li>
+      <li className='navigation__item'>
+        Войти
+      </li>
+    </ul>
   )
 };
 
