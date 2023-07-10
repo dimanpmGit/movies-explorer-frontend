@@ -33,7 +33,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  padding: 20px 0 19px;
+  padding: 15px 0 13px;
   position: relative;
 }
 
@@ -42,11 +42,15 @@
 }
 
 .portfolio__item:after {
-  content: url('../../../images/arrow.svg');
-  
-  right: 0;
+  content: "";
+  background-image: url('../../../images/arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
-  align-items: center;
+  width: 30px;
+  height: 60px;
+  padding: 1px 0 0;
+  margin: 0;
 }
 
 .portfolio__link {
