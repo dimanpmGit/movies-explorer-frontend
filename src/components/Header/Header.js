@@ -10,7 +10,8 @@ const Header = () => {
       <div className='header__container'>
       <Logo />
       <div className='header__menu'>
-        <AuthMenu />
+        {/*<AuthMenu />*/}
+        <Navigation />
       </div>
     </div>
     </div>
