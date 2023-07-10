@@ -1,0 +1,58 @@
+.portfolio {
+  background-color: #202020;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__container {
+  margin: 0 auto;
+  padding: 100px 70px;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio__title {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #8b8b8b;
+}
+
+.portfolio__links {
+  margin: 0;
+  padding: 30px 0 0;
+  list-style: none;
+  width: 100%;
+}
+
+.portfolio__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 20px 0 19px;
+  position: relative;
+}
+
+.portfolio__item:not(:last-of-type) {
+  border-bottom: 1px solid #404040;
+}
+
+.portfolio__item:after {
+  content: url('../../../images/arrow.svg');
+  
+  right: 0;
+  cursor: pointer;
+  align-items: center;
+}
+
+.portfolio__link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+}
