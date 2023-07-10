@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   min-width: 38px;
+  max-width: 38px;
   min-height: 38px;
   background-image: url(../../images/logo.svg);
   background-repeat: no-repeat;

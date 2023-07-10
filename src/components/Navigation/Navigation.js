@@ -5,10 +5,10 @@ const Navigation = () => {
   return (
     <ul className='navigation'>
       <li className='navigation__item'>
-        Регистрация
+        Фильмы
       </li>
       <li className='navigation__item'>
-        Войти
+        Сохранённые фильмы
       </li>
     </ul>
   )
