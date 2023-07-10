@@ -5,7 +5,7 @@ const AboutProject = () => {
   return (
     <div className='about-project'>
       <div className='about-project__container'>
-        <h2 className='about-project__title'>О проекте</h2>
+        <h2 className='about-project__title main__title'>О проекте</h2>
         <ul className='about-project__description'>
           <li className='about-project__item'>
             <h3 className='about-project__item-title'>
