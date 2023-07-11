@@ -7,17 +7,6 @@ const MoviesCardList = () => {
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
         <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
       </div>
     </div>
   )
