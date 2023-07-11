@@ -10,8 +10,8 @@ const Header = () => {
       <div className='header__container'>
       <Logo />
       <div className='header__menu'>
-        {/*<AuthMenu />*/}
-        <Navigation />
+        <AuthMenu />
+        {/*<Navigation />*/}
       </div>
     </div>
     </div>

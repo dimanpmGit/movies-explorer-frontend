@@ -5,10 +5,11 @@
 .techs__container {
   margin: 0 auto;
   padding: 100px 70px;
-  max-width: 1140px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .techs__title {
@@ -55,4 +56,30 @@
   height: 60px;
   background-color: #303030;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__container {
+    padding: 90px 50px;
+  }
+
+  .techs__subtitle {
+    padding-top: 80px;
+  }
+
+  .techs__description {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .techs__technologies {
+    padding-top: 83px;
+  }
+
+  .techs__technologies-item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+  }
 }

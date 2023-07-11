@@ -9,8 +9,8 @@ const Promo = () => {
         <h1 className='promo__title'>
           Учебный проект студента факультета Веб-разработки.
         </h1>
-        <img className='promo__image' src={promoImg} alt='Учебный проект студента факультета Веб-разработки'/>
-      </div>
+        <div className='promo__image'></div>
+        </div>
     </div>
   )
 };

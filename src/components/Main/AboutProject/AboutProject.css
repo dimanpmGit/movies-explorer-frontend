@@ -78,3 +78,24 @@
   font-weight: 500;
   color: #8B8B8B;
 }
+
+@media screen and (max-width: 768px) {
+  .about-project__container {
+    padding: 90px 50px;
+  }
+
+  .about-project__description {
+    column-gap: 38px;
+  }
+
+  .about-project__item-text {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 19px;
+  }
+
+  .about-project__periods {
+    padding-top: 93px;
+    grid-template-columns: 140px 528px;
+  }
+}

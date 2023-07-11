@@ -1,15 +1,15 @@
 .header {
   margin: 0;
   padding: 0;
-  /*background-color: #073042;*/
 }
 
 .header__container {
   margin: 0 auto;
   padding: 18px 70px;
-  max-width: 1140px;
+  max-width: 1280px;
   display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .header__menu {
@@ -20,4 +20,12 @@
   align-items: center;
   padding: 0 0 0 44px;
   margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    max-width: 768px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }  
 }

@@ -28,7 +28,7 @@
 
 .about-me__student-info {
   margin: 0;
-  padding: 18px 0 0;
+  padding: 19px 0 0;
   font-size: 18px;
   line-height: 20px;
   font-weight: 500;
@@ -36,11 +36,19 @@
 
 .about-me__student-biography {
   margin: 0;
-  padding: 26px 0 0;
+  padding: 26px 30px 0 0;
   font-size: 14px;
   line-height: 22px;
   font-weight: 400;
   max-width: 595px;
+}
+
+.about-me__student-photo {
+  margin: 0;
+  padding: 0;
+  max-width: 270px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .about-me__github-link {
@@ -52,4 +60,37 @@
   display: block;
   font-size: 14px;
   font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__container {
+    padding: 90px 50px 0;
+  }
+
+  .about-me__student-name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__student-info {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 16px;
+  }
+
+  .about-me__student-biography {
+    padding-right: 49px;
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+    max-width: 364px;
+  }
+
+  .about-me__student-photo {
+    max-width: 255px;
+  }
+
+  .about-me__github-link {
+    padding-top: 87px;
+  }
 }

@@ -1,15 +1,16 @@
 .footer {
-  background-color: #202020;
+  background: #202020;
   margin: 0;
   padding: 0;
 }
 
 .footer__container {
   margin: 0 auto;
-  padding: 84px 70px 0;
-  max-width: 1140px;
+  padding: 84px 70px 20px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .footer__title {
@@ -26,7 +27,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0;
-  padding: 7px 0 20px;
+  padding: 7px 0 0;
 }
 
 .footer__links {
@@ -40,4 +41,10 @@
   text-decoration: none;
   color: #fff;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .footer__container {
+    padding: 59px 30px 6px;
+  }
 }
