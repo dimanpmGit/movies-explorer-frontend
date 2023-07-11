@@ -5,7 +5,6 @@
   justify-content: space-between;
   padding: 0;
   margin: 0;
-  cursor: pointer;
 }
 
 .authmenu__item {
@@ -16,6 +15,11 @@
   padding: 8px 20px;
   border-radius: 3px;
   transition: all .3s ease;
+}
+
+.authmenu__link {
+  text-decoration: none;
+  color: #fff;
 }
 
 .authmenu__item:hover {

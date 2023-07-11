@@ -9,10 +9,10 @@ import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 
 
-const Main = () => {
+const Main = (props) => {
   return (
     <div className='main'>
-      <Header />
+      <Header isMain={props.isMain}/>
       <Promo />
       <AboutProject />
       <Techs  />

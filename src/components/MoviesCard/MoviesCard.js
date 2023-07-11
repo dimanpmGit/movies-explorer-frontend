@@ -13,14 +13,15 @@ import pic10 from '../../images/pic__10.png'
 import pic11 from '../../images/pic__11.png'
 import pic12 from '../../images/pic__12.png'
 
-const MoviesCard = () => {
+const MoviesCard = (props) => {
+  if (!props.allMovies) {
   return (
     <>
       <div className='movies-card'>
         <img className='movies-card__picture' src={pic01} alt='There are 33 words about design'/>
         <div className='movies-card__name-and-like'>
           <p className='movies-card__name app__link'>33 слова о дизайне</p>
-          <div className='movies-card__like movies-card__like_active app__link'></div>
+          <div className='movies-card__close-btn app__link'></div>
         </div>
         <p className='movies-card__movie-duration'>1ч 47м</p>
       </div>
@@ -28,7 +29,7 @@ const MoviesCard = () => {
         <img className='movies-card__picture' src={pic02} alt='There are 33 words about design'/>
         <div className='movies-card__name-and-like'>
           <p className='movies-card__name app__link'>Киноальманах «100 лет дизайна»</p>
-          <div className='movies-card__like app__link'></div>
+          <div className='movies-card__close-btn app__link'></div>
         </div>
         <p className='movies-card__movie-duration'>1ч 3м</p>
       </div>
@@ -36,11 +37,39 @@ const MoviesCard = () => {
         <img className='movies-card__picture' src={pic03} alt='There are 33 words about design'/>
         <div className='movies-card__name-and-like'>
           <p className='movies-card__name app__link'>В погоне за Бенкси</p>
-          <div className='movies-card__like app__link'></div>
+          <div className='movies-card__close-btn app__link'></div>
         </div>
         <p className='movies-card__movie-duration'>1ч 42м</p>
       </div>
-      {/*
+      </>
+      )};
+
+    return (
+      <>
+        <div className='movies-card'>
+          <img className='movies-card__picture' src={pic01} alt='There are 33 words about design' />
+          <div className='movies-card__name-and-like'>
+            <p className='movies-card__name app__link'>33 слова о дизайне</p>
+            <div className='movies-card__like movies-card__like_active app__link'></div>
+          </div>
+          <p className='movies-card__movie-duration'>1ч 47м</p>
+        </div>
+        <div className='movies-card'>
+          <img className='movies-card__picture' src={pic02} alt='There are 33 words about design' />
+          <div className='movies-card__name-and-like'>
+            <p className='movies-card__name app__link'>Киноальманах «100 лет дизайна»</p>
+            <div className='movies-card__like app__link'></div>
+          </div>
+          <p className='movies-card__movie-duration'>1ч 3м</p>
+        </div>
+        <div className='movies-card'>
+          <img className='movies-card__picture' src={pic03} alt='There are 33 words about design' />
+          <div className='movies-card__name-and-like'>
+            <p className='movies-card__name app__link'>В погоне за Бенкси</p>
+            <div className='movies-card__like app__link'></div>
+          </div>
+          <p className='movies-card__movie-duration'>1ч 42м</p>
+        </div>
       <div className='movies-card'>
         <img className='movies-card__picture' src={pic04} alt='There are 33 words about design' />
         <div className='movies-card__name-and-like'>
@@ -113,7 +142,6 @@ const MoviesCard = () => {
         </div>
         <p className='movies-card__movie-duration'>1ч 7м</p>
       </div>
-      */}
     </>
   )
 };

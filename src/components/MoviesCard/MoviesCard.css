@@ -40,6 +40,21 @@
   background-image: url('../../images/heart-red.svg');
 }
 
+.movies-card__close-btn {
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../images/close-btn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+}
+
+.movies-card:hover .movies-card__close-btn {
+  opacity: 1;
+}
+
 .movies-card__movie-duration {
   margin: 0;
   padding: 10px 16px 16px;

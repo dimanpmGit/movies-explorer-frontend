@@ -16,7 +16,7 @@ const AboutMe = () => {
               и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
               С&nbsp;2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
-            <a className='about-me__github-link' href='http://ya.ru'>Github</a>
+            <a className='about-me__github-link' href='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank">Github</a>
           </dvi>
           <img className='about-me__student-photo' src={studentPhoto} alt='vitalii' />
         </div>

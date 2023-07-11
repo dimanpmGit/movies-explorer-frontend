@@ -19,7 +19,7 @@ const Login = () => {
         </form>
         <div className='login__enter-menu'>
           <p className='login__enter-menu-text'>Ещё не зарегистрированы?</p>
-          <a className='login__enter-menu-link app__link' href='/signin'>Регистрация</a>
+          <a className='login__enter-menu-link app__link' href='/signup'>Регистрация</a>
         </div>
       </div>
     </div>

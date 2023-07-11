@@ -5,10 +5,10 @@ const AuthMenu = () => {
   return (
     <ul className='authmenu'>
       <li className='authmenu__item'>
-        Регистрация
+        <a className='authmenu__link' href='/signup'>Регистрация</a>
       </li>
       <li className='authmenu__item'>
-        Войти
+        <a className='authmenu__link' href='/signin'>Войти</a>
       </li>
     </ul>
   )

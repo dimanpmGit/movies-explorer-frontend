@@ -6,12 +6,12 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoreButton from '../MoreButton/MoreButton';
 
-const Movies = () => {
+const Movies = (props) => {
   return (
     <>
       <Header />
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList allMovies={props.allMovies} />
       <MoreButton />
       <Footer />
     </>

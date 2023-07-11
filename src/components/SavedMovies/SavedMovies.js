@@ -5,13 +5,13 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 
-const SavedMovies = () => {
+const SavedMovies = (props) => {
   return (
     <div className='saved-movies'>
       <Header />
       <SearchForm />
       <div className='saved-movies__container'>
-        <MoviesCard />
+        <MoviesCard allMovies={props.allMovies} />
       </div>
       <div className='saved-movies__devider'></div>
       <Footer />

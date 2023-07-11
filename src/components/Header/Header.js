@@ -4,14 +4,13 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import AuthMenu from '../AuthMenu/AuthMenu';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className='header'>
       <div className='header__container'>
       <Logo />
       <div className='header__menu'>
-        <AuthMenu />
-        {/*<Navigation />*/}
+        {props.isMain ? <AuthMenu /> : <Navigation />}
       </div>
     </div>
     </div>

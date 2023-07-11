@@ -2,11 +2,11 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-const MoviesCardList = () => {
+const MoviesCardList = (props) => {
   return (
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
-        <MoviesCard />
+        <MoviesCard allMovies={props.allMovies} />
       </div>
     </div>
   )
