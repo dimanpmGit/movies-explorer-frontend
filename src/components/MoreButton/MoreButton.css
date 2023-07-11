@@ -19,6 +19,7 @@
   font-weight: 500;
   box-sizing: border-box;
   cursor: pointer;
+  transition: all .3s ease;
 }
 
 .more-button__btn:hover {

@@ -17,3 +17,12 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
 }
+
+.app__link {
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.app__link:hover {
+  opacity: .8;
+}

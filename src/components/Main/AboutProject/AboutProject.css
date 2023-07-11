@@ -1,5 +1,7 @@
 .about-project {
-
+  margin: 0;
+  padding: 0;
+  background: #202020;
 }
 
 .about-project__container {

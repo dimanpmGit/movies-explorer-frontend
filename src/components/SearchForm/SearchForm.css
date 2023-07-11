@@ -47,6 +47,7 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
+  transition: all .3s ease;
 }
 
 .search-form__button:hover {

@@ -11,6 +11,7 @@
   position: relative;
   width: 36px;
   height: 20px;
+  cursor: pointer;
 }
 
 .filter-checkbox__btn {
@@ -30,7 +31,6 @@
   left: 0;
   background: #202020;
   border-radius: 20px;
-  transition: all .3s ease;
 }
 
 .filter-checkbox__sliding-btn::after {
@@ -42,11 +42,11 @@
   background: #3ddc84;
   top: 2px;
   right: 2px;
+  transition: all .3s ease;
 }
 
 .filter-checkbox__btn:checked + .filter-checkbox__sliding-btn::after {
   transform: translate(-16px);
-  transition: all .3s ease;
   background: #3e3e3e;
 }
 

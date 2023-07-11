@@ -11,7 +11,7 @@ import Portfolio from './Portfolio/Portfolio';
 
 const Main = () => {
   return (
-    <>
+    <div className='main'>
       <Header />
       <Promo />
       <AboutProject />
@@ -19,7 +19,7 @@ const Main = () => {
       <AboutMe />
       <Portfolio />
       <Footer />
-    </>
+    </div>
   );
 };
 
