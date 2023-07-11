@@ -104,3 +104,15 @@
   font-size: 14px;
   color: #4285f4;
 }
+
+@media screen and (max-width: 768px) {
+  .register__container {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 231px;
+  }
+
+  .register__title {
+    padding-top: 38px;
+  }
+}

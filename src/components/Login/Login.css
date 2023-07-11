@@ -104,3 +104,11 @@
   font-size: 14px;
   color: #4285f4;
 }
+
+@media screen and (max-width: 768px) {
+  .login__container {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 231px;
+  }
+}

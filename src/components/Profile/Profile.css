@@ -67,3 +67,17 @@
   color: #fff;
   border: none;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__container {
+    padding: 235px 30px 268px;
+  }
+
+  .profile__form {
+    padding-top: 78px;
+  }
+
+  .profile__edit {
+    padding-top: 209px;
+  }
+}

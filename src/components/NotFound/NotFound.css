@@ -1,11 +1,11 @@
 .not-found {
   margin: 0;
-  padding: 70px 70px 6px0;
+  padding: 70px 70px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #202022;
+  background: #202020;
   height: 100vh;
 }
 
@@ -27,4 +27,12 @@
   padding: 184px 0 0;
   text-decoration: none;
   color: #4285f4;
+}
+
+@media screen and (max-width: 768px) {
+  .not-found {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 119px;
+  }
 }
