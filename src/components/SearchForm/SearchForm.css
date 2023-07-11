@@ -40,12 +40,17 @@
   width: 100px;
   border-radius: 5px;
   margin: 0 10px 0 0;
-  background-color: #4285F4;
+  background: rgb(66, 133, 244);
   color: #fff;
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
   border: none;
+  cursor: pointer;
+}
+
+.search-form__button:hover {
+  background-color: rgba(66, 133, 244, .8);
 }
 
 .search-form__hr {
