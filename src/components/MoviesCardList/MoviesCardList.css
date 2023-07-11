@@ -12,12 +12,6 @@
   gap: 37px 24px;
 }
 
-.saved-movies__devider {
-  margin: 0;
-  padding: 0;
-  height: 140px;
-}
-
 @media screen and (max-width: 768px) {
   .movies-card-list {
     height: 1230px;

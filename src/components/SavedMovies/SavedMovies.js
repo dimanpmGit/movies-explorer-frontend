@@ -13,7 +13,7 @@ const SavedMovies = (props) => {
       <div className='saved-movies__container'>
         <MoviesCard allMovies={props.allMovies} />
       </div>
-      <div className='saved-movies__devider'></div>
+      <div className='saved-movies__divider'></div>
       <Footer />
     </div>
   )
