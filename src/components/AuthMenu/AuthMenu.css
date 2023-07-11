@@ -1,4 +1,4 @@
-.authmenu {
+.auth-menu {
   list-style: none;
   display: flex;
   column-gap: 10px;
@@ -7,7 +7,9 @@
   margin: 0;
 }
 
-.authmenu__item {
+.auth-menu__link {
+  text-decoration: none;
+  color: #fff;
   margin: 0;
   font-size: 12px;
   line-height: 16px;
@@ -17,16 +19,7 @@
   transition: all .3s ease;
 }
 
-.authmenu__link {
-  text-decoration: none;
-  color: #fff;
-}
-
-.authmenu__item:hover {
+.auth-menu__link:hover {
   color: #000;
-  background-color: #3DDC84;
-}
-
-@media screen and (max-width: 768px) {
-  
+  background: #3DDC84;
 }

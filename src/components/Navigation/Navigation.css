@@ -1,6 +1,12 @@
 .navigation {
   padding: 0;
-  margin: 0;  
+  margin: 0;
+  position: relative;
+}
+
+.navigation__wrapper {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -46,7 +52,7 @@
 }
 
 .navigation__profile-link::after {
-  content: " ";
+  content: "";
   width: 26px;
   height: 30px;
   background-image: url('../../images/accaunt.svg');
@@ -56,4 +62,29 @@
   padding: 0;
   background-color: #313131;
   border-radius: 4px;
+}
+
+.navigation__hamburger {
+  content: "";
+  width: 44px;
+  height: 44px;
+  background-image: url('../../images/icon-main.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -7px;
+  right: 1px;
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__wrapper {
+    opacity: 0;
+  }
+
+  .navigation__hamburger {
+    opacity: 1;
+  }
 }

@@ -1,6 +1,6 @@
 .more-button {
   margin: 0;
-  padding: 50px 0 74px;
+  padding: 50px 70px 74px;
   display: flex;
   justify-content: center;
 }
@@ -26,4 +26,10 @@
   background: #3ddc84;
   color: #000;
   border-color: #3ddc84;
+}
+
+@media screen and (max-width: 768px) {
+  .more-button {
+    padding: 59px 30px 99px;
+  }
 }

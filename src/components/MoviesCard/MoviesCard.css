@@ -24,6 +24,9 @@
 .movies-card__name {
   margin: 0;
   padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .movies-card__like {
@@ -60,4 +63,16 @@
   padding: 10px 16px 16px;
   color: #8b8b8b;
   font-size: 11px;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card {
+    max-width: 339px;
+    max-height: 262px;
+  }
+
+  .movies-card__movie-duration {
+    padding-top: 7px;
+    padding-bottom: 14px;;
+  }
 }

@@ -61,3 +61,14 @@
   padding: 44px 0 0;
   transition: .2;
 }
+
+@media screen and (max-width: 768px) {
+  .search-form__container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .search-form__hr {
+    padding-top: 51px;
+  }
+}
