@@ -40,6 +40,7 @@ const MoviesCard = () => {
         </div>
         <p className='movies-card__movie-duration'>1ч 42м</p>
       </div>
+      {/*
       <div className='movies-card'>
         <img className='movies-card__picture' src={pic04} alt='There are 33 words about design' />
         <div className='movies-card__name-and-like'>
@@ -112,6 +113,7 @@ const MoviesCard = () => {
         </div>
         <p className='movies-card__movie-duration'>1ч 7м</p>
       </div>
+      */}
     </>
   )
 };
