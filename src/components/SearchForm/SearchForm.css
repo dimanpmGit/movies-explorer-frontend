@@ -1,7 +1,7 @@
 .search-form__container {
   margin: 0 auto;
-  padding: 70px 70px 100px;
-  width: 1140px;
+  padding: 70px 70px 10px;
+  max-width: 1140px;
   display: flex;
   flex-direction: column;
 }
@@ -46,58 +46,6 @@
   line-height: 18px;
   font-weight: 500;
   border: none;
-}
-
-.search-form__short-films-wrapper {
-  margin: 0;
-  padding: 26px 0 0;
-}
-
-.search-form__short-films {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  width: 36px;
-  height: 20px;
-}
-
-.search-form__short-films-btn {
-  display: none;
-}
-
-.search-form__short-films-label {
-  margin: 0 0 0 50px;
-  padding: 2px 0 0;
-}
-
-.search-form__sliding-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: #202020;
-  border-radius: 20px;
-  transition: all .3s ease;
-}
-
-.search-form__sliding-btn::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #3ddc84;
-  top: 2px;
-  right: 2px;
-}
-
-.search-form__short-films-btn:checked + .search-form__sliding-btn::after {
-  transform: translate(-16px);
-  transition: all .3s ease;
-  background: #424242;
 }
 
 .search-form__hr {

@@ -1,9 +1,25 @@
 import React from 'react';
 import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
 const MoviesCardList = () => {
   return (
-    <h2>компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством</h2>
+    <div className='movies-card-list'>
+      <div className='movies-card-list__container'>
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+      </div>
+    </div>
   )
 };
 
