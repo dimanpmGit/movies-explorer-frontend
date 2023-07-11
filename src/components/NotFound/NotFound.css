@@ -1,0 +1,30 @@
+.not-found {
+  margin: 0;
+  padding: 70px 70px 6px0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #202022;
+  height: 100vh;
+}
+
+.not-found__err-code {
+  margin: 0;
+  padding: 0;
+  font-size: 140px;
+  font-weight: 400;
+}
+
+.not-found__err-description {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.not-found__back-link {
+  margin: 0;
+  padding: 184px 0 0;
+  text-decoration: none;
+  color: #4285f4;
+}
