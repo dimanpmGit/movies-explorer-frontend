@@ -22,3 +22,12 @@
     gap: 30px 30px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .movies-card-list__container {
+    grid-template-columns: repeat(1, minmax(100px, 300px));
+    grid-auto-rows: 237px;
+    padding: 40px 9px 0;
+    gap: 14px;
+  }
+}

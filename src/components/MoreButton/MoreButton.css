@@ -33,3 +33,13 @@
     padding: 59px 30px 99px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .more-button {
+    padding: 78px 14px 0;
+  }
+
+  .more-button__btn {
+    max-width: 240px;
+  }
+}

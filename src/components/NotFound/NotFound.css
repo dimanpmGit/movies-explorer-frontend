@@ -6,7 +6,15 @@
   justify-content: center;
   align-items: center;
   background: #202020;
-  height: 100vh;
+  height: 80vh;
+  position: relative;
+}
+
+.not-found__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .not-found__err-code {
@@ -34,5 +42,29 @@
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 119px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .not-found {
+    padding: 78px 14px 48px;
+    position: relative;
+  }
+
+  .not-found__err-code {
+    font-size: 80px;
+  }
+
+  .not-found__err-description {
+    font-size: 12px;
+    padding-top: 5px;
+  }
+
+  .not-found__back-link {
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
   }
 }

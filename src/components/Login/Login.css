@@ -112,3 +112,36 @@
     padding-bottom: 231px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .login__container {
+    padding: 57px 17px 29px;
+    align-items: center;
+  }
+
+  .login__title {
+    padding-top: 50px;
+  }
+
+  .login__form {
+    padding-top: 70px;
+    min-width: 260px;
+  }
+
+  .login__submit-btn {
+    margin-top: 291px;
+    font-size: 12px;
+  }
+
+  .login__enter-menu {
+    padding-top: 14px;
+  }
+
+  .login__enter-menu-text {
+    font-size: 12px;
+  }
+
+  .login__enter-menu-link {
+    font-size: 12px;
+  }
+}

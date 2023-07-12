@@ -53,3 +53,15 @@
 .filter-checkbox__btn:checked + .filter-checkbox__sliding-btn {
   background: #505050;
 }
+
+@media screen and (max-width: 320px) {
+  .filter-checkbox__label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .filter-checkbox {
+    padding-top: 29px;
+    margin-left: -2px;
+  }
+}

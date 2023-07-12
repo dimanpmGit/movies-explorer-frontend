@@ -73,3 +73,28 @@
     padding-top: 51px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .search-form__container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .search-form__input {
+    height: 56px;
+    padding-left: 9px;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+
+  .search-form__button {
+    width: 80px;
+    height: 44px;
+    margin-right: 7px;
+  }
+
+  .search-form__hr {
+    padding-top: 64px;
+  }
+}

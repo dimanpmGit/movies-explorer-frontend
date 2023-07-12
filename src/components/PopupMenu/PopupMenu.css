@@ -77,3 +77,18 @@
 .popup-menu__link:hover {
   border-bottom: 2px solid #fff;
 }
+
+@media screen and (max-width: 320px) {
+  .popup-menu__container {
+    padding: 145px 14px 48px;
+  }
+
+  .popup-menu__item:not(:first-of-type) {
+    padding-top: 24px;
+  }
+
+  .popup-menu__close-btn {
+    top: 18px;
+    right: 18px;
+  }
+}
