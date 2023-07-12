@@ -10,6 +10,7 @@ import pic09 from '../images/pic__09.jpg';
 import pic10 from '../images/pic__10.jpg';
 import pic11 from '../images/pic__11.jpg';
 import pic12 from '../images/pic__12.jpg';
+import studentPhoto from '../images/student.png';
 
 const cards = [
   {
@@ -110,4 +111,4 @@ const cards = [
   },
 ];
 
-export { cards };
+export { cards, studentPhoto };

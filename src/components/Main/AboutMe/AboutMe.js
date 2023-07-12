@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutMe.css';
-import studentPhoto from '../../../images/student.png';
+import { studentPhoto } from '../../../utils/constants';
 
 const AboutMe = () => {
   return (
@@ -16,7 +16,7 @@ const AboutMe = () => {
               и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
               С&nbsp;2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
-            <a className='about-me__github-link' href='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank">Github</a>
+            <a className='about-me__github-link' href='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</a>
           </dvi>
           <img className='about-me__student-photo' src={studentPhoto} alt='vitalii' />
         </div>
