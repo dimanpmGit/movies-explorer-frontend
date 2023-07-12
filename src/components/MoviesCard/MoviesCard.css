@@ -1,8 +1,8 @@
 .movies-card {
   display: flex;
   flex-direction: column;
-  max-width: 364px;
   max-height: 281px;
+  width: 100%;
   background: #222;
   border-radius: 6px;
   margin: 0;
@@ -10,7 +10,8 @@
 }
 
 .movies-card__picture {
-  width: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .movies-card__name-and-like {
@@ -48,7 +49,7 @@
   padding: 0;
   width: 30px;
   height: 30px;
-  background-image: url('../../images/close-btn.svg');
+  background-image: url('../../images/close-small-btn.svg');
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0;

@@ -1,18 +1,16 @@
 import React from 'react';
 import './SavedMovies.css';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 
-const SavedMovies = (props) => {
+const SavedMovies = ({ onlySaved }) => {
   return (
     <div className='saved-movies'>
       <Header />
       <SearchForm />
-      <div className='saved-movies__container'>
-        <MoviesCard allMovies={props.allMovies} />
-      </div>
+      <MoviesCardList onlySaved={onlySaved} />
       <div className='saved-movies__divider'></div>
       <Footer />
     </div>

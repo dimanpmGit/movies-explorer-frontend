@@ -1,0 +1,26 @@
+.account-menu__profile-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 17px;
+  align-items: center;
+}
+
+.account-menu__profile-link::after {
+  content: "";
+  width: 26px;
+  height: 30px;
+  background-image: url('../../images/accaunt.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  background-color: #313131;
+  border-radius: 4px;
+}

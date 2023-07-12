@@ -1,7 +1,8 @@
 import React from 'react';
 import './Navigation.css';
+import AccountMenu from '../AccountMenu/AccountMenu';
 
-const Navigation = () => {
+const Navigation = ({ onMenuClick }) => {
   return (
     <div className='navigation'>
       <div className='navigation__wrapper'>
@@ -17,9 +18,9 @@ const Navigation = () => {
             </a>
           </li>
         </ul>
-        <a className='navigation__profile-link app__link' href='/profile'>Аккаунт</a>
+        <AccountMenu />
       </div>
-      <div className='navigation__hamburger'></div>
+      <button className='navigation__hamburger' type='button' onClick={onMenuClick}></button>
     </div>
   )
 };

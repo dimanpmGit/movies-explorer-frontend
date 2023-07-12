@@ -5,13 +5,14 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoreButton from '../MoreButton/MoreButton';
+import PopupMenu from '../PopupMenu/PopupMenu';
 
-const Movies = (props) => {
+const Movies = ({ onMenuClick, onlySaved }) => {
   return (
     <>
-      <Header />
+      <Header onMenuClick={onMenuClick} />
       <SearchForm />
-      <MoviesCardList allMovies={props.allMovies} />
+      <MoviesCardList onlySaved={onlySaved} />
       <MoreButton />
       <Footer />
     </>

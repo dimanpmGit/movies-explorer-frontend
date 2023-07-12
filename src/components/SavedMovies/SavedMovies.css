@@ -16,7 +16,7 @@
 .saved-movies__divider {
   margin: 0;
   padding: 0;
-  height: 140px;
+  height: 230px;
 }
 
 @media screen and (max-width: 768px) {
@@ -29,6 +29,6 @@
   }
 
   .saved-movies__divider {
-    height: 88px;
+    height: 180px;
   }
 }

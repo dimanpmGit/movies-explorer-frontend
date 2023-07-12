@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   position: relative;
+  width: 100%;
 }
 
 .navigation__wrapper {
@@ -9,7 +10,6 @@
   padding: 0;
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 
 .navigation__films {
@@ -37,37 +37,12 @@
   font-weight: 500;
 }
 
-.navigation__profile-link {
-  text-decoration: none;
-  color: #fff;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 500;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: flex-end;
-  column-gap: 17px;
-  align-items: center;
-}
-
-.navigation__profile-link::after {
-  content: "";
-  width: 26px;
-  height: 30px;
-  background-image: url('../../images/accaunt.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  margin: 0;
-  padding: 0;
-  background-color: #313131;
-  border-radius: 4px;
-}
-
 .navigation__hamburger {
   content: "";
   width: 44px;
   height: 44px;
+  background: none;
+  border: none;
   background-image: url('../../images/icon-main.svg');
   background-repeat: no-repeat;
   background-position: center center;
@@ -77,6 +52,7 @@
   top: -7px;
   right: 1px;
   opacity: 0;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
