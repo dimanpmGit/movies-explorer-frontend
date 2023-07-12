@@ -12,12 +12,12 @@ const Footer = () => {
           <p className='footer__copyright'>&copy; 2023</p>
           <ul className='footer__links'>
             <li className='footer__item'>
-              <a className='footer__link app__link' href='https://practicum.yandex.ru' target='_blank'>
+              <a className='footer__link app__link' href='https://practicum.yandex.ru' target='_blank' rel='noreferrer'>
                 Яндекс.Практикум
               </a>
             </li>
             <li className='footer__item'>
-              <a className='footer__link app__link' href='https://github.com/dimanpmGit' target='_blank'>
+              <a className='footer__link app__link' href='https://github.com/dimanpmGit' target='_blank' rel='noreferrer'>
                 Github
               </a>
             </li>

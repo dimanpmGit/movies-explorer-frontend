@@ -13,7 +13,7 @@ import './App.css';
 import PopupMenu from '../PopupMenu/PopupMenu';
 
 function App() {
-  const [isMain, setIsMain] = useState(true);
+  const [isMain] = useState(true);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
 
   function handleShowPopupBtnClick() {
