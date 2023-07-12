@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutMe.css';
-import { studentPhoto } from '../../../utils/constants';
+import { studentPic } from '../../../utils/constants';
 
 const AboutMe = () => {
   return (
@@ -18,7 +18,7 @@ const AboutMe = () => {
             </p>
             <a className='about-me__github-link' href='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</a>
           </dvi>
-          <img className='about-me__student-photo' src={studentPhoto} alt='vitalii' />
+          <img className='about-me__student-photo' src={studentPic} alt='vitalii' />
         </div>
       </div>
     </div>

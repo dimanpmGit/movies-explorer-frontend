@@ -50,6 +50,7 @@
   display: flex;
   object-fit: contain;
   object-position: center;
+  border-radius: 10px;
 }
 
 .about-me__github-link {

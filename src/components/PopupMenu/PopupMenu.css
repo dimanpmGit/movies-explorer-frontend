@@ -12,6 +12,7 @@
   visibility: hidden;
   opacity: 0;
   transition: all .9s ease;
+  z-index: 100;
 }
 
 .popup-menu_is-opened {
