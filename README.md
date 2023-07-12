@@ -12,6 +12,9 @@
 * '/not-found' - страница 404.
 * всплывающее меню на разрешениях ниже 768px.
 
+Картинки svg оптимизированы сервисом [SVGOMG](https://jakearchibald.github.io/svgomg/).
+Растровые картинки сохранены в оптимизированном jpg.
+
 ### О проекте
 
 Протестировано в браузерах Google Chrome (в том числе с Pixel Perfect), Yandex, Firefox, Opera, Safari.

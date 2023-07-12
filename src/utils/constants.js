@@ -1,15 +1,15 @@
-import pic01 from '../images/pic__01.png';
-import pic02 from '../images/pic__02.png';
-import pic03 from '../images/pic__03.png';
-import pic04 from '../images/pic__04.png';
-import pic05 from '../images/pic__05.png';
-import pic06 from '../images/pic__06.png';
-import pic07 from '../images/pic__07.png';
-import pic08 from '../images/pic__08.png';
-import pic09 from '../images/pic__09.png';
-import pic10 from '../images/pic__10.png';
-import pic11 from '../images/pic__11.png';
-import pic12 from '../images/pic__12.png';
+import pic01 from '../images/pic__01.jpg';
+import pic02 from '../images/pic__02.jpg';
+import pic03 from '../images/pic__03.jpg';
+import pic04 from '../images/pic__04.jpg';
+import pic05 from '../images/pic__05.jpg';
+import pic06 from '../images/pic__06.jpg';
+import pic07 from '../images/pic__07.jpg';
+import pic08 from '../images/pic__08.jpg';
+import pic09 from '../images/pic__09.jpg';
+import pic10 from '../images/pic__10.jpg';
+import pic11 from '../images/pic__11.jpg';
+import pic12 from '../images/pic__12.jpg';
 
 const cards = [
   {
