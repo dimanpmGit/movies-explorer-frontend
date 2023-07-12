@@ -7,9 +7,10 @@
 .portfolio__container {
   margin: 0 auto;
   padding: 100px 70px;
-  max-width: 1140px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .portfolio__title {
@@ -46,6 +47,7 @@
   background-image: url('../../../images/arrow.svg');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain;
   cursor: pointer;
   width: 30px;
   height: 60px;
@@ -77,5 +79,36 @@
 
   .portfolio__item:not(:last-of-type) {
     border-color: #e6e6e6;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio__container {
+    padding: 68px 14px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__links {
+    padding-top: 21px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__item {
+    padding: 21px 0 18px;
+  }
+
+  .portfolio__item:after {
+    width: 11px;
+    height: 11px;
+    margin-right: 4px;
+    margin-top: -1px;
   }
 }

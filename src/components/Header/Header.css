@@ -27,5 +27,12 @@
     max-width: 768px;
     padding-left: 30px;
     padding-right: 30px;
-  }  
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__container {
+    max-width: 320px;
+    padding: 18px 14px;
+  }
 }

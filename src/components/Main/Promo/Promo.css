@@ -29,7 +29,7 @@
   min-height: 244px;
   background-image: url('../../../images/text__COLOR_landing-logo.svg');
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: center bottom;
   background-size: contain;
 }
 
@@ -46,5 +46,24 @@
   .promo__image {
     padding-top: 126px;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo__container {
+    padding: 183px 0 40px;
+  }
+
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+    min-width: 300px;
+  }
+
+  .promo__image {
+    width: 100%;
+    object-fit: cover;
+    padding-top: 47px;
+    background-size: 680px 230px;
   }
 }

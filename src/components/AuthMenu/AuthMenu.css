@@ -23,3 +23,15 @@
   color: #000;
   background: #3DDC84;
 }
+
+@media screen and (max-width: 320px) {
+  .auth-menu {
+    column-gap: 5px;
+  }
+
+  .auth-menu__link {
+    font-size: 10px;
+    line-height: 16px;
+    padding: 5px 11px;
+  }
+}

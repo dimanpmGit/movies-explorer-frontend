@@ -7,9 +7,10 @@
 .about-project__container {
   margin: 0 auto;
   padding: 110px 70px;
-  max-width: 1140px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .about-project__description {
@@ -37,8 +38,8 @@
 
 .about-project__periods {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-rows: repeat(2 1fr);
+  grid-template-columns: minmax(110px, 228px) minmax(420px, 912px);
+  grid-template-rows: repeat(2, 1fr);
   justify-items: center;
   align-items: center;
   margin: 0;
@@ -96,6 +97,43 @@
 
   .about-project__periods {
     padding-top: 93px;
-    grid-template-columns: 140px 528px;
+    grid-template-columns: minmax(80px, 140px) minmax(150px, 528px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-project__container {
+    padding: 70px 18px;
+  }
+
+  .about-project__description {
+    padding-top: 60px;
+    flex-direction: column;
+    row-gap: 56px;
+  }
+
+  .about-project__item-title {
+    font-size: 18px;
+  }
+
+  .about-project__item-text {
+    font-size: 11px;
+    line-height: 16px;
+    padding-top: 13px;
+  }
+
+  .about-project__periods {
+    padding-top: 60px;
+    grid-template-columns: minmax(20px, 100px) minmax(50px, 184px);
+  }
+
+  .about-project__periods-1stweek,
+  .about-project__periods-4weeks,
+  .about-project__periods-text {
+    font-size: 11px;
+  }
+
+  .about-project__periods-text {
+    padding-top: 0;
   }
 }
