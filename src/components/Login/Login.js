@@ -10,10 +10,10 @@ const Login = () => {
         <h2 className='login__title'>Рады видеть!</h2>
         <form className='login__form'>
           <label className='login__label' for='login-email'>E-mail</label>
-          <input className='login__input' id='login-email' type='email'></input>
+          <input className='login__input' id='login-email' type='email' required></input>
           <label className='login__err-msg' for='login-email'>Что-то пошло не так...</label>
           <label className='login__label' for='login-password'>Пароль</label>
-          <input className='login__input' id='login-password' type='password'></input>
+          <input className='login__input' id='login-password' type='password' required minlength='8'></input>
           <label className='login__err-msg' for='login-password'>Что-то пошло не так...</label>
           <button className='login__submit-btn app__link'>Войти</button>
         </form>
