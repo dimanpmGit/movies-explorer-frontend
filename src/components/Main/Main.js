@@ -8,11 +8,10 @@ import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 
-
-const Main = (props) => {
+const Main = ({ isMain }) => {
   return (
     <div className='main'>
-      <Header isMain={props.isMain}/>
+      <Header isMain={isMain}/>
       <Promo />
       <AboutProject />
       <Techs  />

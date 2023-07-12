@@ -3,7 +3,6 @@ import './PopupMenu.css';
 import AccountMenu from '../AccountMenu/AccountMenu';
 
 const PopupMenu = ({ isOpen, onClose }) => {
-  console.log(isOpen);
   return (
     <div className={`popup-menu ${isOpen ? "popup-menu_is-opened" : ""}`}>
       <div className='popup-menu__container'>
