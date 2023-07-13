@@ -7,7 +7,7 @@ const SearchForm = () => {
     <form className='search-form'>
       <div className='search-form__container'>
         <div className='search-form__wrapper'>
-          <input className='search-form__input' type='text' name='movie' placeholder='Фильм'></input>
+          <input className='search-form__input' type='text' name='movie' placeholder='Фильм' required></input>
           <button className='search-form__button' type='submit'>Поиск</button>
         </div>
         <FilterCheckbox />
