@@ -17,6 +17,7 @@ import PopupMenu from '../PopupMenu/PopupMenu';
 
 function App() {
   const [isMain, setIsMain] = useState(true);
+  const [isOnlySaved, setIsOnlySaved] = useState(false);
   const [noHeader, setNoHeader] = useState(false);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   
@@ -40,21 +41,43 @@ function App() {
     setNoHeader(true);
   }
 
+  const setOnlySaved = () => {
+    return setIsOnlySaved(true);
+  }
+
+  const setAllMovies = () => {
+    return setIsOnlySaved(false);
+  }
+
   function handleEditClick() {
 
   }
-
+  
   return (
     <div className='app'>
       <Helmet>
         <title>Movies explorer</title>
         <html lang="ru" />
       </Helmet>
-      <Header isMain={isMain} onMenuClick={handleShowPopupBtnClick} noHeader={noHeader} />
+      <Header isMain={isMain} onMenuClick={handleShowPopupBtnClick} noHeader={noHeader} isSavedMovies={isOnlySaved} />
       <Routes>
         <Route path='/' element={<Main isMain={setMainPage} />} />
-        <Route path='/movies' element={<Movies onMenuClick={handleShowPopupBtnClick} onlySaved={false} notMain={setNotMainPage} />} />
-        <Route path='/saved-movies' element={<SavedMovies onMenuClick={handleShowPopupBtnClick} onlySaved={true} notMain={setNotMainPage}  />} />
+        <Route path='/movies' element={
+          <Movies
+            onMenuClick={handleShowPopupBtnClick}
+            setAllMovies={setAllMovies}
+            onlySaved={isOnlySaved}
+            notMain={setNotMainPage}
+          />
+        } />
+        <Route path='/saved-movies' element={
+          <SavedMovies
+            onMenuClick={handleShowPopupBtnClick}
+            setOnlySavedMovies={setOnlySaved}
+            onlySaved={isOnlySaved}
+            notMain={setNotMainPage}
+          />
+        } />
         <Route path='/profile' element={<Profile notMain={setNotMainPage}  getEdit={handleEditClick}/>} />
         <Route path='/signin' element={<Login setNoHeader={setWithoutHeader}  />} />
         <Route path='/signup' element={<Register setNoHeader={setWithoutHeader}  />} />

@@ -4,8 +4,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoreButton from '../Buttons/MoreButton/MoreButton';
 
-const Movies = ({ notMain, onlySaved }) => {
+const Movies = ({ setAllMovies, notMain, onlySaved }) => {
   notMain();
+  setAllMovies();
   return (
     <section className='movies'>
       <SearchForm />
