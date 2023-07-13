@@ -11,11 +11,11 @@ const Profile = ({ notMain, getProfileEdit, saveProfile, isProfileEdit }) => {
         <form className='profile__form'>
           <div className='profile__form-input'>
             <label className='profile__label' for='user-name'>Имя</label>
-            <input className='profile__input' placeholder='Имя' id='user-name' type='text' reqired minLength={1}></input>
+            <input className='profile__input' placeholder='Имя' id='user-name' type='text' reqired minLength={1} disabled={!isProfileEdit}></input>
           </div>
           <div className='profile__form-input'>
             <label className='profile__label' for='email'>E-mail</label>
-            <input className='profile__input' placeholder='E-mail' id='email' type='email' required></input>
+            <input className='profile__input' placeholder='E-mail' id='email' type='email' required disabled={!isProfileEdit}></input>
           </div>
           <dvi className={`profile__btn-wrapper ${isProfileEdit && 'profile__btn-wrapper_visible'}`}>
             <SubmitButton text='Сохранить' onClick={saveProfile}/>
