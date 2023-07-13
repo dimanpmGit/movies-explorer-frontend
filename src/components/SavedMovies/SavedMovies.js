@@ -1,19 +1,16 @@
 import React from 'react';
 import './SavedMovies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 
-const SavedMovies = ({ onlySaved }) => {
+const SavedMovies = ({ notMain, onlySaved }) => {
+  notMain();
   return (
-    <div className='saved-movies'>
-      <Header />
+    <section className='saved-movies'>
       <SearchForm />
       <MoviesCardList onlySaved={onlySaved} />
       <div className='saved-movies__divider'></div>
-      <Footer />
-    </div>
+    </section>
   )
 };
 

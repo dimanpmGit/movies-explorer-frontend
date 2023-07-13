@@ -1,11 +1,10 @@
 import React from 'react';
 import './Profile.css';
-import Header from '../Header/Header';
 
-const Profile = () => {
+const Profile = ({ notMain }) => {
+  notMain();
   return (
-    <div className='profile'>
-      <Header />
+    <section className='profile'>
       <div className='profile__container'>
         <h2 className='profile__title'>Привет, Виталий!</h2>
         <form className='profile__form'>
@@ -21,7 +20,7 @@ const Profile = () => {
         <div className='profile__edit app__link'>Редактировать</div>
         <div className='profile__exit app__link'>Выйти из аккаунта</div>
       </div>
-    </div>
+    </section>
   )
 };
 

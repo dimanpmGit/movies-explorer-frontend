@@ -3,6 +3,14 @@
   padding: 0;
 }
 
+.header_main {
+  background: #073042;
+}
+
+.header_none {
+  display: none;
+}
+
 .header__container {
   margin: 0 auto;
   padding: 18px 70px;

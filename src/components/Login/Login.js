@@ -2,9 +2,10 @@ import React from 'react';
 import './Login.css';
 import Logo from '../Logo/Logo';
 
-const Login = () => {
+const Login = ({ setNoHeader }) => {
+  setNoHeader();
   return (
-    <div className='login'>
+    <section className='login'>
       <div className='login__container'>
         <Logo />
         <h2 className='login__title'>Рады видеть!</h2>
@@ -22,7 +23,7 @@ const Login = () => {
           <a className='login__enter-menu-link app__link' href='/signup'>Регистрация</a>
         </div>
       </div>
-    </div>
+    </section>
   )
 };
 

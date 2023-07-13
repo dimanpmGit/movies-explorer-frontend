@@ -1,6 +1,5 @@
 import React from 'react';
 import './Navigation.css';
-import AccountMenu from '../AccountMenu/AccountMenu';
 
 const Navigation = ({ onMenuClick }) => {
   return (
@@ -18,7 +17,7 @@ const Navigation = ({ onMenuClick }) => {
             </a>
           </li>
         </ul>
-        <AccountMenu />
+        <a className='navigation__profile-link' href='/profile'>Аккаунт</a>
       </div>
       <button className='navigation__hamburger' type='button' onClick={onMenuClick}></button>
     </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import './PopupMenu.css';
-import AccountMenu from '../AccountMenu/AccountMenu';
 
 const PopupMenu = ({ isOpen, onClose }) => {
   return (
@@ -24,7 +23,7 @@ const PopupMenu = ({ isOpen, onClose }) => {
             </a>
           </li>
         </ul>
-        <AccountMenu />
+        <a className='popup-menu__profile-link' href='/profile'>Аккаунт</a>
       </div>
     </div>
   )

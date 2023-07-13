@@ -1,19 +1,19 @@
 import React from 'react';
 import './Header.css';
 import Logo from '../Logo/Logo';
-import Navigation from '../Navigation/Navigation';
-import AuthMenu from '../AuthMenu/AuthMenu';
+import Navigation from './Navigation/Navigation';
+import AuthMenu from './AuthMenu/AuthMenu';
 
-const Header = ({ isMain, onMenuClick }) => {
+const Header = ({ isMain, onMenuClick, noHeader }) => {
   return (
-    <div className='header'>
+    <header className={`header${isMain ? " header_main" : ""}${noHeader ? " header_none" : ""}`}>
       <div className='header__container'>
-      <Logo />
-      <div className='header__menu'>
-          {isMain ? <AuthMenu /> : <Navigation onMenuClick={onMenuClick} />}
+        <Logo />
+        <div className='header__menu'>
+            {isMain ? <AuthMenu /> : <Navigation onMenuClick={onMenuClick} />}
+        </div>
       </div>
-    </div>
-    </div>
+    </header>
   )
 };
 

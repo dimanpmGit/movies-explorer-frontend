@@ -1,9 +1,10 @@
 import React from 'react';
 import './NotFound.css';
 
-const NotFound = () => {
+const NotFound = ({ setNoHeader }) => {
+  setNoHeader();
   return (
-    <div className='not-found'>
+    <section className='not-found'>
       <h2 className='not-found__err-code'>404</h2>
       <p className='not-found__err-description'>
         Страница не найдена
@@ -11,7 +12,7 @@ const NotFound = () => {
       <a className='not-found__back-link app__link' href='javascript: history.back()'>
         Назад
       </a>
-    </div>
+    </section>
   )
 };
 

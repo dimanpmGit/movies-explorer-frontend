@@ -4,9 +4,9 @@ import './MoreButton.css';
 const MoreButton = () => {
   return (
     <div className='more-button'>
-      <div className='more-button__btn'>
+      <button className='more-button__btn'>
         Ещё
-      </div>
+      </button>
     </div>
   )
 };

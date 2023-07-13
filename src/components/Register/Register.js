@@ -2,9 +2,10 @@ import React from 'react';
 import './Register.css';
 import Logo from '../Logo/Logo';
 
-const Register = () => {
+const Register = ({ setNoHeader }) => {
+  setNoHeader();
   return (
-    <div className='register'>
+    <section className='register'>
       <div className='register__container'>
         <Logo />
         <h2 className='register__title'>Добро пожаловать!</h2>
@@ -25,7 +26,7 @@ const Register = () => {
           <a className='register__enter-menu-link app__link' href='/signin'>Войти</a>
         </div>
       </div>
-    </div>
+    </section>
   )
 };
 

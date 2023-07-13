@@ -3,7 +3,7 @@ import './AboutProject.css';
 
 const AboutProject = () => {
   return (
-    <div className='about-project'>
+    <section className='about-project'>
       <div className='about-project__container'>
         <h2 className='about-project__title main__title'>О проекте</h2>
         <ul className='about-project__description'>
@@ -39,7 +39,7 @@ const AboutProject = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   )
 };
 
