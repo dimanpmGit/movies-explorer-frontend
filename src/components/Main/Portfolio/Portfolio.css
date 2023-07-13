@@ -70,6 +70,7 @@
   font-size: 2.35vw;
   line-height: 50px;
   letter-spacing: -0.04em;
+  width: 100%;
 }
 
 @media screen and (min-width: 1290px) {
