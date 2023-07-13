@@ -2,7 +2,7 @@ import React from 'react';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MoreButton from '../MoreButton/MoreButton';
+import MoreButton from '../Buttons/MoreButton/MoreButton';
 
 const Movies = ({ notMain, onlySaved }) => {
   notMain();
@@ -10,7 +10,7 @@ const Movies = ({ notMain, onlySaved }) => {
     <section className='movies'>
       <SearchForm />
       <MoviesCardList onlySaved={onlySaved} />
-      <MoreButton />
+      <MoreButton text={'Ещё'}/>
     </section>
   )
 };

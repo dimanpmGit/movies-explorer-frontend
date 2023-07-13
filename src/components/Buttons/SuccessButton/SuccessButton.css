@@ -1,0 +1,24 @@
+.success-button__btn {
+  margin: 133px 0 0;
+  padding: 0 30px;
+  background: #4285f4;
+  border: none;
+  border-radius: 3px;
+  height: 45px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity .3s ease;
+  max-width: 396px;
+}
+
+.success-button__btn:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 320px) {
+  .success-button__btn {
+    margin-top: 221px;
+    font-size: 12px;
+  }
+}

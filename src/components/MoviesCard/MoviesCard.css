@@ -30,6 +30,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity .3s ease;
+}
+
+.movies-card__name:hover {
+  opacity: .8;
 }
 
 .movies-card__like {

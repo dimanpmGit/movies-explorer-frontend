@@ -20,6 +20,7 @@ const cards = [
     'duration': '1ч 47м',
     'like': true,
     'saved': true,
+    'link': 'https://www.youtube.com/watch?v=OAZWXUkrjPc&pp=ygUQ0L3QsNC_0L7Qu9C10L7QvQ%3D%3D',
   },
   {
     'picture': pic02,
@@ -28,6 +29,7 @@ const cards = [
     'duration': '1ч 3м',
     'like': false,
     'saved': true,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic03,
@@ -36,6 +38,7 @@ const cards = [
     'duration': '1ч 42м',
     'like': false,
     'saved': true,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic04,
@@ -44,6 +47,7 @@ const cards = [
     'duration': '1ч 21м',
     'like': false,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic05,
@@ -52,6 +56,7 @@ const cards = [
     'duration': '1ч 44м',
     'like': false,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic06,
@@ -60,6 +65,7 @@ const cards = [
     'duration': '1ч 42м',
     'like': true,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic07,
@@ -68,6 +74,7 @@ const cards = [
     'duration': '1ч 56м',
     'like': false,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic08,
@@ -76,6 +83,7 @@ const cards = [
     'duration': '1ч 59м',
     'like': false,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic09,
@@ -84,6 +92,7 @@ const cards = [
     'duration': '1ч 42м',
     'like': true,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic10,
@@ -92,6 +101,7 @@ const cards = [
     'duration': '1ч 10м',
     'like': true,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic11,
@@ -100,6 +110,7 @@ const cards = [
     'duration': '1ч 4м',
     'like': false,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
   {
     'picture': pic12,
@@ -108,6 +119,7 @@ const cards = [
     'duration': '1ч 7м',
     'like': false,
     'saved': false,
+    'link': 'https://www.youtube.com/watch?v=_YUzQa_1RCE&pp=ygUZ0LTRjtC90LAgMiDRgtGA0LXQudC70LXRgA%3D%3D',
   },
 ];
 

@@ -19,7 +19,7 @@ function App() {
   const [isMain, setIsMain] = useState(true);
   const [noHeader, setNoHeader] = useState(false);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
-
+  
   function handleShowPopupBtnClick() {
     setIsPopupMenuOpen(true);
   }
@@ -40,6 +40,10 @@ function App() {
     setNoHeader(true);
   }
 
+  function handleEditClick() {
+
+  }
+
   return (
     <div className='app'>
       <Helmet>
@@ -51,7 +55,7 @@ function App() {
         <Route path='/' element={<Main isMain={setMainPage} />} />
         <Route path='/movies' element={<Movies onMenuClick={handleShowPopupBtnClick} onlySaved={false} notMain={setNotMainPage} />} />
         <Route path='/saved-movies' element={<SavedMovies onMenuClick={handleShowPopupBtnClick} onlySaved={true} notMain={setNotMainPage}  />} />
-        <Route path='/profile' element={<Profile notMain={setNotMainPage}  />} />
+        <Route path='/profile' element={<Profile notMain={setNotMainPage}  getEdit={handleEditClick}/>} />
         <Route path='/signin' element={<Login setNoHeader={setWithoutHeader}  />} />
         <Route path='/signup' element={<Register setNoHeader={setWithoutHeader}  />} />
         <Route path='/not-found' element={<NotFound setNoHeader={setWithoutHeader} />} />

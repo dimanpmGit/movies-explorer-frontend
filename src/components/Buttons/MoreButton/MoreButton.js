@@ -1,11 +1,11 @@
 import React from 'react';
 import './MoreButton.css';
 
-const MoreButton = () => {
+const MoreButton = ({ text }) => {
   return (
     <div className='more-button'>
       <button className='more-button__btn'>
-        Ещё
+        {text}
       </button>
     </div>
   )
