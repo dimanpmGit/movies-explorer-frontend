@@ -20,6 +20,7 @@ function App() {
   const [isOnlySaved, setIsOnlySaved] = useState(false);
   const [noHeader, setNoHeader] = useState(false);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
+  const [isProfileEdit, setIsProfileEdit] = useState(false);
   
   function handleShowPopupBtnClick() {
     setIsPopupMenuOpen(true);
@@ -49,8 +50,12 @@ function App() {
     return setIsOnlySaved(false);
   }
 
-  function handleEditClick() {
+  const handleEditProfileClick = () => {
+    setIsProfileEdit(true);
+  }
 
+  const handleSaveProfileClick = () => {
+    setIsProfileEdit(false);
   }
   
   return (
@@ -77,8 +82,15 @@ function App() {
             onlySaved={isOnlySaved}
             notMain={setNotMainPage}
           />
-        } />
-        <Route path='/profile' element={<Profile notMain={setNotMainPage}  getEdit={handleEditClick}/>} />
+        }/>
+        <Route path='/profile' element={
+          <Profile 
+            notMain={setNotMainPage}
+            getProfileEdit={handleEditProfileClick}
+            saveProfile={handleSaveProfileClick}
+            isProfileEdit={isProfileEdit}
+          />
+        }/>
         <Route path='/signin' element={<Login setNoHeader={setWithoutHeader}  />} />
         <Route path='/signup' element={<Register setNoHeader={setWithoutHeader}  />} />
         <Route path='/not-found' element={<NotFound setNoHeader={setWithoutHeader} />} />

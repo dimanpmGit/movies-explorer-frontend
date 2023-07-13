@@ -9,7 +9,7 @@
   font-size: 14px;
   font-weight: 500;
   transition: opacity .3s ease;
-  max-width: 396px;
+  width: 100%;
 }
 
 .submit-button__btn:hover {
