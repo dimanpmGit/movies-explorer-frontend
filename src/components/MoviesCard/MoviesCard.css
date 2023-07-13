@@ -37,6 +37,9 @@
   padding: 0;
   width: 30px;
   height: 30px;
+  background: none;
+  border: none;
+  outline: none;
   background-image: url('../../images/heart-black.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -51,6 +54,9 @@
   padding: 0;
   width: 30px;
   height: 30px;
+  background: none;
+  border: none;
+  outline: none;
   background-image: url('../../images/close-small-btn.svg');
   background-repeat: no-repeat;
   background-position: center;

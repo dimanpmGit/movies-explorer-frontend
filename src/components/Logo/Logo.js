@@ -3,7 +3,8 @@ import './Logo.css';
 
 const Logo = () => {
   return (
-    <div className='logo'></div>
+    <a className='logo' href='/'>
+    </a>
   )
 };
 

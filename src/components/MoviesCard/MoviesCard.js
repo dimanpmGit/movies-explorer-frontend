@@ -7,7 +7,7 @@ const MoviesCard = ({ card, onlySaved }) => {
         <img className='movies-card__picture' src={card.picture} alt={card.alt}/>
         <div className='movies-card__name-and-like'>
           <p className='movies-card__name app__link'>{card.title}</p>
-          {onlySaved ? <div className='movies-card__close-btn app__link'></div> : <div className='movies-card__like app__link'></div>}
+          {onlySaved ? <button className='movies-card__close-btn app__link'></button> : <button className='movies-card__like app__link'></button>}
         </div>
         <p className='movies-card__movie-duration'>{card.duration}</p>
       </div>
