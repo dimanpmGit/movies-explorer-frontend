@@ -6,7 +6,7 @@
 
 .footer__container {
   margin: 0 auto;
-  padding: 84px 70px 20px;
+  padding: 87px 70px 20px;
   max-width: 1280px;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,12 @@
   display: flex;
   justify-content: space-between;
   margin: 0;
-  padding: 7px 0 0;
+  padding: 20px 0 0;
+}
+
+.footer__copyright {
+  margin: 0;
+  padding: 0;
 }
 
 .footer__links {
@@ -47,13 +52,13 @@
 
 @media screen and (max-width: 768px) {
   .footer__container {
-    padding: 59px 30px 6px;
+    padding: 62px 30px 19px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .footer__container {
-    padding: 157px 14px 21px;
+    padding: 61px 14px 21px;
   }
 
   .footer__title {
@@ -78,8 +83,7 @@
   }
 
   .footer__copyright {
-    margin: 0;
-    padding: 28px 0 0;
+    padding-top: 28px;
     order: 2;
     text-align: center;
     font-size: 12px;

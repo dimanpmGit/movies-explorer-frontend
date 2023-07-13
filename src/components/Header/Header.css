@@ -36,4 +36,8 @@
     max-width: 320px;
     padding: 18px 14px;
   }
+
+  .header__menu {
+    padding-left: 10px;
+  }
 }

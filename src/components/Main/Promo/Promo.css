@@ -29,7 +29,7 @@
   min-height: 244px;
   background-image: url('../../../images/text__COLOR_landing-logo.svg');
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: right bottom;
   background-size: contain;
 }
 
@@ -46,6 +46,7 @@
   .promo__image {
     padding-top: 126px;
     width: 100%;
+    background-position: center bottom;
   }
 }
 
@@ -57,7 +58,7 @@
   .promo__title {
     font-size: 31px;
     line-height: 39px;
-    min-width: 300px;
+    max-width: 300px;
   }
 
   .promo__image {

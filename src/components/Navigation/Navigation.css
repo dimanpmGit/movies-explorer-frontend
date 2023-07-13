@@ -3,12 +3,14 @@
   margin: 0;
   position: relative;
   width: 100%;
-  z-index: 5;
+  display: flex;
+  justify-content: space-between;
 }
 
 .navigation__wrapper {
   margin: 0;
   padding: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -40,7 +42,6 @@
 
 .navigation__hamburger {
   display: none;
-  content: "";
   width: 44px;
   height: 44px;
   background: none;
@@ -52,15 +53,16 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  top: -7px;
-  right: 1px;
+  top: -22px;
+  right: 0px;
   opacity: 0;
   cursor: pointer;
+  z-index: 1;
 }
 
 @media screen and (max-width: 768px) {
   .navigation__wrapper {
-    opacity: 0;
+    display: none;
   }
 
   .navigation__hamburger {
@@ -70,10 +72,6 @@
 }
 
 @media screen and (max-width: 320px) {
-  .navigation__wrapper {
-    display: none;
-  }
-
   .navigation__hamburger {
     background-image: url('../../images/icon-main-small.svg');
     width: 40px;

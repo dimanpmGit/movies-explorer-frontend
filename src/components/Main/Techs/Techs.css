@@ -6,7 +6,6 @@
   margin: 0 auto;
   padding: 100px 70px;
   max-width: 1280px;
-  min-width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,7 +39,7 @@
 
 .techs__technologies {
   margin: 0;
-  padding: 100px 0 0;
+  padding: 91px 0 0;
   display: flex;
   column-gap: 10px;
   list-style: none;
@@ -67,7 +66,7 @@
 
 @media screen and (max-width: 768px) {
   .techs__container {
-    padding: 90px 50px;
+    padding: 85px 50px;
   }
 
   .techs__subtitle {
@@ -107,6 +106,10 @@
 }
 
 @media screen and (max-width: 320px) {
+  .techs__container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
   .techs__subtitle {
     font-size: 30px;
     padding-top: 49px;

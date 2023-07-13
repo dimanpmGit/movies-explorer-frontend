@@ -47,8 +47,9 @@
   margin: 0;
   padding: 0;
   max-width: 270px;
+  max-height: 327px;
   display: flex;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   border-radius: 10px;
 }
@@ -66,7 +67,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me__container {
-    padding: 90px 50px 0;
+    padding: 95px 50px 0;
   }
 
   .about-me__student-name {
@@ -90,6 +91,7 @@
 
   .about-me__student-photo {
     max-width: 255px;
+    max-height: 307px;
   }
 
   .about-me__github-link {
@@ -120,7 +122,7 @@
 
   .about-me__student-photo {
     max-width: 292px;
-    width: 100%;
+    max-height: 352px;
   }
 
   .about-me__student-name {
