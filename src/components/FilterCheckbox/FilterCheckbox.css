@@ -1,6 +1,7 @@
 .filter-checkbox {
   margin: 0;
   padding: 26px 0 0;
+  position: relative;
 }
 
 .filter-checkbox__wrapper {
@@ -19,8 +20,9 @@
 }
 
 .filter-checkbox__label {
-  margin: 0 0 0 50px;
-  padding: 2px 0 0;
+  position: absolute;
+  top: 15px;
+  left: 50px;
 }
 
 .filter-checkbox__sliding-btn {
@@ -58,6 +60,8 @@
   .filter-checkbox__label {
     font-size: 11px;
     line-height: 18px;
+    top: 20px;
+    left: 51px;
   }
 
   .filter-checkbox {

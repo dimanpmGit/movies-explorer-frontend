@@ -25,7 +25,7 @@
   min-width: 410px;
   display: flex;
   flex-direction: column;
-  transform: all .3s ease;
+  transition: all .3s ease;
 }
 
 .profile__form-input {

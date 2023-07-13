@@ -18,7 +18,7 @@ const Login = ({ setNoHeader, setFooterDoesNotNeed }) => {
           <label className='login__label' for='login-password'>Пароль</label>
           <input className='login__input' id='login-password' type='password' required minlength='8'></input>
           <label className='login__err-msg' for='login-password'>Что-то пошло не так...</label>
-          <SubmitButton text={'Войти'} />
+          <SubmitButton text={'Войти'} className={'login__submit-btn'} />
         </form>
         <div className='login__enter-menu'>
           <p className='login__enter-menu-text'>Ещё не зарегистрированы?</p>
