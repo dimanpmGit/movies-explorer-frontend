@@ -121,8 +121,9 @@
   }
 
   .about-me__student-photo {
-    max-width: 292px;
+    max-width: calc(100vw - 9%);
     max-height: 352px;
+    width: 100%;
   }
 
   .about-me__student-name {
