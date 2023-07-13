@@ -66,20 +66,12 @@
   transition: all .3s ease;
 }
 
-.register__err-msg_active {
-  opacity: 1;
+.register__err-msg:last-of-type {
+  padding-bottom: 131px;
 }
 
-.register__submit-btn {
-  margin: 133px 0 0;
-  padding: 0;
-  background: #4285f4;
-  border: none;
-  border-radius: 3px;
-  height: 45px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
+.register__err-msg_active {
+  opacity: 1;
 }
 
 .register__enter-menu {
@@ -132,11 +124,6 @@
     min-width: 260px;
   }
 
-  .register__submit-btn {
-    margin-top: 221px;
-    font-size: 12px;
-  }
-
   .register__enter-menu {
     padding-top: 14px;
   }
@@ -147,5 +134,9 @@
 
   .register__enter-menu-link {
     font-size: 12px;
+  }
+
+  .register__err-msg:last-of-type {
+    padding-bottom: 222px;
   }
 }

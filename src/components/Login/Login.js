@@ -1,6 +1,7 @@
 import React from 'react';
 import './Login.css';
 import Logo from '../Logo/Logo';
+import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 
 const Login = ({ setNoHeader }) => {
   setNoHeader();
@@ -16,7 +17,7 @@ const Login = ({ setNoHeader }) => {
           <label className='login__label' for='login-password'>Пароль</label>
           <input className='login__input' id='login-password' type='password' required minlength='8'></input>
           <label className='login__err-msg' for='login-password'>Что-то пошло не так...</label>
-          <button className='login__submit-btn app__link'>Войти</button>
+          <SubmitButton text={'Войти'} />
         </form>
         <div className='login__enter-menu'>
           <p className='login__enter-menu-text'>Ещё не зарегистрированы?</p>

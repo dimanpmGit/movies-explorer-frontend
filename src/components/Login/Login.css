@@ -66,6 +66,10 @@
   transition: all .3s ease;
 }
 
+.login__err-msg:last-of-type {
+  padding-bottom: 200px;
+}
+
 .login__err-msg_active {
   opacity: 1;
 }
@@ -143,5 +147,9 @@
 
   .login__enter-menu-link {
     font-size: 12px;
+  }
+
+  .login__err-msg:last-of-type {
+    padding-bottom: 292px;
   }
 }
