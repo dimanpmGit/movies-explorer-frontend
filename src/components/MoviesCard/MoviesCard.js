@@ -4,7 +4,9 @@ import './MoviesCard.css';
 const MoviesCard = ({ card, onlySaved }) => {
   return (
       <div className='movies-card'>
-        <img className='movies-card__picture' src={card.picture} alt={card.alt}/>
+      <a className='movies-card__picture-link app__link' href={card.link} target='_blank' rel='noreferrer'>
+          <img className='movies-card__picture' src={card.picture} alt={card.alt}/>
+        </a>
         <div className='movies-card__name-and-like'>
         <a className='movies-card__name app__link' href={card.link} target='_blank' rel='noreferrer'>{card.title}</a>
           {onlySaved ? 
