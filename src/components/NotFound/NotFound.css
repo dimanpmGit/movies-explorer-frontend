@@ -1,13 +1,11 @@
 .not-found {
   margin: 0;
-  padding: 70px 70px 60px;
+  padding: 70px 70px 86px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: #202020;
-  height: 80vh;
-  position: relative;
 }
 
 .not-found__wrapper {
@@ -19,8 +17,9 @@
 
 .not-found__err-code {
   margin: 0;
-  padding: 0;
+  padding: 180px 0 0;
   font-size: 140px;
+  line-height: 160px;
   font-weight: 400;
 }
 
@@ -28,46 +27,56 @@
   margin: 0;
   padding: 0;
   font-size: 16px;
+  line-height: 38px;
 }
 
 .not-found__back-link {
   margin: 0;
-  padding: 184px 0 0;
+  padding: 175px 0 0;
   text-decoration: none;
   color: #4285f4;
   background: none;
   outline: none;
   border: none;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 768px) {
   .not-found {
     padding-left: 30px;
     padding-right: 30px;
-    padding-bottom: 119px;
+    padding-bottom: 409px;
+  }
+
+  .not-found__err-code {
+    padding-top: 342px;
+  }
+
+  .not-found__back-link {
+    padding-top: 176px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .not-found {
     padding: 78px 14px 48px;
-    position: relative;
   }
 
   .not-found__err-code {
     font-size: 80px;
+    line-height: 80px;
+    padding-top: 260px;
   }
 
   .not-found__err-description {
     font-size: 12px;
-    padding-top: 5px;
+    line-height: 12px;
+    padding-top: 20px;
   }
 
   .not-found__back-link {
     font-size: 12px;
-    position: absolute;
-    bottom: 0;
-    padding: 0;
-    margin: 0;
+    line-height: 12px;
+    padding-top: 287px;
   }
 }

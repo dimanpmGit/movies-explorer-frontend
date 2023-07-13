@@ -6,7 +6,7 @@
 
 .portfolio__container {
   margin: 0 auto;
-  padding: 100px 70px;
+  padding: 100px 70px 108px;
   max-width: 1280px;
   display: flex;
   flex-direction: column;
@@ -81,11 +81,18 @@
 
 @media screen and (max-width: 768px) {
   .portfolio__container {
-    padding: 90px 50px;
+    padding: 90px 50px 72px;
+  }
+  .portfolio__links {
+    padding-top: 29px;
   }
 
   .portfolio__link {
     font-size: 28px;
+  }
+
+  .portfolio__item {
+    padding-top: 21px;
   }
 
   .portfolio__item:not(:last-of-type) {
@@ -102,7 +109,7 @@
 
 @media screen and (max-width: 320px) {
   .portfolio__container {
-    padding: 68px 14px;
+    padding: 68px 14px 52px;
   }
 
   .portfolio__title {

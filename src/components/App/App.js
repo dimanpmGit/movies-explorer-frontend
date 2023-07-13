@@ -21,6 +21,7 @@ function App() {
   const [noHeader, setNoHeader] = useState(false);
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   const [isProfileEdit, setIsProfileEdit] = useState(false);
+  const [isFooterNeeds, setIsFooterNeeds] = useState(true);
   
   function handleShowPopupBtnClick() {
     setIsPopupMenuOpen(true);
@@ -57,6 +58,14 @@ function App() {
   const handleSaveProfileClick = () => {
     setIsProfileEdit(false);
   }
+
+  const setFooterNeeds = () => {
+    setIsFooterNeeds(true);
+  }
+
+  const setFooterDoesNotNeed = () => {
+    setIsFooterNeeds(false);
+  }
   
   return (
     <div className='app'>
@@ -64,9 +73,17 @@ function App() {
         <title>Movies explorer</title>
         <html lang="ru" />
       </Helmet>
-      <Header isMain={isMain} onMenuClick={handleShowPopupBtnClick} noHeader={noHeader} isSavedMovies={isOnlySaved} />
+      <Header 
+        isMain={isMain}
+        onMenuClick={handleShowPopupBtnClick}
+        noHeader={noHeader}
+        isSavedMovies={isOnlySaved}
+      />
       <Routes>
-        <Route path='/' element={<Main isMain={setMainPage} />} />
+        <Route path='/' element={
+          <Main isMain={setMainPage}
+          />}
+        />
         <Route path='/movies' element={
           <Movies
             onMenuClick={handleShowPopupBtnClick}
@@ -89,13 +106,29 @@ function App() {
             getProfileEdit={handleEditProfileClick}
             saveProfile={handleSaveProfileClick}
             isProfileEdit={isProfileEdit}
+            setFooterDoesNotNeed={setFooterDoesNotNeed}
           />
         }/>
-        <Route path='/signin' element={<Login setNoHeader={setWithoutHeader}  />} />
-        <Route path='/signup' element={<Register setNoHeader={setWithoutHeader}  />} />
-        <Route path='/not-found' element={<NotFound setNoHeader={setWithoutHeader} />} />
+        <Route path='/signin' element={
+          <Login 
+            setNoHeader={setWithoutHeader}
+            setFooterDoesNotNeed={setFooterDoesNotNeed}
+          />}
+        />
+        <Route path='/signup' element={
+          <Register 
+            setNoHeader={setWithoutHeader}
+            setFooterDoesNotNeed={setFooterDoesNotNeed}
+          />}
+        />
+        <Route path='/not-found' element={
+          <NotFound 
+            setNoHeader={setWithoutHeader}
+            setFooterDoesNotNeed={setFooterDoesNotNeed}
+          />}
+        />
       </Routes>
-      <Footer />
+      <Footer isFooterNeeds={isFooterNeeds}/>
       <PopupMenu isOpen={isPopupMenuOpen} onClose={closePopup} />
     </div>
   );

@@ -2,8 +2,9 @@ import React from 'react';
 import './Profile.css';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 
-const Profile = ({ notMain, getProfileEdit, saveProfile, isProfileEdit }) => {
+const Profile = ({ notMain, getProfileEdit, saveProfile, isProfileEdit, setFooterDoesNotNeed }) => {
   notMain();
+  setFooterDoesNotNeed();
   return (
     <section className='profile'>
       <div className='profile__container'>

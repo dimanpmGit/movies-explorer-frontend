@@ -111,9 +111,11 @@
 
 @media screen and (max-width: 768px) {
   .login__container {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 231px;
+    padding: 231px 30px;
+  }
+
+  .login__err-msg:last-of-type {
+    padding-bottom: 202px;
   }
 }
 
@@ -124,7 +126,7 @@
   }
 
   .login__title {
-    padding-top: 50px;
+    padding-top: 48px;
   }
 
   .login__form {

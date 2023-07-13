@@ -67,7 +67,7 @@
 
 @media screen and (max-width: 768px) {
   .about-me__container {
-    padding: 95px 50px 0;
+    padding: 90px 50px 0;
   }
 
   .about-me__student-name {
@@ -83,7 +83,7 @@
 
   .about-me__student-biography {
     padding-right: 49px;
-    padding-top: 22px;
+    padding-top: 20px;
     font-size: 12px;
     line-height: 18px;
     max-width: 364px;

@@ -11,7 +11,9 @@ const Movies = ({ setAllMovies, notMain, onlySaved }) => {
     <section className='movies'>
       <SearchForm />
       <MoviesCardList onlySaved={onlySaved} />
-      <MoreButton text={'Ещё'}/>
+      <div className='movies__more-btn-wrapper'>
+        <MoreButton text={'Ещё'}/>
+      </div>
     </section>
   )
 };

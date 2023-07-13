@@ -1,9 +1,9 @@
 import React from 'react';
 import './Footer.css';
 
-const Footer = () => {
+const Footer = ({ isFooterNeeds }) => {
   return (
-    <footer className='footer'>
+    <footer className={`footer ${!isFooterNeeds ? 'footer_none' : ''}`}>
       <div className='footer__container'>
         <h3 className='footer__title'>
           Учебный проект Яндекс.Практикум х BeatFilm.

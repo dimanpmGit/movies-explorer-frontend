@@ -35,7 +35,7 @@
   justify-content: space-between;
   font-size: 11px;
   font-weight: 500;
-  
+
 }
 
 .profile__form-input:not(:last-of-type) {
@@ -131,23 +131,36 @@
     padding-top: 78px;
   }
 
-  .profile__edit {
-    padding-top: 209px;
+  .profile__form-input:last-of-type {
+    padding-bottom: 211px;
+  }
+
+  .profile__links-wrapper {
+    row-gap: 16px;
   }
 }
 
+@media screen and (max-width: 520px) {
+  .profile__form {
+    min-width: 81vw;
+  }
+}
+
+
 @media screen and (max-width: 320px) {
   .profile__container {
-    padding: 68px 14px 39px;
+    padding: 68px 14px 42px;
   }
 
   .profile__form {
-    min-width: 260px;
     padding-top: 62px;
   }
 
+  .profile__form-input:last-of-type {
+    padding-bottom: 380px;
+  }
+
   .profile__edit {
-    padding-top: 379px;
     font-size: 12px;
   }
 

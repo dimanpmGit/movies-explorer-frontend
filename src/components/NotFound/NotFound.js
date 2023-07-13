@@ -1,8 +1,9 @@
 import React from 'react';
 import './NotFound.css';
 
-const NotFound = ({ setNoHeader }) => {
+const NotFound = ({ setNoHeader, setFooterDoesNotNeed }) => {
   setNoHeader();
+  setFooterDoesNotNeed();
   return (
     <section className='not-found'>
       <h2 className='not-found__err-code'>404</h2>

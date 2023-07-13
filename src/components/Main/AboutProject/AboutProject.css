@@ -73,7 +73,7 @@
 
 .about-project__periods-text {
   margin: 0;
-  padding: 14px 0 0;
+  padding: 10px 0 0;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
@@ -82,48 +82,57 @@
 
 @media screen and (max-width: 768px) {
   .about-project__container {
-    padding: 90px 50px;
+    padding: 91px 50px 84px;
   }
 
   .about-project__description {
     column-gap: 38px;
   }
 
+  .about-project__item-title {
+    line-height: 25px;
+  }
+
   .about-project__item-text {
     font-size: 12px;
     line-height: 18px;
-    padding-top: 19px;
+    padding-top: 21px;
   }
 
   .about-project__periods {
     padding-top: 93px;
     grid-template-columns: minmax(80px, 140px) minmax(150px, 528px);
   }
+
+  .about-project__periods-text {
+    padding-top: 7px;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .about-project__container {
-    padding: 70px 18px;
+    padding: 69px 18px 70px;
   }
 
   .about-project__description {
-    padding-top: 60px;
+    padding-top: 59px;
     flex-direction: column;
     row-gap: 56px;
   }
 
   .about-project__item-title {
     font-size: 18px;
+    line-height: 23px;
   }
 
   .about-project__item-text {
     font-size: 11px;
     line-height: 16px;
-    padding-top: 13px;
+    padding-top: 14px;
   }
 
   .about-project__periods {
-    padding-top: 60px;
+    padding-top: 61px;
     grid-template-columns: minmax(20px, 100px) minmax(50px, 184px);
   }
 
@@ -135,5 +144,6 @@
 
   .about-project__periods-text {
     padding-top: 0;
+    margin-top: -5px;
   }
 }

@@ -3,8 +3,9 @@ import './Register.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 
-const Register = ({ setNoHeader }) => {
+const Register = ({ setNoHeader, setFooterDoesNotNeed }) => {
   setNoHeader();
+  setFooterDoesNotNeed();
   return (
     <section className='register'>
       <div className='register__container'>

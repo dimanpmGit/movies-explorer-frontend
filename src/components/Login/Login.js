@@ -3,8 +3,9 @@ import './Login.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 
-const Login = ({ setNoHeader }) => {
+const Login = ({ setNoHeader, setFooterDoesNotNeed }) => {
   setNoHeader();
+  setFooterDoesNotNeed();
   return (
     <section className='login'>
       <div className='login__container'>
