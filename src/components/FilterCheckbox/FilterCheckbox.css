@@ -15,11 +15,22 @@
   cursor: pointer;
 }
 
+.filter-checkbox__label {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+}
+
 .filter-checkbox__btn {
   display: none;
 }
 
-.filter-checkbox__label {
+.filter-checkbox__label-text {
   position: absolute;
   top: 15px;
   left: 50px;
@@ -57,7 +68,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .filter-checkbox__label {
+  .filter-checkbox__label-text {
     font-size: 11px;
     line-height: 18px;
     top: 20px;

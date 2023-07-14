@@ -7,12 +7,12 @@ const Navigation = ({ onMenuClick, isSavedMovies }) => {
       <div className='navigation__wrapper'>
         <ul className='navigation__films'>
           <li className='navigation__item'>
-            <a className={`navigation__item-link ${!isSavedMovies && "navigation__item-link_active "}app__link`} href='/movies'>
+            <a className={`navigation__item-link ${isSavedMovies ? 'navigation__item-link_active ' : ''}app__link`} href='/movies'>
               Фильмы
             </a>
           </li>
           <li className='navigation__item'>
-            <a className={`navigation__item-link ${isSavedMovies && "navigation__item-link_active "}app__link`} href='/saved-movies'>
+            <a className={`navigation__item-link ${isSavedMovies ? 'navigation__item-link_active ' : ''}app__link`} href='/saved-movies'>
               Сохранённые фильмы
             </a>
           </li>
