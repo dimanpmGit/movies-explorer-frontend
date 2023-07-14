@@ -131,3 +131,9 @@
     height: 57px;
   }
 }
+
+@media screen and (max-width: 250px) {
+  .techs__subtitle {
+    font-size: 10vw;
+  }
+}

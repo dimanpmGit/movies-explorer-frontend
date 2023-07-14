@@ -35,3 +35,14 @@
     padding: 5px 11px;
   }
 }
+
+@media screen and (max-width: 250px) {
+  .auth-menu {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 15px;
+    column-gap: 0;
+  }
+
+}

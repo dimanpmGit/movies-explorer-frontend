@@ -68,3 +68,9 @@
     background-size: 680px 230px;
   }
 }
+
+@media screen and (max-width: 250px) {
+  .promo__title {
+    font-size: 10vw;
+  }
+}
