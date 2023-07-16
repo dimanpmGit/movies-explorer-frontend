@@ -14,9 +14,15 @@ import Footer from '../Footer/Footer';
 
 import './App.css';
 import PopupMenu from '../PopupMenu/PopupMenu';
+import * as auth from '../../utils/MainApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: '',
+    name: '',
+  });
   const [isMain, setIsMain] = useState(true);
   const [isOnlySaved, setIsOnlySaved] = useState(false);
   const [noHeader, setNoHeader] = useState(false);
@@ -68,6 +74,42 @@ function App() {
     setIsFooterNeeds(false);
   }
   
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    if (!formValue.email || !formValue.password) {
+      return;
+    }
+    auth.authorize(formValue.email, formValue.password)
+      .then((data) => {
+        setLoggedIn(true);
+        console.log(data);
+      })
+      .catch(err => console.log(err));
+  }
+
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password } = formValue;
+    auth.register(name, email, password)
+      .then((res) => {
+        setLoggedIn(true);
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <div className='app'>
       <Helmet>
@@ -126,13 +168,19 @@ function App() {
           <Navigate  to='/signin' replace />
         } />
         <Route path='/signin' element={
-          <Login 
+          <Login
+            handleChange={handleChange}
+            handleSubmit={handleLoginSubmit}
+            formValue={formValue}
             setNoHeader={setWithoutHeader}
             setFooterDoesNotNeed={setFooterDoesNotNeed}
           />}
         />
         <Route path='/signup' element={
           <Register 
+            handleChange={handleChange}
+            handleSubmit={handleRegisterSubmit}
+            formValue={formValue}
             setNoHeader={setWithoutHeader}
             setFooterDoesNotNeed={setFooterDoesNotNeed}
           />}

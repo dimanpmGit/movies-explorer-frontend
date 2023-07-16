@@ -12,6 +12,8 @@ import pic11 from '../images/pic__11.jpg';
 import pic12 from '../images/pic__12.jpg';
 import studentPic from '../images/student.jpg';
 
+export const BASE_URL = 'http://localhost:3001';
+
 const cards = [
   {
     'picture': pic01,
