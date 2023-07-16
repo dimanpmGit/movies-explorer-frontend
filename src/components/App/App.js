@@ -1,8 +1,8 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import Main from '../Main/Main';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
@@ -16,6 +16,7 @@ import './App.css';
 import PopupMenu from '../PopupMenu/PopupMenu';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isMain, setIsMain] = useState(true);
   const [isOnlySaved, setIsOnlySaved] = useState(false);
   const [noHeader, setNoHeader] = useState(false);
@@ -80,35 +81,50 @@ function App() {
         isSavedMovies={isOnlySaved}
       />
       <Routes>
-        <Route path='/' element={
-          <Main isMain={setMainPage}
-          />}
+        <Route 
+          path='/movies' 
+          element={
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              element={Movies}
+              onMenuClick={handleShowPopupBtnClick}
+              setAllMovies={setAllMovies}
+              onlySaved={isOnlySaved}
+              notMain={setNotMainPage}
+            />
+          }
         />
-        <Route path='/movies' element={
-          <Movies
-            onMenuClick={handleShowPopupBtnClick}
-            setAllMovies={setAllMovies}
-            onlySaved={isOnlySaved}
-            notMain={setNotMainPage}
-          />
+        <Route
+          path='/saved-movies'
+          element={
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              element={SavedMovies}
+              onMenuClick={handleShowPopupBtnClick}
+              setOnlySavedMovies={setOnlySaved}
+              onlySaved={isOnlySaved}
+              notMain={setNotMainPage}
+            />
+          }
+        />
+        <Route 
+          path='profile'
+          element={
+            <ProtectedRoute
+              loggedIn={loggedIn}
+              element={Profile}
+              notMain={setNotMainPage}
+              getProfileEdit={handleEditProfileClick}
+              saveProfile={handleSaveProfileClick}
+              isProfileEdit={isProfileEdit}
+              setFooterDoesNotNeed={setFooterDoesNotNeed}
+            />
+          }
+        />
+        <Route path='/' element={
+          loggedIn ? <Navigate to='/movies' replace /> :
+          <Navigate  to='/signin' replace />
         } />
-        <Route path='/saved-movies' element={
-          <SavedMovies
-            onMenuClick={handleShowPopupBtnClick}
-            setOnlySavedMovies={setOnlySaved}
-            onlySaved={isOnlySaved}
-            notMain={setNotMainPage}
-          />
-        }/>
-        <Route path='/profile' element={
-          <Profile 
-            notMain={setNotMainPage}
-            getProfileEdit={handleEditProfileClick}
-            saveProfile={handleSaveProfileClick}
-            isProfileEdit={isProfileEdit}
-            setFooterDoesNotNeed={setFooterDoesNotNeed}
-          />
-        }/>
         <Route path='/signin' element={
           <Login 
             setNoHeader={setWithoutHeader}
