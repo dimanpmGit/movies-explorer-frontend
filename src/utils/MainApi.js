@@ -9,19 +9,28 @@ export const register = (name, email, password) => {
     },
     body: JSON.stringify({ name, email, password })
   })
-    .then((response) => {
-      try {
+    .then((res) => {
+      if (res.status === 201) {
+        return res.json()
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      if (data._id) {
+        return authorize(data.email, password);
+      }
+  /*    try {
         if (response.status === 201) {
-          //return response.json();
-          return authorize(email, password);
+          .then((data) => {
+            if (data.token) {
+              localStorage.setItem('jwt', data.token);
+              return data;
+            }
         }
       }
       catch (e) {
         return (e)
-      }
-    })
-    .then((res) => {
-      return res;
+      }*/
     })
     .catch((err) => console.log(err));
 };
@@ -37,13 +46,26 @@ export const authorize = (email, password) => {
     })
     .then(res => res.json())
     .then((data) => {
-      if (data.jwt) {
+      if (data.token) {
         localStorage.setItem('jwt', data.token);
-        return "data";
+        return data;
       }      
     })
     .catch((err) => console.log(err));
 };
+
+export const getContent = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+    .then(res => res.json())
+    .then(data => data)
+}
 
 export const getMovies = () => {
   return fetch(`${BASE_URL}/movies`, {

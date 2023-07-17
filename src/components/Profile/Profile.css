@@ -30,21 +30,17 @@
 
 .profile__form-input {
   margin: 0;
-  padding: 17px 0 0;
+  padding: 17px 0 16px;
   display: flex;
   justify-content: space-between;
   font-size: 11px;
   font-weight: 500;
-
-}
-
-.profile__form-input:not(:last-of-type) {
-  padding-bottom: 16px;
   border-bottom: 1px solid #424242;
 }
 
-.profile__form-input:last-of-type {
+.profile__form-input:nth-last-of-type(2) {
   padding-bottom: 219px;
+  border-bottom: none;
 }
 
 .profile__name-label {
@@ -131,7 +127,7 @@
     padding-top: 78px;
   }
 
-  .profile__form-input:last-of-type {
+  .profile__form-input:nth-last-of-type(2) {
     padding-bottom: 211px;
   }
 
@@ -156,7 +152,7 @@
     padding-top: 62px;
   }
 
-  .profile__form-input:last-of-type {
+  .profile__form-input:nth-last-of-type(2) {
     padding-bottom: 380px;
   }
 

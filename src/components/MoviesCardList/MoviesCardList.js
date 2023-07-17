@@ -8,8 +8,8 @@ const MoviesCardList = ({ onlySaved }) => {
   return (
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
-        {cards.map((card) => (
-          card.saved ? <MoviesCard card={card} onlySaved={onlySaved} /> : ''
+        {cards.map((card, i) => (
+          card.saved ? <MoviesCard key={i} card={card} onlySaved={onlySaved} /> : ''
         ))}
       </div>
     </div>
@@ -17,7 +17,7 @@ const MoviesCardList = ({ onlySaved }) => {
   return (
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
-        {cards.map((card) => <MoviesCard card={card} onlySaved={onlySaved} />)}
+        {cards.map((card, i) => <MoviesCard key={i} card={card} onlySaved={onlySaved} />)}
       </div>
     </div>
   )

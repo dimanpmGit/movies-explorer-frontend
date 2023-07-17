@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Main.css';
 import Promo from './Promo/Promo';
 import AboutProject from '../Main/AboutProject/AboutProject';
@@ -7,7 +7,9 @@ import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 
 const Main = ({ isMain }) => {
-  isMain();
+  useEffect(() => {
+    isMain();
+  })
   return (
     <main className='main'>
       <Promo />

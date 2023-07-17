@@ -1,23 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
+import * as auth from '../../utils/MainApi';
 
-const Login = ({ handleChange, handleSubmit, formValue, setNoHeader, setFooterDoesNotNeed }) => {
-  setNoHeader();
-  setFooterDoesNotNeed();
+const Login = ({
+  loggedIn,
+  formValue,
+  setFormValue,
+  handleLogin,
+  setNoHeader,
+  noHeader,
+  setFooterDoesNotNeed,
+  isFooterNeeds
+}) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formValue.email || !formValue.password) {
+      return;
+    }
+    auth.authorize(formValue.email, formValue.password)
+      .then((data) => {
+        if (data.token) {
+          setFormValue({ email: '', password: '' });
+          handleLogin();
+          //const url = location.state?.returnUrl || '/movies';
+          //navigate(url);
+          navigate('/movies', {replace: true});
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    setNoHeader();
+    setFooterDoesNotNeed();
+  }, []);
+
   return (
     <section className='login'>
       <div className='login__container'>
         <Logo />
         <h2 className='login__title'>Рады видеть!</h2>
         <form className='login__form' onSubmit={handleSubmit}>
-          <label className='login__label' for='login-email'>E-mail</label>
+          <label className='login__label' htmlFor='login-email'>E-mail</label>
           <input className='login__input' id='login-email' type='email' name='email' value={formValue.email} onChange={handleChange} required></input>
-          <label className='login__err-msg' for='login-email'>Что-то пошло не так...</label>
-          <label className='login__label' for='login-password'>Пароль</label>
-          <input className='login__input' id='login-password' type='password' name='password' value={formValue.password} onChange={handleChange} minlength='8' required></input>
-          <label className='login__err-msg' for='login-password'>Что-то пошло не так...</label>
+          <label className='login__err-msg' htmlFor='login-email'>Что-то пошло не так...</label>
+          <label className='login__label' htmlFor='login-password'>Пароль</label>
+          <input className='login__input' id='login-password' type='password' name='password' value={formValue.password} onChange={handleChange} minLength='8' required></input>
+          <label className='login__err-msg' htmlFor='login-password'>Что-то пошло не так...</label>
           <SubmitButton text={'Войти'} className={'login__submit-btn'} />
         </form>
         <div className='login__enter-menu'>

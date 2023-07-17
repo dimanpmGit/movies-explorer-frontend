@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoreButton from '../Buttons/MoreButton/MoreButton';
 
-const Movies = ({ setAllMovies, notMain, onlySaved }) => {
-  notMain();
-  setAllMovies();
+const Movies = ({ loggedIn, setAllMovies, notMain, onlySaved, setWithHeader, setFooterNeeds }) => {
+  useEffect(() => {
+    notMain();
+    setAllMovies();
+    setWithHeader();
+    setFooterNeeds();
+  }, [])
   return (
     <section className='movies'>
       <SearchForm />

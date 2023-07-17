@@ -7,7 +7,7 @@ const FilterCheckbox = () => {
       <div className='filter-checkbox__wrapper'>
         <input className='filter-checkbox__btn' type='checkbox' id='short-movies' />
         <div className='filter-checkbox__sliding-btn'></div>
-        <label for='short-movies' className='filter-checkbox__label'>
+        <label htmlFor='short-movies' className='filter-checkbox__label'>
         </label>
       </div>
       <p className='filter-checkbox__label-text'>
