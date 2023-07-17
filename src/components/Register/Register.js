@@ -5,9 +5,9 @@ import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 
-const Register = ({ formValue, setFormValue, handleLogin, setNoHeader, setFooterDoesNotNeed }) => {
+const Register = ({ formValue, setFormValue, handleLogin, setIsNoHeader, setFooterDoesNotNeed }) => {
   useEffect(() => {
-    setNoHeader();
+    setIsNoHeader();
     setFooterDoesNotNeed();
   }, [])
 

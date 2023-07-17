@@ -3,7 +3,7 @@ import './SavedMovies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 
-const SavedMovies = ({ setOnlySavedMovies, notMain, onlySaved, setWithHeader, setFooterNeeds }) => {
+const SavedMovies = ({ setOnlySavedMovies, notMain, onlySaved, setWithHeader, setFooterNeeds, moviesSet }) => {
   useEffect(() => {
     notMain();
     setOnlySavedMovies();
@@ -14,7 +14,7 @@ const SavedMovies = ({ setOnlySavedMovies, notMain, onlySaved, setWithHeader, se
   return (
     <section className='saved-movies'>
       <SearchForm />
-      <MoviesCardList onlySaved={onlySaved} />
+      <MoviesCardList onlySaved={onlySaved} moviesSet={moviesSet} />
       <div className='saved-movies__divider'></div>
     </section>
   )

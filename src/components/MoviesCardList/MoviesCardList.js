@@ -3,7 +3,11 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { cards } from '../../utils/constants';
 
-const MoviesCardList = ({ onlySaved }) => {
+const MoviesCardList = ({ onlySaved, moviesSet }) => {
+  const moviesArr = Array.from(moviesSet);
+  moviesArr.map(([key, value]) => {
+    //console.log(key, value);
+  });
   if (onlySaved) {
   return (
     <div className='movies-card-list'>

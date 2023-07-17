@@ -10,8 +10,8 @@ const Login = ({
   formValue,
   setFormValue,
   handleLogin,
-  setNoHeader,
-  noHeader,
+  setIsNoHeader,
+  isNoHeader,
   setFooterDoesNotNeed,
   isFooterNeeds
 }) => {
@@ -43,7 +43,7 @@ const Login = ({
   }
 
   useEffect(() => {
-    setNoHeader();
+    setIsNoHeader();
     setFooterDoesNotNeed();
   }, []);
 

@@ -11,26 +11,13 @@ export const register = (name, email, password) => {
   })
     .then((res) => {
       if (res.status === 201) {
-        return res.json()
+        return res.json();
       }
     })
     .then((data) => {
-      console.log(data);
       if (data._id) {
         return authorize(data.email, password);
       }
-  /*    try {
-        if (response.status === 201) {
-          .then((data) => {
-            if (data.token) {
-              localStorage.setItem('jwt', data.token);
-              return data;
-            }
-        }
-      }
-      catch (e) {
-        return (e)
-      }*/
     })
     .catch((err) => console.log(err));
 };

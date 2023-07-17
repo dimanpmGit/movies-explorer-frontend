@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './NotFound.css';
 
-const NotFound = ({ setNoHeader, setFooterDoesNotNeed }) => {
-  setNoHeader();
+const NotFound = ({ setIsNoHeader, setFooterDoesNotNeed }) => {
+  useEffect(() => {
+
+  })
+  setIsNoHeader();
   setFooterDoesNotNeed();
   return (
     <section className='not-found'>

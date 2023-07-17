@@ -4,9 +4,9 @@ import Logo from '../Logo/Logo';
 import Navigation from './Navigation/Navigation';
 import AuthMenu from './AuthMenu/AuthMenu';
 
-const Header = ({ isMain, onMenuClick, noHeader, isSavedMovies }) => {
+const Header = ({ isMain, onMenuClick, isNoHeader, isSavedMovies }) => {
   return (
-    <header className={`header${isMain ? " header_main" : ""}${noHeader ? " header_none" : ""}`}>
+    <header className={`header${isMain ? " header_main" : ""}${isNoHeader ? " header_none" : ""}`}>
       <div className='header__container'>
         <Logo />
         <div className='header__menu'>

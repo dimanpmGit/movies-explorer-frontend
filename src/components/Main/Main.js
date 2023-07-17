@@ -9,7 +9,7 @@ import Portfolio from './Portfolio/Portfolio';
 const Main = ({ isMain }) => {
   useEffect(() => {
     isMain();
-  })
+  }, [])
   return (
     <main className='main'>
       <Promo />

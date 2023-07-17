@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './Preloader.css'
 
-const Preloader = () => {
+const Preloader = ({ notMain }) => {
+    useEffect(() => {
+        notMain();
+    }, [])
     return (
         <div className="preloader">
             <div className="preloader__container">
