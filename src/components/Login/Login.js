@@ -5,7 +5,7 @@ import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 
-const Login = ({ loggedIn, formValue, setFormValue, handleLogin }) => {
+const Login = ({ loggedIn, formValue, setFormValue, handleLogin, startPreloader, stopPreloader }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValue({
@@ -20,15 +20,14 @@ const Login = ({ loggedIn, formValue, setFormValue, handleLogin }) => {
     if (!formValue.email || !formValue.password) {
       return;
     }
+    startPreloader();
     auth.authorize(formValue.email, formValue.password)
       .then((data) => {
         if (data.token) {
+          stopPreloader();
           setFormValue({ email: '', password: '' });
-          //handleTokenCheck();
-          //const url = location.state?.returnUrl || '/movies';
-          //navigate(url);
-          navigate('/movies', {replace: true});
           handleLogin();
+          navigate('/movies', {replace: true});
         }
       })
       .catch(err => console.log(err));

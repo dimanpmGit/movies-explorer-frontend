@@ -5,7 +5,7 @@ import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 
-const Register = ({ formValue, setFormValue, handleLogin, handleTokenCheck }) => {
+const Register = ({ formValue, setFormValue, handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,12 +18,13 @@ const Register = ({ formValue, setFormValue, handleLogin, handleTokenCheck }) =>
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = formValue;
+    startPreloader();
     auth.register(name, email, password)
       .then((data) => {
         if (data.token) {
+          stopPreloader();
           setFormValue({ name: '', email: '', password: '' });
           handleLogin();
-          handleTokenCheck();
           navigate('/movies', { replace: true });
         }
       })

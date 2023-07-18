@@ -9,6 +9,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Main from '../Main/Main';
+import Preloader from '../Preloader/Preloader';
 import * as auth from '../../utils/MainApi';
 import * as movies from '../../utils/MoviesApi';
 
@@ -16,42 +17,37 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [formValue, setFormValue] = useState({
     email: '',
     password: '',
     name: '',
   });
   const [moviesSet, setMoviesSet] = useState([]);
-  const [isTokenChecked, setIsTokenChecked] = useState(false);
-
-  console.log(`++++++++++++++App loggedIn : ${loggedIn}`);
-  console.log(`++++++++++++++App isTokenChecked : ${isTokenChecked}`);
 
   const handleLogin = () => {
-    return setLoggedIn(true);
+    setLoggedIn(true);
   }
 
   const handleLogout = () => {
-    return setLoggedIn(false);
+    setLoggedIn(false);
+    setIsTokenChecked(false);
   }
 
-  const handleTokenCheck = () => {
-    return setIsTokenChecked(true);
-  }
-
-  const tokenCheck = useCallback(() => {
+  const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
+      startPreloader();
       auth.getContent(jwt)
         .then((res) => {
           if (res) {
-            handleTokenCheck();
-            //handleLogin();
-            //const url = location.state?.returnUrl || '/';
+            stopPreloader();
+            handleLogin();
+            setIsTokenChecked(true);
             const url = location.pathname || '/movies';
             navigate(url, { replace: true });
-            //navigate('/movies', { replace: true });
           }
         })
         .catch((err) => {
@@ -59,20 +55,24 @@ function App() {
           console.log(err)
         });
     }
-  }, [])
-
-  useEffect(() => {
-    handleLogin(); 
-  }, [loggedIn])
-
-  useEffect(() => {
-    document.title = 'Movies explorer';
-    document.documentElement.setAttribute('lang', 'ru');
-  }, []);
+  };
 
   useEffect(() => {
     tokenCheck();
   }, [isTokenChecked]);
+
+  const startPreloader = () => {
+    setIsLoading(true);
+  }
+
+  const stopPreloader = () => {
+    setIsLoading(false);
+  }
+  
+  useEffect(() => {
+    document.title = 'Movies explorer';
+    document.documentElement.setAttribute('lang', 'ru');
+  }, []);
   
   useEffect(() => {
     movies.getMovies()
@@ -90,45 +90,49 @@ function App() {
 
   return (
     <div className='app'>
-      <Routes>
-        <Route path='/signin' element={
-          <Login
-            loggedIn={loggedIn}
-            formValue={formValue}
-            setFormValue={setFormValue}
-            handleLogin={handleLogin}
-            handleTokenCheck={handleTokenCheck}
-          />}
-        />
-        <Route path='/signup' element={
-          <Register
-            loggedIn={loggedIn}
-            formValue={formValue}
-            setFormValue={setFormValue}
-            handleLogin={handleLogin}
-            handleTokenCheck={handleTokenCheck}
-          />}
-        />
-        <Route path='/not-found' element={<NotFound />} />
-        <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} />} />
-        <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />} />
-        <Route 
-          path='profile'
-          element={
-            <ProtectedRoute
-              element={Profile}
+      {isLoading ? < Preloader /> : (
+        <Routes>
+          <Route path='/signin' element={
+            <Login
               loggedIn={loggedIn}
-              handleLogout={handleLogout}
+              formValue={formValue}
+              setFormValue={setFormValue}
+              handleLogin={handleLogin}
+              startPreloader={startPreloader}
+              stopPreloader={stopPreloader}
             />}
-        />
-        <Route path='/' element={
-          loggedIn ? <Navigate to='/movies' /> : <Navigate to='/main' />
-        } />
-        <Route path='/main' element={<Main />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+          />
+          <Route path='/signup' element={
+            <Register
+              loggedIn={loggedIn}
+              formValue={formValue}
+              setFormValue={setFormValue}
+              handleLogin={handleLogin}
+              startPreloader={startPreloader}
+              stopPreloader={stopPreloader}
+            />}
+          />
+          <Route path='/not-found' element={<NotFound />} />
+          <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} />} />
+          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />} />
+          <Route 
+            path='profile'
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                handleLogout={handleLogout}
+              />}
+          />
+          <Route path='/' element={
+            loggedIn ? <Navigate to='/movies' /> : <Navigate to='/main' />
+          } />
+          <Route path='/main' element={<Main />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      )}
     </div>
-  );
+  )
 }
 
 export default App;
