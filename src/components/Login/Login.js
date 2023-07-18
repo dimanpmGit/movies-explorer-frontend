@@ -5,16 +5,7 @@ import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 
-const Login = ({
-  loggedIn,
-  formValue,
-  setFormValue,
-  handleLogin,
-  setIsNoHeader,
-  isNoHeader,
-  setFooterDoesNotNeed,
-  isFooterNeeds
-}) => {
+const Login = ({ loggedIn, formValue, setFormValue, handleLogin }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValue({
@@ -33,19 +24,15 @@ const Login = ({
       .then((data) => {
         if (data.token) {
           setFormValue({ email: '', password: '' });
-          handleLogin();
+          //handleTokenCheck();
           //const url = location.state?.returnUrl || '/movies';
           //navigate(url);
           navigate('/movies', {replace: true});
+          handleLogin();
         }
       })
       .catch(err => console.log(err));
   }
-
-  useEffect(() => {
-    setIsNoHeader();
-    setFooterDoesNotNeed();
-  }, []);
 
   return (
     <section className='login'>

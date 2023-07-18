@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NotFound.css';
 
-const NotFound = ({ setIsNoHeader, setFooterDoesNotNeed }) => {
-  useEffect(() => {
-
-  })
-  setIsNoHeader();
-  setFooterDoesNotNeed();
+const NotFound = () => {
+  const navigate = useNavigate();
+  const handleBackBtn = () => {
+    navigate(-1);
+  }
   return (
     <section className='not-found'>
       <h2 className='not-found__err-code'>404</h2>
       <p className='not-found__err-description'>
         Страница не найдена
       </p>
-      <a className='not-found__back-link app__link' href='javascript: history.back()'>
+      <button className='not-found__back-link app__link' onClick={handleBackBtn}>
         Назад
-      </a>
+      </button>
     </section>
   )
 };

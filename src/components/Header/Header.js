@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import Logo from '../Logo/Logo';
 import Navigation from './Navigation/Navigation';
 import AuthMenu from './AuthMenu/AuthMenu';
+import PopupMenu from '../PopupMenu/PopupMenu';
 
-const Header = ({ isMain, onMenuClick, isNoHeader, isSavedMovies }) => {
+const Header = ({ isMain, isAllMovies, isSavedMovies }) => {
+  const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
+  const showPopup = () => {
+    setIsPopupMenuOpen(true);
+  }
+
+  const closePopup = () => {
+    setIsPopupMenuOpen(false);
+  }
+
   return (
-    <header className={`header${isMain ? " header_main" : ""}${isNoHeader ? " header_none" : ""}`}>
-      <div className='header__container'>
-        <Logo />
-        <div className='header__menu'>
-          {isMain ? <AuthMenu /> : <Navigation onMenuClick={onMenuClick} isSavedMovies={isSavedMovies} />}
+    <>
+      <header className={`header${isMain ? " header_main" : ""}`}>
+        <div className='header__container'>
+          <Logo />
+          <div className='header__menu'>
+            {isMain ? <AuthMenu /> : <Navigation onMenuClick={showPopup} isAllMovies={isAllMovies} isSavedMovies={isSavedMovies} />}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <PopupMenu isOpen={isPopupMenuOpen} onClose={closePopup} />
+    </>
   )
 };
 

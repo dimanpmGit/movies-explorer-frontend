@@ -1,16 +1,11 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 
-const Register = ({ formValue, setFormValue, handleLogin, setIsNoHeader, setFooterDoesNotNeed }) => {
-  useEffect(() => {
-    setIsNoHeader();
-    setFooterDoesNotNeed();
-  }, [])
-
+const Register = ({ formValue, setFormValue, handleLogin, handleTokenCheck }) => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,6 +23,7 @@ const Register = ({ formValue, setFormValue, handleLogin, setIsNoHeader, setFoot
         if (data.token) {
           setFormValue({ name: '', email: '', password: '' });
           handleLogin();
+          handleTokenCheck();
           navigate('/movies', { replace: true });
         }
       })

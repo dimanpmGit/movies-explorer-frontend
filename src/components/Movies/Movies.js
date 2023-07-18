@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoreButton from '../Buttons/MoreButton/MoreButton';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
-const Movies = ({ setAllMovies, notMain, onlySaved, setWithHeader, setFooterNeeds, moviesSet }) => {
-  useEffect(() => {
-    notMain();
-    setAllMovies();
-    setWithHeader();
-    setFooterNeeds();
-  }, [])
+const Movies = ({ loggedIn, moviesSet }) => {
   return (
-    <section className='movies'>
-      <SearchForm />
-      <MoviesCardList onlySaved={onlySaved} moviesSet={moviesSet} />
-      <div className='movies__more-btn-wrapper'>
-        <MoreButton text={'Ещё'}/>
-      </div>
-    </section>
+    <>
+      <Header isMain={false} isAllMovies={true} />
+      <section className='movies'>
+        <SearchForm />
+        <MoviesCardList onlySaved={false} moviesSet={moviesSet} />
+        <div className='movies__more-btn-wrapper'>
+          <MoreButton text={'Ещё'}/>
+        </div>
+      </section>
+      <Footer />
+    </>
   )
 };
 

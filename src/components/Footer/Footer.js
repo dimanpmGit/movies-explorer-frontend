@@ -3,7 +3,7 @@ import './Footer.css';
 
 const Footer = ({ isFooterNeeds }) => {
   return (
-    <footer className={`footer ${!isFooterNeeds ? 'footer_none' : ''}`}>
+    <footer className={'footer'}>
       <div className='footer__container'>
         <h3 className='footer__title'>
           Учебный проект Яндекс.Практикум х BeatFilm.
