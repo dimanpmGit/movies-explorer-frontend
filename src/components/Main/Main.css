@@ -1,0 +1,21 @@
+.main {
+  background: #073042;
+  margin: 0;
+  padding: 0;
+}
+
+.main__title {
+  margin: 0;
+  padding: 0 0 21px;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid #fff;
+}
+
+@media screen and (max-width: 320px) {
+  .main__title {
+    font-size: 18px;
+    padding-bottom: 27px;
+  }
+}

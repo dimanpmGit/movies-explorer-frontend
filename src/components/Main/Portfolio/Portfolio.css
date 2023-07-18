@@ -1,0 +1,136 @@
+.portfolio {
+  background-color: #202020;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__container {
+  margin: 0 auto;
+  padding: 100px 70px 108px;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.portfolio__title {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #8b8b8b;
+}
+
+.portfolio__links {
+  margin: 0;
+  padding: 30px 0 0;
+  list-style: none;
+  width: 100%;
+}
+
+.portfolio__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 10px;
+  margin: 0;
+  padding: 20px 0 18px;
+}
+
+.portfolio__item:not(:last-of-type) {
+  border-bottom: 1px solid #404040;
+}
+
+.portfolio__item:after {
+  content: "";
+  background-image: url('../../../images/arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 6px 5px 0;
+  transition: opacity .3s ease;
+}
+
+.portfolio__item:hover:after {
+  opacity: .8;
+}
+
+.portfolio__link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 2.35vw;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  width: 100%;
+  z-index: 1;
+}
+
+@media screen and (min-width: 1290px) {
+  .portfolio__link {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio__container {
+    padding: 90px 50px 72px;
+  }
+  .portfolio__links {
+    padding-top: 29px;
+  }
+
+  .portfolio__link {
+    /*font-size: 28px;*/
+    font-size: 3.6vw;
+    letter-spacing: -0.03em;
+  }
+
+  .portfolio__item {
+    padding-top: 21px;
+  }
+
+  .portfolio__item:not(:last-of-type) {
+    border-color: #e6e6e6;
+  }
+
+  .portfolio__item:after {
+    width: 2.5vw;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio__container {
+    padding: 69px 14px 51px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__links {
+    padding-top: 21px;
+  }
+
+  .portfolio__link {
+    font-size: 5.6vw;
+    line-height: 8.75vw;
+    letter-spacing: -0.04em;
+  }
+
+  .portfolio__item {
+    padding: 21px 0 18px;
+
+  }
+
+  .portfolio__item:after {
+    width: 3.4vw;
+    height: 3.4vw;
+    margin-top: -5px;
+  }
+}

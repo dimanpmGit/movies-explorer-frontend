@@ -1,0 +1,156 @@
+.about-me {
+  background-color: #202020;
+}
+
+.about-me__container {
+  margin: 0 auto;
+  padding: 110px 70px 0;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-me__info-block {
+  margin: 0;
+  padding: 66px 0 0;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 25px;
+}
+
+.about-me__student-name {
+  margin: 0;
+  padding: 0;
+  font-size: 50px;
+  line-height: 58px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.about-me__student-info {
+  margin: 0;
+  padding: 19px 0 0;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.about-me__student-biography {
+  margin: 0;
+  padding: 26px 30px 0 0;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  max-width: 595px;
+}
+
+.about-me__student-photo {
+  margin: 0;
+  padding: 0;
+  max-width: 270px;
+  max-height: 327px;
+  display: flex;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+.about-me__github-link {
+  margin: 0;
+  padding: 99px 0 0;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__container {
+    padding: 90px 50px 0;
+  }
+
+  .about-me__student-name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__student-info {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 16px;
+  }
+
+  .about-me__student-biography {
+    padding-right: 49px;
+    padding-top: 20px;
+    font-size: 12px;
+    line-height: 18px;
+    max-width: 364px;
+  }
+
+  .about-me__student-photo {
+    max-width: 255px;
+    max-height: 307px;
+  }
+
+  .about-me__github-link {
+    padding-top: 69px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-me__info-block {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+  }
+  .about-me__student-description {
+    order: 2;
+    padding-top: 30px;
+  }
+
+  .about-me__student-photo {
+    align-self: center;
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-me__container {
+    padding: 83px 14px 0;
+  }
+
+  .about-me__student-photo {
+    max-width: calc(100vw - 9%);
+    max-height: 352px;
+    width: 100%;
+  }
+
+  .about-me__student-name {
+    font-size: 30px;
+    padding-top: 37px;
+  }
+
+  .about-me__student-info {
+    font-size: 11px;
+    line-height: 16px;
+    padding-top: 18px;
+  }
+
+  .about-me__student-biography {
+    font-size: 11px;
+    line-height: 16px;
+    padding-top: 20px;
+    padding-right: 0;
+  }
+
+  .about-me__github-link {
+    padding-top: 40px;
+  }
+
+  .about-me__student-description {
+    padding-top: 0;
+  }
+}

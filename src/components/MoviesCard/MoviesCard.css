@@ -1,0 +1,127 @@
+.movies-card {
+  display: flex;
+  flex-direction: column;
+  max-height: 281px;
+  width: 100%;
+  background: #222;
+  border-radius: 7px;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.movies-card__picture {
+  object-fit: contain;
+  object-position: center;
+  max-width: 364px;
+}
+
+.movies-card__name-and-like {
+  margin: 0;
+  padding:  5px 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movies-card__name {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity .3s ease;
+}
+
+.movies-card__name:hover {
+  opacity: .8;
+}
+
+.movies-card__like {
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  outline: none;
+  background-image: url('../../images/heart-black.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.movies-card__like_active {
+  background-image: url('../../images/heart-red.svg');
+}
+
+.movies-card__close-btn {
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  outline: none;
+  background-image: url('../../images/close-small-btn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+}
+
+.movies-card:hover .movies-card__close-btn {
+  opacity: 1;
+}
+
+.movies-card__movie-duration {
+  margin: 0;
+  padding: 9px 16px 16px;
+  color: #8b8b8b;
+  font-size: 11px;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card {
+    max-width: 339px;
+    max-height: 262px;
+  }
+
+  .movies-card__picture {
+    max-width: 339px;
+  }
+
+  .movies-card__name-and-like {
+    padding-right: 14px;
+    padding-left: 14px;
+    padding-top: 5px;
+  }
+
+  .movies-card__movie-duration {
+    padding: 7px 14px 7px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies-card__picture {
+    max-width: 300px;
+  }
+
+  .movies-card__name {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .movies-card__name-and-like {
+    padding-right: 11px;
+    padding-left: 14px;
+    padding-top: 4px;
+  }
+
+  .movies-card__movie-duration {
+    font-size: 10px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}

@@ -1,0 +1,114 @@
+.navigation {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation__wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation__films {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  column-gap: 16px;
+  list-style: none;
+}
+
+.navigation__item-link {
+  text-decoration: none;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.navigation__item-link_active {
+  font-weight: 500;
+}
+
+.navigation__profile-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 17px;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.navigation__profile-link::after {
+  content: "";
+  width: 26px;
+  height: 30px;
+  background-image: url('../../../images/accaunt.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  background-color: #313131;
+  border-radius: 4px;
+}
+
+.navigation__profile-link:hover {
+  opacity: .8;
+}
+
+.navigation__hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  background-image: url('../../../images/icon-main.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -22px;
+  right: 0px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__wrapper {
+    display: none;
+  }
+
+  .navigation__hamburger {
+    display: block;
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navigation__hamburger {
+    background-image: url('../../../images/icon-main-small.svg');
+    width: 40px;
+    height: 43px;
+    top: -22px
+  }
+}

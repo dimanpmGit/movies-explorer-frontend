@@ -1,0 +1,15 @@
+.saved-movies {
+  background-color: #202020;
+}
+
+.saved-movies__divider {
+  margin: 0;
+  padding: 0;
+  height: 230px;
+}
+
+@media screen and (max-width: 768px) {
+  .saved-movies__divider {
+    height: 180px;
+  }
+}

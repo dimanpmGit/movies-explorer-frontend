@@ -1,0 +1,149 @@
+.about-project {
+  margin: 0;
+  padding: 0;
+  background: #202020;
+}
+
+.about-project__container {
+  margin: 0 auto;
+  padding: 110px 70px 105px;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.about-project__description {
+  display: flex;
+  column-gap: 53px;
+  margin: 0;
+  padding: 69px 0 0;
+  list-style: none;
+}
+
+.about-project__item-title {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.about-project__item-text {
+  margin: 0;
+  padding: 25px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about-project__periods {
+  display: grid;
+  grid-template-columns: minmax(110px, 228px) minmax(420px, 912px);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
+  margin: 0;
+  padding: 110px 0 0;
+}
+
+.about-project__periods-1stweek {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  background-color: #3DDC84;
+  color: #000;
+  font-size: 14px;
+}
+
+.about-project__periods-4weeks {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  background-color: #303030;
+  font-size: 14px;
+}
+
+.about-project__periods-text {
+  margin: 0;
+  padding: 10px 0 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #8B8B8B;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__container {
+    padding: 91px 50px 84px;
+  }
+
+  .about-project__description {
+    column-gap: 38px;
+  }
+
+  .about-project__item-title {
+    line-height: 25px;
+  }
+
+  .about-project__item-text {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 21px;
+  }
+
+  .about-project__periods {
+    padding-top: 93px;
+    grid-template-columns: minmax(80px, 140px) minmax(150px, 528px);
+  }
+
+  .about-project__periods-text {
+    padding-top: 7px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-project__container {
+    padding: 69px 18px 70px;
+  }
+
+  .about-project__description {
+    padding-top: 59px;
+    flex-direction: column;
+    row-gap: 56px;
+  }
+
+  .about-project__item-title {
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  .about-project__item-text {
+    font-size: 11px;
+    line-height: 16px;
+    padding-top: 14px;
+  }
+
+  .about-project__periods {
+    padding-top: 61px;
+    grid-template-columns: minmax(20px, 100px) minmax(50px, 184px);
+  }
+
+  .about-project__periods-1stweek,
+  .about-project__periods-4weeks,
+  .about-project__periods-text {
+    font-size: 11px;
+  }
+
+  .about-project__periods-text {
+    padding-top: 0;
+    margin-top: -5px;
+  }
+}
