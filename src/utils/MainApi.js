@@ -19,7 +19,7 @@ export const register = (name, email, password) => {
         return authorize(data.email, password);
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => err);
 };
 
 export const authorize = (email, password) => {
@@ -38,7 +38,7 @@ export const authorize = (email, password) => {
         return data;
       }      
     })
-    .catch((err) => console.log(err));
+    .catch((err) => err);
 };
 
 export const getContent = (token) => {
@@ -52,6 +52,22 @@ export const getContent = (token) => {
   })
     .then(res => res.json())
     .then(data => data)
+    .catch((err) => err);
+}
+
+export const updateUser = (name, email, token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, email })
+  })
+    .then(res => res.json())
+    .then(data => data)
+    .catch((err) => err);
 }
 
 export const getMovies = () => {
@@ -59,4 +75,7 @@ export const getMovies = () => {
     method: 'GET',
     headers: `Bearer ${localStorage.getItem('jwt')}`
   })
+    .then(res => res.json())
+    .then(data => data)
+    .catch((err) => err);
 }

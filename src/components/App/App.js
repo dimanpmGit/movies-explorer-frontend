@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -10,16 +11,16 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Main from '../Main/Main';
 import Preloader from '../Preloader/Preloader';
-import * as auth from '../../utils/MainApi';
-import * as movies from '../../utils/MoviesApi';
+import * as mainApi from '../../utils/MainApi';
+import * as moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [formValue, setFormValue] = useState({
     email: '',
     password: '',
@@ -33,19 +34,23 @@ function App() {
 
   const handleLogout = () => {
     setLoggedIn(false);
-    setIsTokenChecked(false);
   }
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       startPreloader();
-      auth.getContent(jwt)
-        .then((res) => {
-          if (res) {
+      mainApi.getContent(jwt)
+        .then((data) => {
+          if (data) {
+            setCurrentUser({
+              ...data,
+              _id: data._id,
+              name: data.name,
+              email: data.email
+            });
             stopPreloader();
             handleLogin();
-            setIsTokenChecked(true);
             const url = location.pathname || '/movies';
             navigate(url, { replace: true });
           }
@@ -59,7 +64,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, [isTokenChecked]);
+  }, [loggedIn]);
 
   const startPreloader = () => {
     setIsLoading(true);
@@ -75,10 +80,12 @@ function App() {
   }, []);
   
   useEffect(() => {
-    movies.getMovies()
+    startPreloader();
+    moviesApi.getMovies()
       .then((data) => {
         const moviesArr = Array.from(data);
         if (data) {
+          stopPreloader();
           moviesArr.map((item) => {
             (moviesSet.length <= moviesArr.length) &&
               setMoviesSet(moviesSet => [...moviesSet, [item]]);
@@ -89,6 +96,7 @@ function App() {
   }, [])
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className='app'>
       {isLoading ? < Preloader /> : (
         <Routes>
@@ -116,12 +124,14 @@ function App() {
           <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />} />
           <Route 
-            path='profile'
+            path='/profile'
             element={
               <ProtectedRoute
                 element={Profile}
                 loggedIn={loggedIn}
                 handleLogout={handleLogout}
+                startPreloader={startPreloader}
+                stopPreloader={stopPreloader}
               />}
           />
           <Route path='/' element={
@@ -132,6 +142,7 @@ function App() {
         </Routes>
       )}
     </div>
+    </CurrentUserContext.Provider>
   )
 }
 
