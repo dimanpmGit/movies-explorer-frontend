@@ -1,31 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
+import { useInput } from '../Validation/Validation';
 
-const Login = ({ loggedIn, formValue, setFormValue, handleLogin, startPreloader, stopPreloader }) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
+
+  const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
+  const password = useInput('', { isEmpty: true, minLength: 8 });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formValue.email || !formValue.password) {
+    if (!email.value || !password.value) {
       return;
     }
     startPreloader();
-    auth.authorize(formValue.email, formValue.password)
+    auth.authorize(email.value, password.value)
       .then((data) => {
         if (data.token) {
           stopPreloader();
-          setFormValue({ email: '', password: '' });
           handleLogin();
           navigate('/movies', {replace: true});
         }
@@ -39,13 +35,17 @@ const Login = ({ loggedIn, formValue, setFormValue, handleLogin, startPreloader,
         <Logo />
         <h2 className='login__title'>Рады видеть!</h2>
         <form className='login__form' onSubmit={handleSubmit}>
-          <label className='login__label' htmlFor='login-email'>E-mail</label>
-          <input className='login__input' id='login-email' type='email' name='email' value={formValue.email} onChange={handleChange} required></input>
-          <label className='login__err-msg' htmlFor='login-email'>Что-то пошло не так...</label>
-          <label className='login__label' htmlFor='login-password'>Пароль</label>
-          <input className='login__input' id='login-password' type='password' name='password' value={formValue.password} onChange={handleChange} minLength='8' required></input>
-          <label className='login__err-msg' htmlFor='login-password'>Что-то пошло не так...</label>
-          <SubmitButton text={'Войти'} className={'login__submit-btn'} />
+          <div className='login__input-wrapper'>
+            <label className='login__label' htmlFor='login-email'>E-mail</label>
+            <input className='login__input' id='login-email' type='email' name='email' value={email.value} onChange={e => email.onChange(e)} onBlur={e => email.onBlur(e)} required></input>
+            {(email.isDirty && !email.isInputValid) && <span className='login__err-msg'>{email.errorText}</span>}
+          </div>
+          <div className='login__input-wrapper'>
+            <label className='login__label' htmlFor='login-password'>Пароль</label>
+            <input className={`login__input ${!password.isInputValid && 'login__input_failed'}`} id='login-password' type='password' name='password' value={password.value} onChange={e => password.onChange(e)} onBlur={e => password.onBlur(e)} minLength='8' required></input>
+            {(password.isDirty && !password.isInputValid) && <span className='login__err-msg'>{password.errorText}</span>}
+          </div>
+          <SubmitButton text={'Войти'} isDisabled={(!email.isInputValid || !password.isInputValid)} />
         </form>
         <div className='login__enter-menu'>
           <p className='login__enter-menu-text'>Ещё не зарегистрированы?</p>
