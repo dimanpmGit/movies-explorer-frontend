@@ -11,6 +11,7 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Main from '../Main/Main';
 import Preloader from '../Preloader/Preloader';
+import { Popup } from '../Popup/Popup';
 import * as mainApi from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
 
@@ -26,8 +27,7 @@ function App() {
     password: '',
     name: '',
   });
-  const [moviesSet, setMoviesSet] = useState([]);
-
+  
   const handleLogin = () => {
     setLoggedIn(true);
   }
@@ -36,7 +36,7 @@ function App() {
     setLoggedIn(false);
   }
 
-  const tokenCheck = () => {
+  const tokenCheck = useCallback(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       startPreloader();
@@ -51,20 +51,22 @@ function App() {
             });
             stopPreloader();
             handleLogin();
-            const url = location.pathname || '/movies';
+            const url = location.pathname;
             navigate(url, { replace: true });
           }
         })
         .catch((err) => {
           navigate('/signin', { replace: true });
-          console.log(err)
+          return console.log(err);
         });
+    } else {
+      setLoggedIn(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     tokenCheck();
-  }, [loggedIn]);
+  }, []);
 
   const startPreloader = () => {
     setIsLoading(true);
@@ -79,26 +81,10 @@ function App() {
     document.documentElement.setAttribute('lang', 'ru');
   }, []);
   
-  useEffect(() => {
-    startPreloader();
-    moviesApi.getMovies()
-      .then((data) => {
-        const moviesArr = Array.from(data);
-        if (data) {
-          stopPreloader();
-          moviesArr.map((item) => {
-            (moviesSet.length <= moviesArr.length) &&
-              setMoviesSet(moviesSet => [...moviesSet, [item]]);
-          })
-        }
-      })
-      .catch(err => console.log(err));
-  }, [])
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className='app'>
-      {isLoading ? < Preloader /> : (
+      <div className='app'>
+        {isLoading && <Popup element={Preloader} />}
         <Routes>
           <Route path='/signin' element={
             <Login
@@ -121,7 +107,7 @@ function App() {
             />}
           />
           <Route path='/not-found' element={<NotFound />} />
-          <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} />} />
+          <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} startPreloader={startPreloader} stopPreloader={stopPreloader} />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />} />
           <Route 
             path='/profile'
@@ -140,8 +126,7 @@ function App() {
           <Route path='/main' element={<Main />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
-      )}
-    </div>
+      </div>
     </CurrentUserContext.Provider>
   )
 }

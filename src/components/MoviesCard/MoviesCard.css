@@ -1,6 +1,7 @@
 .movies-card {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   max-height: 281px;
   width: 100%;
   background: #222;
@@ -90,6 +91,13 @@
 
   .movies-card__picture {
     max-width: 339px;
+  }
+
+  .movies-card__picture-link {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .movies-card__name-and-like {

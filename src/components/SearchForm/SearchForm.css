@@ -35,6 +35,21 @@
   color: #8b8b8b;
 }
 
+.search-form__err-msg {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  color: #ee3465;
+  font-size: 13px;
+  transition: all .3s ease;
+}
+
+.search-form__input_failed {
+  border: 1.5px solid #ee3465;
+}
+
 .search-form__button {
   position: absolute;
   height: 52px;
@@ -53,6 +68,11 @@
 
 .search-form__button:hover {
   background-color: rgba(66, 133, 244, .8);
+}
+
+.search-form__button:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
 }
 
 .search-form__hr {

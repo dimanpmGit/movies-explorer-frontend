@@ -8,6 +8,7 @@ export const useValidation = (value, validations) => {
   const [emailError, setEmailError] = useState(false);
   const [isInputValid, setInputValid] = useState(false);
   const [errorText, setErrorText] = useState('');
+
   useEffect(() => {
     for (const validation in validations) {
       switch (validation) {

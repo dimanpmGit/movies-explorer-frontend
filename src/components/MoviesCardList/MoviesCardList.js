@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { cards } from '../../utils/constants';
 
-const MoviesCardList = ({ onlySaved }) => {
+const MoviesCardList = ({ onlySaved, moviesSet }) => {
 
   if (onlySaved) {
   return (
@@ -18,7 +18,7 @@ const MoviesCardList = ({ onlySaved }) => {
   return (
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
-        {cards.map((card, i) => <MoviesCard key={i} card={card} onlySaved={onlySaved} />)}
+        {moviesSet.map((movie, i) => <MoviesCard key={movie.id} movie={movie} onlySaved={onlySaved} />)}
       </div>
     </div>
   )
