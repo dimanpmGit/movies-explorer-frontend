@@ -62,7 +62,11 @@ export const useInput = (initialValue, validations) => {
   const [isDirty, setDirty] = useState(false);
   
   const valid = useValidation(value, validations);
-  
+
+  const onChangeInitial = (initialValue) => {
+    setValue(initialValue);
+  }
+
   const onChange = (e) => {
     setValue(e.target.value);
   }
@@ -72,6 +76,7 @@ export const useInput = (initialValue, validations) => {
   }
   return {
     value,
+    onChangeInitial,
     onChange,
     onBlur,
     isDirty,

@@ -96,7 +96,7 @@ function App() {
           />
           <Route path='/not-found' element={<NotFound />} />
           <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} startPreloader={startPreloader} stopPreloader={stopPreloader} />} />
-          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />} />
+          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} startPreloader={startPreloader} stopPreloader={stopPreloader} />} />
           <Route 
             path='/profile'
             element={

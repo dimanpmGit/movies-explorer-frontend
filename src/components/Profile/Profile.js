@@ -40,6 +40,9 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
   const signOut = () => {
     localStorage.removeItem('jwt');
     handleLogout();
+    localStorage.removeItem('movies');
+    localStorage.removeItem('phrase');
+    localStorage.removeItem('only-short');
     navigate('/', {replace: true});
   }
   return (

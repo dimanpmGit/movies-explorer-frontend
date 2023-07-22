@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
 
-const MoviesCardList = ({ onlyShort, foundMovies, moreButtonClicksCounter, showMoreButton, hideMoreButton, moreButtonStatus }) => {
+const MoviesCardList = ({ onlyShort, foundMovies, moreButtonClicksCounter, showMoreButton, hideMoreButton }) => {
   const [cardsOnPage, setCardsOnPage] = useState(0);
   const [shortMovies, setShortMovies] = useState([]);
   
@@ -48,17 +48,55 @@ const MoviesCardList = ({ onlyShort, foundMovies, moreButtonClicksCounter, showM
   }
   const { cardsPerPage, cardsOnMoreButton} = useCardsPerPage();
 
-  const getCountCardsOnPage = (foundMovies, addMoviesByClick, cliksCounter, maxCardsOnPage) => {
+  const getCountCardsOnPage = (foundMovies, addMoviesByClick, cliksCounter, maxCardsOnPage, cardsOnPage) => {
     const maxOnPage = maxCardsOnPage + (addMoviesByClick * cliksCounter);
-    //const maxOnPage = maxMoviesOnPage + cardsOnPage;
-    if (foundMovies > maxOnPage) {
+    /*if (!cardsOnPage) { 
+      cardsOnPage = 0
+    };*/
+    //const maxOnPage = maxCardsOnPage + Math.floor((cardsOnPage / addMoviesByClick) * addMoviesByClick);
+    /*if ((cardsOnPage > 0) && (cardsOnPage > maxOnPage)) {
       showMoreButton();
-      //setCardsOnPage(maxOnPage);
+      return maxCardsOnPage + (addMoviesByClick * Math.floor(cardsOnPage, maxOnPage));
+    }
+    if ((cardsOnPage > 0) && (cardsOnPage < maxOnPage)) {
+      if (foundMovies > maxOnPage) {
+        showMoreButton();
+        return maxCardsOnPage + addMoviesByClick;
+      }
+      hideMoreButton();
+      return foundMovies;
+    }
+    else 
+    console.log('*******************************************************************');
+    console.log(`Найдено фильмов: ${foundMovies}`);
+    console.log(`Добавляется фильмов за клик: ${addMoviesByClick}`);
+    console.log(`Нажатий кнопки [Ещё]: ${cliksCounter}`);
+    console.log(`Максимум карточек на странице: ${maxCardsOnPage}`);
+    console.log(`Карточек на странице: ${cardsOnPage}`);
+    //maxCardsOnPage = cardsOnPage + addMoviesByClick;
+    console.log(`Math.floor((cardsOnPage / addMoviesByClick)): ${Math.floor((cardsOnPage / addMoviesByClick) * addMoviesByClick) }`);
+    console.log(`Максимум карточек на странице: ${cardsOnPage > maxCardsOnPage ? (Math.floor(cardsOnPage / addMoviesByClick) * addMoviesByClick) : maxCardsOnPage}`);*/
+    /*if (foundMovies > maxOnPage) {
+      if (cardsOnPage > maxOnPage) {
+        showMoreButton();
+        return (Math.floor(cardsOnPage / addMoviesByClick) * addMoviesByClick);
+      }
+      showMoreButton();
       return maxOnPage;
     }
-    hideMoreButton();
-    //setCardsOnPage(foundMovies);
-    return foundMovies;
+    else {
+      hideMoreButton();
+      return foundMovies;
+    }*/
+
+    if (foundMovies > maxOnPage) {
+      showMoreButton();
+      return maxOnPage;
+    }
+    else {
+      hideMoreButton();
+      return foundMovies;
+    }
   }
 
   const getShortMovies = (foundMovies) => {
@@ -66,14 +104,14 @@ const MoviesCardList = ({ onlyShort, foundMovies, moreButtonClicksCounter, showM
   }
   useEffect(() => {
     setShortMovies(getShortMovies(foundMovies));
-  }, [onlyShort]);
+  }, [onlyShort, foundMovies]);
 
   useEffect(() => {
     onlyShort ?
-      setCardsOnPage(getCountCardsOnPage(shortMovies.length, cardsOnMoreButton, moreButtonClicksCounter, cardsPerPage))
+      setCardsOnPage(getCountCardsOnPage(shortMovies.length, cardsOnMoreButton, moreButtonClicksCounter, cardsPerPage, cardsOnPage))
       :
-      setCardsOnPage(getCountCardsOnPage(foundMovies.length, cardsOnMoreButton, moreButtonClicksCounter, cardsPerPage));
-  }, [onlyShort, moreButtonClicksCounter, cardsOnPage, foundMovies.length, shortMovies.length])
+      setCardsOnPage(getCountCardsOnPage(foundMovies.length, cardsOnMoreButton, moreButtonClicksCounter, cardsPerPage, cardsOnPage));
+  }, [onlyShort, moreButtonClicksCounter, cardsOnPage, foundMovies, shortMovies])
 
 
 
@@ -84,20 +122,23 @@ const MoviesCardList = ({ onlyShort, foundMovies, moreButtonClicksCounter, showM
   console.log(`Максимум карточек на странице при первой загрузке: ${cardsPerPage}`);
   console.log(`Кнопка [Ещё] нажата ${moreButtonClicksCounter} раз`);
   console.log(`Показано карточек: ${getCountCardsOnPage(foundMovies.length, cardsOnMoreButton, moreButtonClicksCounter, cardsPerPage)}`);
-  console.log(`Показывать кнопку [Ещё]? ${moreButtonStatus}`);*/
+  console.log(`Показывать кнопку [Ещё]? ${moreButtonStatus}`);
+  
   console.log(`Показано карточек: ${cardsOnPage}`);
+  
   console.log(`onlyShort: ${onlyShort}`);
+  console.log('shortMovies: ');
   console.log(shortMovies);
+  console.log('foundMovies: ');
+  console.log(foundMovies);
+  */
   if (onlyShort) 
   return (
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
-        {/*cards.map((card, i) => (
-          card.saved ? <MoviesCard key={i} card={card} onlySaved={onlySaved} /> : ''
-        ))*/
-          shortMovies.length > 0 &&
-          /*[...Array((foundMovies.length < cardsPerPage ? foundMovies.length : cardsPerPage))].map((movie, i) => <MoviesCard key={foundMovies[i].id} movie={foundMovies[i]} />)*/
-          [...Array(cardsOnPage)].map((movie, i) => <MoviesCard key={shortMovies[i].id} movie={shortMovies[i]} />)
+        {
+          shortMovies.length > 0 && shortMovies.length >= cardsOnPage &&
+            [...Array(cardsOnPage)].map((movie, i) => <MoviesCard key={shortMovies[i].id} movie={shortMovies[i]} />)
         }
       </div>
     </div>
@@ -106,9 +147,8 @@ const MoviesCardList = ({ onlyShort, foundMovies, moreButtonClicksCounter, showM
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
         {
-          foundMovies.length > 0 &&
-          /*[...Array((foundMovies.length < cardsPerPage ? foundMovies.length : cardsPerPage))].map((movie, i) => <MoviesCard key={foundMovies[i].id} movie={foundMovies[i]} />)*/
-          [...Array(cardsOnPage)].map((movie, i) => <MoviesCard key={foundMovies[i].id} movie={foundMovies[i]} />)
+          foundMovies.length > 0 && foundMovies.length >= cardsOnPage &&
+            [...Array(cardsOnPage)].map((movie, i) => <MoviesCard key={foundMovies[i].id} movie={foundMovies[i]} />)
         }
       </div>
     </div>
