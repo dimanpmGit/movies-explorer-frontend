@@ -1,11 +1,12 @@
 import React from 'react';
 import './MoviesCard.css';
+import { MOVIES_IMAGES_URL } from '../../utils/constants';
 
 const MoviesCard = ({ movie, onlySaved }) => {
   return (
       <div className='movies-card'>
-      <a className='movies-card__picture-link app__link' href={movie.link} target='_blank' rel='noreferrer'>
-        <img className='movies-card__picture' src={movie.image.formats.thumbnail.url} alt={movie.nameRU}/>
+      <a className='movies-card__picture-link app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>
+        <img className='movies-card__picture' src={`${MOVIES_IMAGES_URL}${movie.image.url}`} alt={movie.nameRU}/>
         </a>
         <div className='movies-card__name-and-like'>
         <a className='movies-card__name app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>{movie.nameRU}</a>

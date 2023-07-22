@@ -4,7 +4,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useInput } from '../Validation/Validation';
 import * as moviesApi from '../../utils/MoviesApi';
 
-const SearchForm = ({ startPreloader, stopPreloader, handleSetFoundMovies }) => {
+const SearchForm = ({ startPreloader, stopPreloader, onSearchClick, onlyShort, handleOnlyShortChange }) => {
   const [moviesSet, setMoviesSet] = useState([]);
   const searchString = useInput('', { isEmpty: true });
 
@@ -27,16 +27,15 @@ const SearchForm = ({ startPreloader, stopPreloader, handleSetFoundMovies }) => 
               stopPreloader();
             });
             //... и выполняем поиск
-            handleSetFoundMovies(searchMoviesInDownloaded(searchString.value, moviesArr));
+            onSearchClick(searchMoviesInDownloaded(searchString.value, moviesArr));
           }
         })
         .catch(err => console.log(err));
     } else {
       //Если фильмы уже скачены, выполняем поиск
-      handleSetFoundMovies(searchMoviesInDownloaded(searchString.value, moviesSet));
+      onSearchClick(searchMoviesInDownloaded(searchString.value, moviesSet));
     }
   }
-
   return (
     <form className='search-form' onSubmit={handleSubmit}>
       <div className='search-form__container'>
@@ -45,7 +44,7 @@ const SearchForm = ({ startPreloader, stopPreloader, handleSetFoundMovies }) => 
           <input className={`search-form__input ${(searchString.isDirty && !searchString.isInputValid) && 'search-form__input_failed'}`} type='text' name='movie' placeholder='Фильм' value={searchString.value} onChange={e => searchString.onChange(e)} onBlur={e => searchString.onBlur(e)} required></input>
           <button className='search-form__button' type='submit' disabled={!searchString.isInputValid}>Поиск</button>
         </div>
-        <FilterCheckbox mainClass={'search-form__checkbox'}/>
+        <FilterCheckbox onlyShort={onlyShort} handleChange={handleOnlyShortChange} />
         <div className='search-form__hr'></div>
       </div>
     </form>

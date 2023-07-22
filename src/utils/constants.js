@@ -14,6 +14,8 @@ import studentPic from '../images/student.jpg';
 
 export const BASE_URL = 'http://localhost:3001';
 export const BEATFILM_MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const MOVIES_IMAGES_URL = 'https://api.nomoreparties.co';
+export const SHORT_MOVIES_LIMIT = 100;
 export const EMAIL_REGXPT_PATTERN = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const cards = [

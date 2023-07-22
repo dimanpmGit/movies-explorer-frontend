@@ -13,7 +13,6 @@ import Main from '../Main/Main';
 import Preloader from '../Preloader/Preloader';
 import { Popup } from '../Popup/Popup';
 import * as mainApi from '../../utils/MainApi';
-import * as moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const navigate = useNavigate();
@@ -22,11 +21,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [formValue, setFormValue] = useState({
-    email: '',
-    password: '',
-    name: '',
-  });
   
   const handleLogin = () => {
     setLoggedIn(true);
@@ -88,9 +82,6 @@ function App() {
         <Routes>
           <Route path='/signin' element={
             <Login
-              loggedIn={loggedIn}
-              formValue={formValue}
-              setFormValue={setFormValue}
               handleLogin={handleLogin}
               startPreloader={startPreloader}
               stopPreloader={stopPreloader}
@@ -98,9 +89,6 @@ function App() {
           />
           <Route path='/signup' element={
             <Register
-              loggedIn={loggedIn}
-              formValue={formValue}
-              setFormValue={setFormValue}
               handleLogin={handleLogin}
               startPreloader={startPreloader}
               stopPreloader={stopPreloader}
