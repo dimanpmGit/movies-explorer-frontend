@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useInput } from '../Validation/Validation';
 
-const SearchForm = ({ onSearchClick, onlyShort, handleOnlyShortChange, phrase }) => {
+const SearchForm = ({ phrase, onSearchClick, handleCheckBoxStatus, onlyShort }) => {
+
   const searchString = useInput('', { isEmpty: true });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,8 +12,9 @@ const SearchForm = ({ onSearchClick, onlyShort, handleOnlyShortChange, phrase })
   }
 
   useEffect(() => {
-    searchString.onChangeInitial(phrase && '');
-  },[])
+    searchString.onChangeInitial(phrase);
+  }, [])
+  
   return (
     <form className='search-form' onSubmit={handleSubmit}>
       <div className='search-form__container'>
@@ -21,7 +23,7 @@ const SearchForm = ({ onSearchClick, onlyShort, handleOnlyShortChange, phrase })
           <input className={`search-form__input ${(searchString.isDirty && !searchString.isInputValid) && 'search-form__input_failed'}`} type='text' name='movie' placeholder='Фильм' value={searchString.value} onChange={e => searchString.onChange(e)} onBlur={e => searchString.onBlur(e)} required></input>
           <button className='search-form__button' type='submit' disabled={!searchString.isInputValid}>Поиск</button>
         </div>
-        <FilterCheckbox onlyShort={onlyShort} handleChange={handleOnlyShortChange} />
+        <FilterCheckbox onlyShort={onlyShort} handleCheckBoxStatus={handleCheckBoxStatus} />
         <div className='search-form__hr'></div>
       </div>
     </form>
