@@ -18,3 +18,4 @@ export const getMovies = () => {
   })
   .catch(err => console.log(err));
 }
+

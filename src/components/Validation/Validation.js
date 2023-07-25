@@ -8,6 +8,7 @@ export const useValidation = (value, validations) => {
   const [emailError, setEmailError] = useState(false);
   const [isInputValid, setInputValid] = useState(false);
   const [errorText, setErrorText] = useState('');
+  const [loginError, setLoginError] = useState(false);
 
   useEffect(() => {
     for (const validation in validations) {
@@ -53,6 +54,7 @@ export const useValidation = (value, validations) => {
     minLengthError,
     emailError,
     isInputValid,
+    loginError,
     errorText
   }
 };

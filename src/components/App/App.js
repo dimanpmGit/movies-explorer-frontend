@@ -63,11 +63,11 @@ function App() {
   }, []);
 
   const startPreloader = () => {
-    setIsLoading(true);
+    setIsLoading(() => true);
   }
 
   const stopPreloader = () => {
-    setIsLoading(false);
+    setIsLoading(() => false);
   }
   
   useEffect(() => {

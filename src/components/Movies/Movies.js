@@ -10,19 +10,24 @@ import * as mainApi from '../../utils/MainApi';
 import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
 
 const Movies = ({ startPreloader, stopPreloader }) => {
+  //localStorage.removeItem('saved-movies');
   //Хранение скачанных фильмов
   const [moviesSet, setMoviesSet] = useState(() => localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []);
+  //Хранение скачанных сохраненных фильмов
+  const [savedMoviesSet, setSavedMoviesSet] = useState(() => localStorage.getItem('saved-movies') ? JSON.parse(localStorage.getItem('saved-movies')) : []);
+  //Показатель, что находимся в фильмах и должно отображаться сердечко для добавления фильма
+  const [isSaved, setIsSaved] = useState(false);
+  
   //Хранение отсортированных по поиску фильиов
   const [foundMovies, setFoundMovies] = useState(() => localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []);
   const [moreButtonClicksCounter, setClicksCounter] = useState(() => localStorage.getItem('more-btn-clicks') ? Number(localStorage.getItem('more-btn-clicks')) : 0 );
   const [showMoreButton, setShowMoreButton] = useState(false);
   const [onlyShort, setOnlyShort] = useState({ isChecked: Number(localStorage.getItem('only-short')) });
   const [phrase, setPhrase] = useState(() => (localStorage.getItem('phrase') === null) ? '' : localStorage.getItem('phrase'));
-
   const getPhrase = (phrase) => {
     setPhrase(phrase);
   }
-
+  
   const getOnlyShort = (value) => {
     setOnlyShort({ ...onlyShort, isChecked: value });
   }
@@ -40,27 +45,51 @@ const Movies = ({ startPreloader, stopPreloader }) => {
     })
   }
 
-  const handleSearchMoviesClick = async (value) => {
-    // Если фильмы еще не скачивались, то скачиваем...
+  // Скачивает сохраненные фильмы...
+  const getSavedMovies = () => {
+    startPreloader();
+    mainApi.getSavedMovies()
+      .then((data) => {
+        setSavedMoviesSet(() => []);
+        if (data) {
+          stopPreloader();
+          const moviesArr = Array.from(data);
+          //Сохраняем данные поиска в локальное хранилище
+          localStorage.removeItem('saved-movies');
+          localStorage.setItem('saved-movies', JSON.stringify(moviesArr));
+          moviesArr.map((movie) => {
+          return setSavedMoviesSet(savedMoviesSet => [...[...new Set(savedMoviesSet)],
+              movie]);
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  const handleSearchMoviesClick = (value) => {
     getPhrase(value);
     localStorage.setItem('phrase', value);
-    if ((moviesSet === undefined) || (moviesSet.length === 0)) {
+    // Если фильмы еще не скачивались, то скачиваем...
+    if ((moviesSet === null) || (moviesSet === undefined) || (moviesSet.length === 0)) {
       setMoviesSet(() => []);
       startPreloader();
       moviesApi.getMovies()
         .then((data) => {
           if (data) {
+            
             stopPreloader();
             const moviesArr = Array.from(data);
             //Сохраняем данные поиска в локальное хранилище
             localStorage.setItem('movies', JSON.stringify(moviesArr));
             moviesArr.map((movie) => {
-              return setMoviesSet(moviesSet => [...[...new Set(moviesSet)], movie]);
+            setMoviesSet(moviesSet => [...[...new Set(moviesSet)], movie]);
             });
             getFoundMoviesArray(searchMoviesInDownloaded(value, moviesArr));
           }
         })
         .catch(err => console.log(err));
+      // Скачиваем сохраненные фильмы...
+      getSavedMovies();
     }
     //Если фильмы уже скачены, сбрасываем счетчик нажатий кнопки [Ещё] и выполняем поиск
     setClicksCounter(() => 0);
@@ -68,10 +97,14 @@ const Movies = ({ startPreloader, stopPreloader }) => {
     localStorage.removeItem('more-btn-clicks');
     getFoundMoviesArray(searchMoviesInDownloaded(value, moviesSet));
   }
+  
+  useEffect(() => {
+    setIsSaved(() => false);
+  }, [isSaved])
 
   useEffect(() => {
     getFoundMoviesArray(searchMoviesInDownloaded(phrase, moviesSet));
-  }, [onlyShort]);
+  }, [onlyShort, moviesSet, phrase]);
 
 
   const handleCheckBoxStatus = (value) => {
@@ -87,6 +120,9 @@ const Movies = ({ startPreloader, stopPreloader }) => {
     localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
   }, [moreButtonClicksCounter]);
   
+  const handleDeleteClick = () => {
+
+  }
 
   const handleHideMoreButton = () => {
     setShowMoreButton(false);
@@ -94,13 +130,12 @@ const Movies = ({ startPreloader, stopPreloader }) => {
   const handleShowMoreButton = () => {
     setShowMoreButton(true);
   }
-  
   return (
     <>
       <Header isMain={false} isAllMovies={true} />
       <section className='movies'>
         <SearchForm phrase={phrase} onSearchClick={handleSearchMoviesClick} handleCheckBoxStatus={handleCheckBoxStatus} onlyShort={onlyShort} />
-        <MoviesCardList onlyShort={false} foundMovies={foundMovies} moreButtonClicksCounter={moreButtonClicksCounter} showMoreButton={handleShowMoreButton} hideMoreButton={handleHideMoreButton} moreButtonStatus={showMoreButton} />
+        <MoviesCardList foundMovies={foundMovies} moreButtonClicksCounter={moreButtonClicksCounter} showMoreButton={handleShowMoreButton} hideMoreButton={handleHideMoreButton} moreButtonStatus={showMoreButton} isSaved={isSaved} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleDeleteClick} />
         <div className='movies__more-btn-wrapper'>
           <MoreButton text={'Ещё'} onClick={handleMoreButtonClick} moreButtonStatus={showMoreButton} />
         </div>

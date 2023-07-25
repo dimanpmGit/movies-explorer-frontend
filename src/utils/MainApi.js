@@ -52,7 +52,7 @@ export const getContent = (token) => {
   })
     .then(res => res.json())
     .then(data => data)
-    .catch((err) => err);
+    .catch(err => err);
 }
 
 export const updateUser = (name, email, token) => {
@@ -70,12 +70,45 @@ export const updateUser = (name, email, token) => {
     .catch((err) => err);
 }
 
-export const getMovies = () => {
+export const getSavedMovies = () => {
   return fetch(`${BASE_URL}/movies`, {
     method: 'GET',
-    headers: `Bearer ${localStorage.getItem('jwt')}`
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+    }
   })
     .then(res => res.json())
     .then(data => data)
     .catch((err) => err);
+}
+
+export const saveMovie = (movieData) => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+    },
+    body: JSON.stringify(movieData)
+  })
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => err);
+}
+
+export const deleteMovie = (id) => {
+  return fetch(`${BASE_URL}/movies/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+    }
+  })
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => err);
 }

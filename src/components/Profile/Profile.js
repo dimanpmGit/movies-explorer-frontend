@@ -19,8 +19,6 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
   }
 
   const handleProfileSaveClick = (e) => {
-    console.log(`name: ${name.value}`);
-    console.log(`email: ${email.value}`);
     const jwt = localStorage.getItem('jwt');
     e.preventDefault();
     setIsProfileEditing(false);
@@ -41,8 +39,11 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
     localStorage.removeItem('jwt');
     handleLogout();
     localStorage.removeItem('movies');
+    localStorage.removeItem('saved-movies');
     localStorage.removeItem('phrase');
     localStorage.removeItem('only-short');
+    localStorage.removeItem('more-btn-clicks');
+    localStorage.removeItem('more-btn-clicks-saved');
     navigate('/', {replace: true});
   }
   return (

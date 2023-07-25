@@ -11,6 +11,7 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
 
   const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8 });
+  const login = useInput('', { uncorrectLogin: true });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,13 +21,15 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
     startPreloader();
     auth.authorize(email.value, password.value)
       .then((data) => {
+        stopPreloader();
         if (data.token) {
-          stopPreloader();
           handleLogin();
           navigate('/movies', {replace: true});
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        login.onCatchLoginError();
+      });      
   }
 
   return (
