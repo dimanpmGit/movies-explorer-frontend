@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { updateUser } from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
+import { Error } from '../Error/Error';
 
 const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
   const currentUser = React.useContext(CurrentUserContext);
@@ -13,6 +14,18 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
   const [isProfileEditing, setIsProfileEditing] = useState(false);
   const name = useInput(currentUser.name, { isEmpty: true, minLength: 2});
   const email = useInput(currentUser.email, { isEmpty: true, minLength: 5, isEmail: true });
+  const [errorStatus, setErrorStatus] = useState(() => false);
+  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+
+  const handleOnError = (text) => {
+    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorStatus(() => true);
+  }
+
+  const closeBtnClick = (e) => {
+    e.preventDefault();
+    setErrorStatus(() => false);
+  }
     
   const handleProfileEditClick = () => {
     setIsProfileEditing(true);
@@ -27,10 +40,22 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
       updateUser(name.value, email.value, jwt)
         .then((data) => {
           stopPreloader();
-          currentUser.name = name.value;
-          currentUser.email = email.value;
+          if (data) {
+            currentUser.name = name.value;
+            currentUser.email = email.value;
+          }
+          else {
+            currentUser.name = 'Гость';
+            currentUser.email = '';
+            return handleOnError(data.message);
+          }
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+          stopPreloader();
+          currentUser.name = 'Гость';
+          currentUser.email = '';
+          handleOnError(err);
+        });
     }
   }
 
@@ -51,7 +76,7 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
       <Header isMain={false} isAllMovies={false} isSavedMovies={false} />
       <section className='profile'>
         <div className='profile__container'>
-          <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
+          <h2 className='profile__title'>Привет, {currentUser.name !== 'TypeError' ? currentUser.name : 'Гость'}!</h2>
           <form className='profile__form'>
             <div className='profile__form-input'>
               {(name.isDirty && !name.isInputValid) && <span className='profile__err-msg_top'>{name.errorText}</span>}
@@ -72,6 +97,7 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
             <button className='profile__exit' onClick={signOut}>Выйти из аккаунта</button>
           </div>
         </div>
+        <Error errorText={errorText} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
       </section>
     </>
   )

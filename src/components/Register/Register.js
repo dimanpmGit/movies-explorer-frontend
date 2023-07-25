@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
+import { Error } from '../Error/Error';
 
 const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
@@ -12,19 +13,36 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
   const name = useInput('', { isEmpty: true, minLength: 2 });
   const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8 });
+  const [errorStatus, setErrorStatus] = useState(() => false);
+  const [errorText, setErrorText] = useState(() => '');
+
+  const handleOnError = (text) => {
+    setErrorText(() => text || 'Что-то пошло не так...');
+    setErrorStatus(() => true);
+  }
+
+  const closeBtnClick = (e) => {
+    e.preventDefault();
+    setErrorStatus(() => false);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     startPreloader();
     auth.register(name.value, email.value, password.value)
       .then((data) => {
+        stopPreloader(data.message);
         if (data.token) {
-          stopPreloader();
-          handleLogin();
           navigate('/movies', { replace: true });
         }
+        else if (data.message) {
+          handleOnError(data.message);
+        }
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        stopPreloader();
+        handleOnError(err);
+      })
   }
 
   return (
@@ -52,6 +70,7 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
             text={'Зарегистрироваться'}
             isDisabled={(!name.isInputValid || !email.isInputValid || !password.isInputValid)}
           />
+          <Error errorText={'Что-то пошло не так...'} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
         </form>
         <div className='register__enter-menu'>
           <p className='register__enter-menu-text'>Уже зарегистрированы?</p>

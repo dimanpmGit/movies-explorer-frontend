@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import * as moviesApi from '../../utils/MoviesApi';
 import * as mainApi from '../../utils/MainApi';
 import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
+import { Error } from '../Error/Error';
 
 const Movies = ({ startPreloader, stopPreloader }) => {
   //localStorage.removeItem('saved-movies');
@@ -26,6 +27,18 @@ const Movies = ({ startPreloader, stopPreloader }) => {
   const [phrase, setPhrase] = useState(() => (localStorage.getItem('phrase') === null) ? '' : localStorage.getItem('phrase'));
   const getPhrase = (phrase) => {
     setPhrase(phrase);
+  }
+  const [errorStatus, setErrorStatus] = useState(() => false);
+  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+
+  const handleOnError = (text) => {
+    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorStatus(() => true);
+  }
+
+  const closeBtnClick = (e) => {
+    e.preventDefault();
+    setErrorStatus(() => false);
   }
   
   const getOnlyShort = (value) => {
@@ -62,8 +75,14 @@ const Movies = ({ startPreloader, stopPreloader }) => {
               movie]);
           });
         }
+        else if (data.message) {
+          return handleOnError(data.message);
+        }
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        stopPreloader();
+        handleOnError(err);
+      });
   }
 
   const handleSearchMoviesClick = (value) => {
@@ -76,7 +95,6 @@ const Movies = ({ startPreloader, stopPreloader }) => {
       moviesApi.getMovies()
         .then((data) => {
           if (data) {
-            
             stopPreloader();
             const moviesArr = Array.from(data);
             //Сохраняем данные поиска в локальное хранилище
@@ -86,8 +104,14 @@ const Movies = ({ startPreloader, stopPreloader }) => {
             });
             getFoundMoviesArray(searchMoviesInDownloaded(value, moviesArr));
           }
+          else if (data.message) {
+            return handleOnError(data.message);
+          }
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+          stopPreloader();
+          handleOnError(err);
+        });
       // Скачиваем сохраненные фильмы...
       getSavedMovies();
     }
@@ -139,6 +163,7 @@ const Movies = ({ startPreloader, stopPreloader }) => {
         <div className='movies__more-btn-wrapper'>
           <MoreButton text={'Ещё'} onClick={handleMoreButtonClick} moreButtonStatus={showMoreButton} />
         </div>
+        <Error errorText={errorText} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
       </section>
       <Footer />
     </>

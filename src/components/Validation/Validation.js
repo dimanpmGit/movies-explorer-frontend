@@ -23,7 +23,7 @@ export const useValidation = (value, validations) => {
           }
           break;
         case 'minLength':
-          if ((value.length > 0) && (value.length < validations[validation])) {
+          if ((value !== undefined) && (value !== null) && (value.length > 0) && (value.length < validations[validation])) {
             setMinLengthError(true);
             setErrorText('Слишком короткое значение');
           }
@@ -33,7 +33,7 @@ export const useValidation = (value, validations) => {
           break;
         case 'isEmail':
           const re = EMAIL_REGXPT_PATTERN;
-          if ((value.length > 0) && !re.test(String(value).toLowerCase())) { 
+          if ((value !== undefined) && (value !== null) && (value.length > 0) && !re.test(String(value).toLowerCase())) { 
             setEmailError(true);
             setErrorText('Некорректный email');
           } else {

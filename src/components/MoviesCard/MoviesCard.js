@@ -3,12 +3,25 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 import { MOVIES_IMAGES_URL } from '../../utils/constants';
 import * as mainApi from '../../utils/MainApi';
+import { Error } from '../Error/Error';
 
 const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDeleteClick }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const [likeState, setLikeState] = useState(false);
   const allMoviesArr = localStorage.getItem('movies') ? Array.from(JSON.parse(localStorage.getItem('movies'))) : [];
   const [savedMoviesSet, setSavedMoviesSet] = useState(() => localStorage.getItem('saved-movies') ? JSON.parse(localStorage.getItem('saved-movies')) : []);
+  const [errorStatus, setErrorStatus] = useState(() => false);
+  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+
+  const handleOnError = (text) => {
+    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorStatus(() => true);
+  }
+
+  const closeBtnClick = (e) => {
+    e.preventDefault();
+    setErrorStatus(() => false);
+  }
   
   const getSavedMovies = () => {
     startPreloader();
@@ -32,9 +45,16 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
             })
             
           }
-      }})
-      .catch(err => console.log(err));
-  }
+      }
+      else if (data.message) {
+        return handleOnError(data.message);
+      }
+    })
+      .catch((err) => {
+        stopPreloader();
+        handleOnError(err);
+      });
+    }
 
   const handleLikeClick = () => {
     //Если лайк уже стоял, то снимаем лайк и удаляем фильм из сохраненных
@@ -82,7 +102,7 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
   }
 
   const getLikeState = () => {
-    if ((savedMoviesSet !== undefined) && (savedMoviesSet !== null) && (savedMoviesSet.find((item) => movie.id == item.likedMovieId))) {
+    if ((savedMoviesSet !== undefined) && (savedMoviesSet !== null) && (savedMoviesSet.length > 0) && (savedMoviesSet.find((item) => movie.id == item.likedMovieId))) {
       setLikeState(() => true);
     }
   }
@@ -93,17 +113,18 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
 
   return (
       <div className='movies-card'>
-      <a className='movies-card__picture-link app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>
-        <img className='movies-card__picture' src={`${!isSaved ? MOVIES_IMAGES_URL + movie.image.url : movie.image}`} alt={movie.nameRU}/>
-        </a>
-        <div className='movies-card__name-and-like'>
-        <a className='movies-card__name app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>{movie.nameRU}</a>
-          {isSaved ? 
-            <button className='movies-card__close-btn app__link' onClick={onDeleteClick}></button> :
-          <button className={`movies-card__like ${likeState && "movies-card__like_active"} app__link`} onClick={handleLikeClick}></button>
-          }
-        </div>
-      <p className='movies-card__movie-duration'>{`${Math.floor(movie.duration / 60) !== 0 ? Math.floor(movie.duration / 60) + 'ч' : ''}${(movie.duration % 60) ? (movie.duration % 60) + 'м' : ''}`}</p>
+        <a className='movies-card__picture-link app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>
+          <img className='movies-card__picture' src={`${!isSaved ? MOVIES_IMAGES_URL + movie.image.url : movie.image}`} alt={movie.nameRU}/>
+          </a>
+          <div className='movies-card__name-and-like'>
+          <a className='movies-card__name app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>{movie.nameRU}</a>
+            {isSaved ? 
+              <button className='movies-card__close-btn app__link' onClick={onDeleteClick}></button> :
+            <button className={`movies-card__like ${likeState && "movies-card__like_active"} app__link`} onClick={handleLikeClick}></button>
+            }
+          </div>
+        <p className='movies-card__movie-duration'>{`${Math.floor(movie.duration / 60) !== 0 ? Math.floor(movie.duration / 60) + 'ч' : ''}${(movie.duration % 60) ? (movie.duration % 60) + 'м' : ''}`}</p>
+        <Error errorText={errorText} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
       </div>
 )};
 

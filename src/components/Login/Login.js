@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
+import { Error } from '../Error/Error';
 
 const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
@@ -12,6 +13,19 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
   const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8 });
   const login = useInput('', { uncorrectLogin: true });
+  const [errorStatus, setErrorStatus] = useState(() => false);
+  const [errorText, setErrorText] = useState(() => 'Что - то пошло не так...');
+
+  const handleOnError = (text) => {
+    setErrorText(() => text || 'Неправильный email или пароль...');
+    setErrorStatus(() => true);
+  }
+
+  const closeBtnClick = (e) => {
+    e.preventDefault();
+    setErrorStatus(() => false);
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,10 +40,14 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
           handleLogin();
           navigate('/movies', {replace: true});
         }
+        else if (data.message) {
+          return handleOnError(data.message);
+        }
       })
       .catch((err) => {
-        login.onCatchLoginError();
-      });      
+        stopPreloader();
+        handleOnError(err);
+      });
   }
 
   return (
@@ -49,6 +67,7 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
             {(password.isDirty && !password.isInputValid) && <span className='login__err-msg'>{password.errorText}</span>}
           </div>
           <SubmitButton text={'Войти'} isDisabled={(!email.isInputValid || !password.isInputValid)} />
+          <Error errorText={errorText} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
         </form>
         <div className='login__enter-menu'>
           <p className='login__enter-menu-text'>Ещё не зарегистрированы?</p>
