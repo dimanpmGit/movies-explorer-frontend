@@ -12,7 +12,6 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
 
   const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8 });
-  const login = useInput('', { uncorrectLogin: true });
   const [errorStatus, setErrorStatus] = useState(() => false);
   const [errorText, setErrorText] = useState(() => 'Что - то пошло не так...');
 
@@ -35,17 +34,17 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
     auth.authorize(email.value, password.value)
       .then((data) => {
         stopPreloader();
-        if ((data.message) || (data === undefined)) {
-          handleOnError('Неправильный email или пароль...');
-        }
-        else if (data.token) {
+        if (data.token) {
           handleLogin();
           navigate('/movies', {replace: true});
+        }
+        else if ((data.message) || (data === undefined)) {
+          handleOnError('Неправильный email или пароль...');
         }
       })
       .catch((err) => {
         stopPreloader();
-        handleOnError('Неправильный email или пароль...');
+        handleOnError(err.description);
       });
   }
 

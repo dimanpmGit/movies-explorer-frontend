@@ -17,7 +17,7 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
   const [errorText, setErrorText] = useState(() => '');
 
   const handleOnError = (text) => {
-    setErrorText(() => text || 'Что-то пошло не так...');
+    setErrorText(() => text);
     setErrorStatus(() => true);
   }
 
@@ -31,17 +31,18 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
     startPreloader();
     auth.register(name.value, email.value, password.value)
       .then((data) => {
-        stopPreloader(data.message);
-        if (data.token) {
+        stopPreloader();
+        if (data._id) {
           navigate('/movies', { replace: true });
         }
         else if (data.message) {
-          handleOnError('Что-то пошло не так...');
+          setErrorText(() => data.message);
+          handleOnError(data.message);
         }
       })
       .catch((err) => {
         stopPreloader();
-        handleOnError('Что-то пошло не так...');
+        handleOnError(err);
       })
   }
 
@@ -70,7 +71,7 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
             text={'Зарегистрироваться'}
             isDisabled={(!name.isInputValid || !email.isInputValid || !password.isInputValid)}
           />
-          <Error errorText={'Что-то пошло не так...'} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
+          <Error errorText={errorText} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
         </form>
         <div className='register__enter-menu'>
           <p className='register__enter-menu-text'>Уже зарегистрированы?</p>

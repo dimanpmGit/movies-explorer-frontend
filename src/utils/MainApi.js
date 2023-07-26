@@ -13,13 +13,23 @@ export const register = (name, email, password) => {
       if (res.status === 201) {
         return res.json();
       }
-    })
-    .then((data) => {
-      if (data._id) {
-        return authorize(data.email, password);
+      else if (res.status === 409) {
+        return { message: 'Пользователь с таким email уже зарегистрирован' }
       }
     })
-    .catch((err) => err);
+    .then((data) => {
+      if ((data) && (!data.message)) {
+        return authorize(email, password);
+      }
+      else {
+        return data;
+      }
+    })
+    .catch((err) => {
+      if (err) {
+        return err;
+      }
+    });
 };
 
 export const authorize = (email, password) => {
@@ -36,7 +46,10 @@ export const authorize = (email, password) => {
       if (data.token) {
         localStorage.setItem('jwt', data.token);
         return data;
-      }      
+      }
+      else {
+        return data;
+      }
     })
     .catch((err) => err);
 };
