@@ -51,7 +51,12 @@ export const getContent = (token) => {
     }
   })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => {
+      if (data.message) {
+        return [];
+      }
+      return data;
+    })
     .catch(err => err);
 }
 
@@ -66,7 +71,12 @@ export const updateUser = (name, email, token) => {
     body: JSON.stringify({ name, email })
   })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => {
+      if (data.message) {
+        return [];
+      }
+      return data;
+    })
     .catch((err) => err);
 }
 
@@ -80,7 +90,12 @@ export const getSavedMovies = () => {
     }
   })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => {
+      if (data.message) {
+        return [];
+      }
+      return data;
+    })
     .catch((err) => err);
 }
 
@@ -95,7 +110,12 @@ export const saveMovie = (movieData) => {
     body: JSON.stringify(movieData)
   })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => {
+      if (data.message) {
+        return [];
+      }
+      return data;
+    })
     .catch(err => err);
 }
 
@@ -109,6 +129,11 @@ export const deleteMovie = (id) => {
     }
   })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => {
+      if (data.message) {
+        return [];
+      }
+      return data;
+    })
     .catch(err => err);
 }

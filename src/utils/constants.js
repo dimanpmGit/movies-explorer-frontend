@@ -12,7 +12,7 @@ import pic11 from '../images/pic__11.jpg';
 import pic12 from '../images/pic__12.jpg';
 import studentPic from '../images/student.jpg';
 
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://api.movies.dimanpm.nomoreparties.sbs';
 export const BEATFILM_MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const MOVIES_IMAGES_URL = 'https://api.nomoreparties.co';
 export const SHORT_MOVIES_LIMIT = 40;

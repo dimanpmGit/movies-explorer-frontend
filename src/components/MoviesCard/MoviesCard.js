@@ -22,7 +22,7 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
     e.preventDefault();
     setErrorStatus(() => false);
   }
-  
+
   const getSavedMovies = () => {
     startPreloader();
     mainApi.getSavedMovies()
@@ -30,31 +30,40 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
         setSavedMoviesSet(() => []);
         stopPreloader();
         if (data) {
-          if (data.message) {
-            localStorage.removeItem('saved-movies');
-            setSavedMoviesSet(() => []);
-            localStorage.setItem('saved-movies', []);
-          }
-          else {
-            //Сохраняем данные поиска в локальное хранилище
-            const moviesArr = Array.from(data);
-            localStorage.removeItem('saved-movies');
-            localStorage.setItem('saved-movies', JSON.stringify(moviesArr));
-            moviesArr.map((movie) => {
-              return setSavedMoviesSet(savedMoviesSet => [...[...new Set(savedMoviesSet)], movie]);
-            })
-            
-          }
-      }
-      else if (data.message) {
-        return handleOnError(data.message);
-      }
-    })
+          //Сохраняем данные поиска в локальное хранилище
+          const moviesArr = Array.from(data);
+          localStorage.removeItem('saved-movies');
+          localStorage.setItem('saved-movies', JSON.stringify(moviesArr));
+          moviesArr.map((movie) => {
+            return setSavedMoviesSet(savedMoviesSet => [...[...new Set(savedMoviesSet)], movie]);
+          })        
+        }
+        else if (data.message) {
+          return handleOnError('Что-то пошло не так...');
+        }
+      })
       .catch((err) => {
         stopPreloader();
         handleOnError(err);
       });
-    }
+  }
+
+  const onDeleteClick = () => {
+    mainApi.deleteMovie(movie._id)
+      .then((data) => {
+        getSavedMovies();
+        handleDeleteClick();
+      })
+      .catch(err => console.log(err));
+  }
+
+  const likeMovie = () => {
+    setLikeState(() => true);
+  }
+
+  const dislikeMovie = () => {
+    setLikeState(() => false);
+  }
 
   const handleLikeClick = () => {
     //Если лайк уже стоял, то снимаем лайк и удаляем фильм из сохраненных
@@ -67,50 +76,45 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
     const imageURL = MOVIES_IMAGES_URL + movie.image.url;
     delete movieToAdd['image'];
     movieToAdd['image'] = imageURL;
-    
-    if (allMoviesArr.length > 0) {
-      if ((allMoviesArr.find((item) => item.id === movie.id)) && (savedMoviesSet.find((item) => item.id === movie.id))) {
-        setLikeState(() => false);
-        mainApi.deleteMovie(movie.id)
+    if ((allMoviesArr !== undefined) && (allMoviesArr !== null)) {
+      if ((allMoviesArr.find((item) => item.id === movie.id)) && (savedMoviesSet.find((item) => item.likedMovieId == movie.id))) {
+        //Удаляем фильм и деактивируем лайк
+        mainApi.deleteMovie(savedMoviesSet.find((item) => item.likedMovieId == movie.id)._id)
           .then((data) => {
             localStorage.setItem('saved-movies', JSON.stringify(data));
+            getSavedMovies();
           })
           .catch(err => console.log(err));
+        dislikeMovie();
       }
       else {
-        setLikeState(() => true);
+        //Сохраняем фильм и активируем лайк
         mainApi.saveMovie(movieToAdd)
           .then((data) => {
+            getSavedMovies();
           })
           .catch(err => console.log(err));
+        likeMovie();
       }
     }
-    mainApi.getSavedMovies()
-      .then((data) => {
-        localStorage.setItem('saved-movies', JSON.stringify(data));
-      })
-      .catch(err => console.log(err));
   };
 
-  const onDeleteClick = () => {
-    mainApi.deleteMovie(movie._id)
-      .then((data) => {
-        getSavedMovies();
-        handleDeleteClick();
-      })
-      .catch(err => console.log(err));
-  }
-
-  const getLikeState = () => {
-    if ((savedMoviesSet !== undefined) && (savedMoviesSet !== null) && (savedMoviesSet.length > 0) && (savedMoviesSet.find((item) => movie.id == item.likedMovieId))) {
-      setLikeState(() => true);
+  const getLikeStatus = () => {
+    if ((savedMoviesSet !== null) && (savedMoviesSet !== undefined) && (savedMoviesSet.length > 0)) {
+      const likedMovie = savedMoviesSet.find((item) => item.likedMovieId == movie.id);
+      if ((likedMovie !== undefined) && (likedMovie !== null)) {
+        likeMovie();
+      }
+      else {
+        dislikeMovie();
+      }
     }
   }
-
+  //Актуализация статуса лайка
   useEffect(() => {
-    getLikeState();
-  }, [likeState]);
-
+    getLikeStatus();
+  }, [likeState, savedMoviesSet])
+  
   return (
       <div className='movies-card'>
         <a className='movies-card__picture-link app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>

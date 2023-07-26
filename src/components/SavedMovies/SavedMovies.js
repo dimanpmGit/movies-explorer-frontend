@@ -16,7 +16,7 @@ const SavedMovies = ({ startPreloader, stopPreloader }) => {
 
   //Показатель, что находимся в сохраненных фильмах и должен отображаться крестик удаления фильма
   const [isSaved, setIsSaved] = useState(true);
-
+  
   const [moreButtonClicksCounter, setClicksCounter] = useState(() => localStorage.getItem('more-btn-clicks-saved') ? Number(localStorage.getItem('more-btn-clicks-saved')) : 0);
   const [showMoreButton, setShowMoreButton] = useState(false);
   const [onlyShort, setOnlyShort] = useState({ isChecked: Number(localStorage.getItem('only-short')) });
@@ -30,7 +30,7 @@ const SavedMovies = ({ startPreloader, stopPreloader }) => {
   }
 
   const searchMoviesInDownloaded = (text, moviesSet) => {
-    if ((moviesSet !== undefined) && (moviesSet !== null)) {
+    if ((moviesSet !== undefined) && (moviesSet !== null) && (!moviesSet.message)) {
     return moviesSet.filter((movies) => ((movies.nameRU.toLowerCase().includes((text.toLowerCase()))) || (movies.nameEN.toLowerCase().includes((text.toLowerCase())))) && (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
     }
   }

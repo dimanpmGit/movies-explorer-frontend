@@ -30,6 +30,7 @@ const Movies = ({ startPreloader, stopPreloader }) => {
   }
   const [errorStatus, setErrorStatus] = useState(() => false);
   const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+  const [likesStatus, setLikesStatus] = useState();
 
   const handleOnError = (text) => {
     setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
@@ -121,15 +122,6 @@ const Movies = ({ startPreloader, stopPreloader }) => {
     localStorage.removeItem('more-btn-clicks');
     getFoundMoviesArray(searchMoviesInDownloaded(value, moviesSet));
   }
-  
-  useEffect(() => {
-    setIsSaved(() => false);
-  }, [isSaved])
-
-  useEffect(() => {
-    getFoundMoviesArray(searchMoviesInDownloaded(phrase, moviesSet));
-  }, [onlyShort, moviesSet, phrase]);
-
 
   const handleCheckBoxStatus = (value) => {
     getOnlyShort((value ? 1 : 0));
@@ -140,12 +132,8 @@ const Movies = ({ startPreloader, stopPreloader }) => {
     setClicksCounter((counter) => counter + 1);
   };
 
-  useEffect(() => {
-    localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
-  }, [moreButtonClicksCounter]);
-  
-  const handleDeleteClick = () => {
-
+  const handleLikeButtonClick = () => {
+    setLikesStatus((likesStatus) => !likesStatus);
   }
 
   const handleHideMoreButton = () => {
@@ -154,12 +142,25 @@ const Movies = ({ startPreloader, stopPreloader }) => {
   const handleShowMoreButton = () => {
     setShowMoreButton(true);
   }
+
+  useEffect(() => {
+    localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
+  }, [moreButtonClicksCounter]);
+
+  useEffect(() => {
+    setIsSaved(() => false);
+  }, [isSaved]);
+
+  useEffect(() => {
+    getFoundMoviesArray(searchMoviesInDownloaded(phrase, moviesSet));
+  }, [onlyShort, moviesSet, phrase]);
+
   return (
     <>
       <Header isMain={false} isAllMovies={true} />
       <section className='movies'>
         <SearchForm phrase={phrase} onSearchClick={handleSearchMoviesClick} handleCheckBoxStatus={handleCheckBoxStatus} onlyShort={onlyShort} />
-        <MoviesCardList foundMovies={foundMovies} moreButtonClicksCounter={moreButtonClicksCounter} showMoreButton={handleShowMoreButton} hideMoreButton={handleHideMoreButton} moreButtonStatus={showMoreButton} isSaved={isSaved} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleDeleteClick} />
+        <MoviesCardList foundMovies={foundMovies} moreButtonClicksCounter={moreButtonClicksCounter} showMoreButton={handleShowMoreButton} hideMoreButton={handleHideMoreButton} moreButtonStatus={showMoreButton} isSaved={isSaved} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleLikeButtonClick} />
         <div className='movies__more-btn-wrapper'>
           <MoreButton text={'Ещё'} onClick={handleMoreButtonClick} moreButtonStatus={showMoreButton} />
         </div>

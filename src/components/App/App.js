@@ -30,7 +30,7 @@ function App() {
     setLoggedIn(false);
   }
 
-  const tokenCheck = useCallback(() => {
+  const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       startPreloader();
@@ -47,20 +47,22 @@ function App() {
             handleLogin();
             const url = location.pathname;
             navigate(url, { replace: true });
+            setLoggedIn(() => true);
           }
         })
         .catch((err) => {
+          setLoggedIn(() => true);
           navigate('/signin', { replace: true });
           return console.log(err);
         });
     } else {
-      setLoggedIn(false);
+      setLoggedIn(() => false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [loggedIn]);
 
   const startPreloader = () => {
     setIsLoading(() => true);
@@ -74,7 +76,7 @@ function App() {
     document.title = 'Movies explorer';
     document.documentElement.setAttribute('lang', 'ru');
   }, []);
-  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='app'>
