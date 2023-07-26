@@ -26,7 +26,6 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
     setErrorStatus(() => false);
   }
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.value || !password.value) {
@@ -36,17 +35,18 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
     auth.authorize(email.value, password.value)
       .then((data) => {
         stopPreloader();
-        if (data.token) {
+        if ((data.message) || (data === undefined)) {
+          navigate('/signin', {replace: true});
+          return handleOnError(data.message);
+        }
+        else if (data.token) {
           handleLogin();
           navigate('/movies', {replace: true});
-        }
-        else if (data.message) {
-          return handleOnError(data.message);
         }
       })
       .catch((err) => {
         stopPreloader();
-        handleOnError(err);
+        navigate('/signin', {replace: true});
       });
   }
 
