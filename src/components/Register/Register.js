@@ -36,12 +36,12 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
           navigate('/movies', { replace: true });
         }
         else if (data.message) {
-          handleOnError(data.message);
+          handleOnError('Что-то пошло не так...');
         }
       })
       .catch((err) => {
         stopPreloader();
-        handleOnError(err);
+        handleOnError('Что-то пошло не так...');
       })
   }
 
