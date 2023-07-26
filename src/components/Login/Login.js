@@ -36,8 +36,7 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
       .then((data) => {
         stopPreloader();
         if ((data.message) || (data === undefined)) {
-          navigate('/signin', {replace: true});
-          return handleOnError(data.message);
+          handleOnError('Неправильный email или пароль...');
         }
         else if (data.token) {
           handleLogin();
@@ -46,7 +45,7 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
       })
       .catch((err) => {
         stopPreloader();
-        navigate('/signin', {replace: true});
+        handleOnError('Неправильный email или пароль...');
       });
   }
 
