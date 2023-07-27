@@ -32,8 +32,11 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
     auth.register(name.value, email.value, password.value)
       .then((data) => {
         stopPreloader();
+        console.log('register.js');
+        console.log(data);
         if (data._id) {
-          navigate('/movies', { replace: true });
+          navigate('/', { replace: true });
+          handleLogin();
         }
         else if (data.message) {
           setErrorText(() => data.message);
@@ -41,6 +44,7 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
         }
       })
       .catch((err) => {
+        console.log('register.js err');
         stopPreloader();
         handleOnError(err);
       })

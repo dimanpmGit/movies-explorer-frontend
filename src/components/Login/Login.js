@@ -34,15 +34,18 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
     auth.authorize(email.value, password.value)
       .then((data) => {
         stopPreloader();
+        console.log('login.js');
+        console.log(data);
         if (data.token) {
           handleLogin();
-          navigate('/movies', {replace: true});
+          navigate('/', {replace: true});
         }
         else if ((data.message) || (data === undefined)) {
           handleOnError('Неправильный email или пароль...');
         }
       })
       .catch((err) => {
+        console.log('login.js err');
         stopPreloader();
         handleOnError(err.description);
       });
