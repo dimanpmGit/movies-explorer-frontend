@@ -14,7 +14,7 @@ const AboutMe = () => {
             <p className='about-me__student-info'>Веб-разработчик, 41 год</p>
             <blockquote className='about-me__student-biography'>
               Я родился и живу в Новосибирске, закончил факультет прикладной математики и информатики НГТУ. У меня есть жена,
-              сын, дочь и собака. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
+              сын, дочь и собака. Я люблю слушать музыку, а ещё увлекаюсь бегом. Решил структурировать знания и навыки в веб-разработке.
               С 2006 года работаю в компании АО «Райффайзенбанк». Пока еще прохожу курс веб-разработки.
             </blockquote>
             <Link className='about-me__github-link' to='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</Link>
