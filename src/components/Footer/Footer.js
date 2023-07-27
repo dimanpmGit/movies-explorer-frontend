@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
-const Footer = ({ isFooterNeeds }) => {
+const Footer = () => {
   return (
     <footer className={'footer'}>
       <div className='footer__container'>
@@ -12,14 +13,14 @@ const Footer = ({ isFooterNeeds }) => {
           <p className='footer__copyright'>&copy; 2023</p>
           <ul className='footer__links'>
             <li className='footer__item'>
-              <a className='footer__link app__link' href='https://practicum.yandex.ru' target='_blank' rel='noreferrer'>
+              <Link className='footer__link app__link' to='https://practicum.yandex.ru' target='_blank' rel='noreferrer'>
                 Яндекс.Практикум
-              </a>
+              </Link>
             </li>
             <li className='footer__item'>
-              <a className='footer__link app__link' href='https://github.com/dimanpmGit' target='_blank' rel='noreferrer'>
+              <Link className='footer__link app__link' to='https://github.com/dimanpmGit' target='_blank' rel='noreferrer'>
                 Github
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

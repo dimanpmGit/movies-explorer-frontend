@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AboutMe.css';
 import { studentPic } from '../../../utils/constants';
 
@@ -16,7 +17,7 @@ const AboutMe = () => {
               и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
               С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
             </blockquote>
-            <a className='about-me__github-link' href='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</a>
+            <Link className='about-me__github-link' to='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</Link>
           </div>
           <img className='about-me__student-photo' src={studentPic} alt='vitalii' />
         </div>

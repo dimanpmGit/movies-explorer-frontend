@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './MoviesCard.css';
 import { MOVIES_IMAGES_URL } from '../../utils/constants';
@@ -117,11 +118,11 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
   
   return (
       <div className='movies-card'>
-        <a className='movies-card__picture-link app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>
+        <Link className='movies-card__picture-link app__link' to={movie.trailerLink} target='_blank' rel='noreferrer'>
           <img className='movies-card__picture' src={`${!isSaved ? MOVIES_IMAGES_URL + movie.image.url : movie.image}`} alt={movie.nameRU}/>
-          </a>
+          </Link>
           <div className='movies-card__name-and-like'>
-          <a className='movies-card__name app__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>{movie.nameRU}</a>
+          <Link className='movies-card__name app__link' to={movie.trailerLink} target='_blank' rel='noreferrer'>{movie.nameRU}</Link>
             {isSaved ? 
               <button className='movies-card__close-btn app__link' onClick={onDeleteClick}></button> :
             <button className={`movies-card__like ${likeState && "movies-card__like_active"} app__link`} onClick={handleLikeClick}></button>

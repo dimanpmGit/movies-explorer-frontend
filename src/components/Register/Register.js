@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
@@ -79,7 +79,7 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
         </form>
         <div className='register__enter-menu'>
           <p className='register__enter-menu-text'>Уже зарегистрированы?</p>
-          <a className='register__enter-menu-link app__link' href='/signin'>Войти</a>
+          <Link className='register__enter-menu-link app__link' to='/signin'>Войти</Link>
         </div>
       </div>
     </section>
