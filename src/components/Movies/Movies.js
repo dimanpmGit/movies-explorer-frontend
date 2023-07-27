@@ -10,7 +10,7 @@ import * as mainApi from '../../utils/MainApi';
 import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
 import { Error } from '../Error/Error';
 
-const Movies = ({ startPreloader, stopPreloader }) => {
+const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
   //localStorage.removeItem('saved-movies');
   //Хранение скачанных фильмов
   const [moviesSet, setMoviesSet] = useState(() => localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []);
@@ -157,7 +157,7 @@ const Movies = ({ startPreloader, stopPreloader }) => {
 
   return (
     <>
-      <Header isMain={false} isAllMovies={true} />
+      <Header loggedIn={loggedIn} isMain={false} isAllMovies={true} />
       <section className='movies'>
         <SearchForm phrase={phrase} onSearchClick={handleSearchMoviesClick} handleCheckBoxStatus={handleCheckBoxStatus} onlyShort={onlyShort} />
         <MoviesCardList foundMovies={foundMovies} moreButtonClicksCounter={moreButtonClicksCounter} showMoreButton={handleShowMoreButton} hideMoreButton={handleHideMoreButton} moreButtonStatus={showMoreButton} isSaved={isSaved} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleLikeButtonClick} />

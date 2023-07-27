@@ -47,16 +47,14 @@ function App() {
             handleLogin();
             const url = location.pathname;
             navigate(url, { replace: true });
-            setLoggedIn(() => true);
           }
         })
         .catch((err) => {
-          setLoggedIn(() => true);
+          handleLogout();
           navigate('/signin', { replace: true });
-          return console.log(err);
         });
     } else {
-      setLoggedIn(() => false);
+      handleLogout();
     }
   };
 
@@ -113,9 +111,10 @@ function App() {
               />}
           />
           <Route path='/' element={
-            loggedIn ? <Navigate to='/movies' /> : <Navigate to='/main' />
+            //loggedIn ? <Navigate to='/movies' /> : <Navigate to='/main' />
+            <Navigate to='/main' loggedIn={loggedIn} />
           } />
-          <Route path='/main' element={<Main />} />
+          <Route path='/main' element={<Main loggedIn={loggedIn} />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>

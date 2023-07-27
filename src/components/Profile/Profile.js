@@ -8,7 +8,7 @@ import { updateUser } from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
 import { Error } from '../Error/Error';
 
-const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
+const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
   const [isProfileEditing, setIsProfileEditing] = useState(false);
@@ -73,7 +73,7 @@ const Profile = ({ handleLogout, startPreloader, stopPreloader }) => {
   }
   return (
     <>
-      <Header isMain={false} isAllMovies={false} isSavedMovies={false} />
+      <Header loggedIn={loggedIn} isMain={false} isAllMovies={false} isSavedMovies={false} />
       <section className='profile'>
         <div className='profile__container'>
           <h2 className='profile__title'>Привет, {currentUser.name !== 'TypeError' ? currentUser.name : 'Гость'}!</h2>

@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import * as mainApi from '../../utils/MainApi';
 import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
 
-const SavedMovies = ({ startPreloader, stopPreloader }) => {
+const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
   //Хранение скачанных сохраненных фильмов
   const [savedMoviesSet, setSavedMoviesSet] = useState(() => localStorage.getItem('saved-movies') ? JSON.parse(localStorage.getItem('saved-movies')) : []);
   //Хранение отсортированных по поиску фильиов
@@ -116,7 +116,7 @@ const SavedMovies = ({ startPreloader, stopPreloader }) => {
   }
   return (
     <>
-      <Header isMain={false} isAllMovies={true} />
+      <Header loggedIn={loggedIn} isMain={false} isAllMovies={true} />
       <section className='movies'>
         <SearchForm phrase={phrase} onSearchClick={handleSearchMoviesClick} handleCheckBoxStatus={handleCheckBoxStatus} onlyShort={onlyShort} />
         <MoviesCardList foundMovies={foundMovies} moreButtonClicksCounter={moreButtonClicksCounter} showMoreButton={handleShowMoreButton} hideMoreButton={handleHideMoreButton} moreButtonStatus={showMoreButton} isSaved={'true'} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleDeleteClick}/>

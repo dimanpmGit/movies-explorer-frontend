@@ -5,7 +5,7 @@ import Navigation from './Navigation/Navigation';
 import AuthMenu from './AuthMenu/AuthMenu';
 import PopupMenu from '../PopupMenu/PopupMenu';
 
-const Header = ({ isMain, isAllMovies, isSavedMovies }) => {
+const Header = ({ loggedIn, isMain, isAllMovies, isSavedMovies }) => {
   const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
   const showPopup = () => {
     setIsPopupMenuOpen(true);
@@ -21,7 +21,7 @@ const Header = ({ isMain, isAllMovies, isSavedMovies }) => {
         <div className='header__container'>
           <Logo />
           <div className='header__menu'>
-            {isMain ? <AuthMenu /> : <Navigation onMenuClick={showPopup} isAllMovies={isAllMovies} isSavedMovies={isSavedMovies} />}
+            {!loggedIn ? <AuthMenu /> : <Navigation isMain={isMain} onMenuClick={showPopup} isAllMovies={isAllMovies} isSavedMovies={isSavedMovies} />}
           </div>
         </div>
       </header>

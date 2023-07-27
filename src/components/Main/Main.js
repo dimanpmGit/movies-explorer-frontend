@@ -8,10 +8,10 @@ import Portfolio from './Portfolio/Portfolio';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-const Main = () => {
+const Main = ({ loggedIn }) => {
   return (
     <>
-      <Header isMain={true} />
+      <Header isMain={true} loggedIn={loggedIn} />
       <main className='main'>
         <Promo />
         <AboutProject />
