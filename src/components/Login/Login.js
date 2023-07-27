@@ -39,7 +39,7 @@ const Login = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
           navigate('/', {replace: true});
         }
         else if ((data.message) || (data === undefined)) {
-          handleOnError('Неправильный email или пароль...');
+          handleOnError(data.message);
         }
       })
       .catch((err) => {

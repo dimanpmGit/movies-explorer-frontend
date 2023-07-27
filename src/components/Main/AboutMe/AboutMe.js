@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './AboutMe.css';
-import { studentPic } from '../../../utils/constants';
+import studentPic from '../../../images/student.jpg';
 
 const AboutMe = () => {
   return (

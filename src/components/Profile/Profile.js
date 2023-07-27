@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
@@ -7,6 +7,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { updateUser } from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
 import { Error } from '../Error/Error';
+import { ERR_MSG_WHEN_NO_SERVER, ERR_MSG_SOMETHING_WRONG, GUEST_NAME } from '../../utils/constants';
 
 const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
   const currentUser = React.useContext(CurrentUserContext);
@@ -15,10 +16,10 @@ const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
   const name = useInput(currentUser.name, { isEmpty: true, minLength: 2});
   const email = useInput(currentUser.email, { isEmpty: true, minLength: 5, isEmail: true });
   const [errorStatus, setErrorStatus] = useState(() => false);
-  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+  const [errorText, setErrorText] = useState(() => ERR_MSG_SOMETHING_WRONG);
 
   const handleOnError = (text) => {
-    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorText(() => text || ERR_MSG_WHEN_NO_SERVER);
     setErrorStatus(() => true);
   }
 
@@ -40,19 +41,22 @@ const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
       updateUser(name.value, email.value, jwt)
         .then((data) => {
           stopPreloader();
-          if (data) {
+          if ((data) && (!data.message)) {
             currentUser.name = name.value;
             currentUser.email = email.value;
+          } else if (data.message) {
+            name.onChangeInitial(currentUser.name);
+            email.onChangeInitial(currentUser.email);
+            return handleOnError(data.message);
           }
           else {
-            currentUser.name = 'Гость';
+            currentUser.name = GUEST_NAME;
             currentUser.email = '';
-            return handleOnError(data.message);
           }
         })
         .catch((err) => {
           stopPreloader();
-          currentUser.name = 'Гость';
+          currentUser.name = GUEST_NAME;
           currentUser.email = '';
           handleOnError(err);
         });
@@ -66,11 +70,14 @@ const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
     localStorage.removeItem('movies');
     localStorage.removeItem('saved-movies');
     localStorage.removeItem('phrase');
+    localStorage.removeItem('phrase-saved');
     localStorage.removeItem('only-short');
+    localStorage.removeItem('only-short-saved');
     localStorage.removeItem('more-btn-clicks');
     localStorage.removeItem('more-btn-clicks-saved');
     navigate('/', {replace: true});
   }
+
   return (
     <>
       <Header loggedIn={loggedIn} isMain={false} isAllMovies={false} isSavedMovies={false} />

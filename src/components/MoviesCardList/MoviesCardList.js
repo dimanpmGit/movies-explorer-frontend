@@ -1,7 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import * as mainApi from '../../utils/MainApi';
+import { 
+  BIG_SCREEN_RESOLUTION,
+  SMALL_SCREEN_RESOLUTION,
+  CARDS_ON_BIG_SCREEN,
+  CARDS_ON_MEDIUM_SCREEN,
+  CARDS_ON_SMALL_SCREEN,
+  CARDS_ON_BIG_SCREEN_BY_MORE_BTN,
+  CARDS_ON_MEDIUM_SCREEN_BY_MORE_BTN,
+  CARDS_ON_SMALL_SCREEN_BY_MORE_BTN
+} from '../../utils/constants';
 
 const MoviesCardList = ({ foundMovies, moreButtonClicksCounter, showMoreButton, hideMoreButton, isSaved, startPreloader, stopPreloader, handleDeleteClick }) => {
   const [cardsOnPage, setCardsOnPage] = useState(0);
@@ -10,17 +19,17 @@ const MoviesCardList = ({ foundMovies, moreButtonClicksCounter, showMoreButton, 
     let cardsPerPage = 0;
     let cardsOnMoreButton = 0;
 
-    if (width > 1155) {
-      cardsPerPage = 12;
-      cardsOnMoreButton = 3;
+    if (width > BIG_SCREEN_RESOLUTION) {
+      cardsPerPage = CARDS_ON_BIG_SCREEN;
+      cardsOnMoreButton = CARDS_ON_BIG_SCREEN_BY_MORE_BTN;
     }
-    else if ((width <= 1155) && (width > 640)) {
-      cardsPerPage = 8;
-      cardsOnMoreButton = 2;
+    else if ((width <= BIG_SCREEN_RESOLUTION) && (width > SMALL_SCREEN_RESOLUTION)) {
+      cardsPerPage = CARDS_ON_MEDIUM_SCREEN;
+      cardsOnMoreButton = CARDS_ON_MEDIUM_SCREEN_BY_MORE_BTN;
     }
-    else if (width <= 640) {
-      cardsPerPage = 6;
-      cardsOnMoreButton = 1;
+    else if (width <= SMALL_SCREEN_RESOLUTION) {
+      cardsPerPage = CARDS_ON_SMALL_SCREEN;
+      cardsOnMoreButton = CARDS_ON_SMALL_SCREEN_BY_MORE_BTN;
     }
     return {
       width,

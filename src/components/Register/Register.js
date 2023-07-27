@@ -33,8 +33,13 @@ const Register = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
       .then((data) => {
         stopPreloader();
         if (data._id) {
-          navigate('/', { replace: true });
-          handleLogin();
+          auth.authorize(email.value, password.value)
+           .then((data) => {
+             if (data._id) {
+               handleLogin();
+               return navigate('/', { replace: true });
+             }
+           })
         }
         else if (data.message) {
           setErrorText(() => data.message);

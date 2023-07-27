@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -23,11 +23,11 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   
   const handleLogin = () => {
-    setLoggedIn(true);
+    setLoggedIn(() => true);
   }
 
   const handleLogout = () => {
-    setLoggedIn(false);
+    setLoggedIn(() => false);
   }
 
   const tokenCheck = () => {

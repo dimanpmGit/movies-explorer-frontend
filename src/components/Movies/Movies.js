@@ -47,16 +47,28 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
   }
 
   const searchMoviesInDownloaded = (text, moviesSet) => {
-    return moviesSet.filter((movies) => ((movies.nameRU.toLowerCase().includes((text.toLowerCase()))) || (movies.nameEN.toLowerCase().includes((text.toLowerCase())))) && (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
+    if (text.length === 0) {
+      return moviesSet.filter((movies) => ((movies.nameRU.toLowerCase().includes((text.toLowerCase()))) || (movies.nameEN.toLowerCase().includes((text.toLowerCase())))) && (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
+    }
+    else if (moviesSet.length > 0) {
+      const foundMovies = moviesSet.filter((movies) => ((movies.nameRU.toLowerCase().includes((text.toLowerCase()))) || (movies.nameEN.toLowerCase().includes((text.toLowerCase())))) && (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
+      if (foundMovies.length === 0) {
+        handleOnError('Ничего не найдено');
+      }
+      return foundMovies;
+    }
   }
 
   const getFoundMoviesArray = (movies) => {
-    const moviesArr = Array.from(movies);
-    setFoundMovies(() => []);
-    localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
-    moviesArr.map((movie) => {
-      return setFoundMovies(foundMovies => [...[...new Set(foundMovies)], movie]);
-    })
+    if ((movies !== undefined) && (movies !== null)) {
+      const moviesArr = Array.from(movies);
+      setFoundMovies(() => []);
+      localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
+      moviesArr.map((movie) => {
+        return setFoundMovies(foundMovies => [...[...new Set(foundMovies)], movie]);
+      })
+    }
+    return;
   }
 
   // Скачивает сохраненные фильмы...

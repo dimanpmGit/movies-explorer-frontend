@@ -7,20 +7,34 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import * as mainApi from '../../utils/MainApi';
 import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
+import { Error } from '../Error/Error';
 
 const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
   //Хранение скачанных сохраненных фильмов
-  const [savedMoviesSet, setSavedMoviesSet] = useState(() => localStorage.getItem('saved-movies') ? JSON.parse(localStorage.getItem('saved-movies')) : []);
+  const [savedMoviesSet, setSavedMoviesSet] = useState(() => []);
   //Хранение отсортированных по поиску фильиов
-  const [foundMovies, setFoundMovies] = useState(() => localStorage.getItem('save-movies') ? JSON.parse(localStorage.getItem('saved-movies')) : []);
+  const [foundMovies, setFoundMovies] = useState(() => []);
 
   //Показатель, что находимся в сохраненных фильмах и должен отображаться крестик удаления фильма
   const [isSaved, setIsSaved] = useState(true);
+  const [errorStatus, setErrorStatus] = useState(() => false);
+  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
   
   const [moreButtonClicksCounter, setClicksCounter] = useState(() => localStorage.getItem('more-btn-clicks-saved') ? Number(localStorage.getItem('more-btn-clicks-saved')) : 0);
   const [showMoreButton, setShowMoreButton] = useState(false);
-  const [onlyShort, setOnlyShort] = useState({ isChecked: Number(localStorage.getItem('only-short')) });
-  const [phrase, setPhrase] = useState(() => (localStorage.getItem('phrase') === null) ? '' : localStorage.getItem('phrase'));
+  const [onlyShort, setOnlyShort] = useState({ isChecked: Number(localStorage.getItem('only-short-saved')) });
+  const [phrase, setPhrase] = useState(() => (localStorage.getItem('phrase-saved') === null) ? '' : localStorage.getItem('phrase-saved'));
+  
+  const closeBtnClick = (e) => {
+    e.preventDefault();
+    setErrorStatus(() => false);
+  }
+
+  const handleOnError = (text) => {
+    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorStatus(() => true);
+  }
+
   const getPhrase = (phrase) => {
     setPhrase(phrase);
   }
@@ -31,7 +45,16 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
 
   const searchMoviesInDownloaded = (text, moviesSet) => {
     if ((moviesSet !== undefined) && (moviesSet !== null) && (!moviesSet.message)) {
-    return moviesSet.filter((movies) => ((movies.nameRU.toLowerCase().includes((text.toLowerCase()))) || (movies.nameEN.toLowerCase().includes((text.toLowerCase())))) && (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
+      if (text.length === 0) {
+        return moviesSet.filter((movies) => (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
+      }
+      else if (moviesSet.length > 0) {
+        const foundMovies = moviesSet.filter((movies) => ((movies.nameRU.toLowerCase().includes((text.toLowerCase()))) || (movies.nameEN.toLowerCase().includes((text.toLowerCase())))) && (onlyShort.isChecked ? movies.duration <= SHORT_MOVIES_LIMIT : movies.duration > 0));
+        if (foundMovies.length === 0) {
+          handleOnError('Ничего не найдено');
+        }
+      return foundMovies;
+      }
     }
   }
 
@@ -54,18 +77,14 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
         stopPreloader();
         if (data) {
           if (data.message) {
-            localStorage.removeItem('saved-movies');
             setSavedMoviesSet(() => []);
-            localStorage.setItem('saved-movies', []);
           }
           else {
-            //Сохраняем данные поиска в локальное хранилище
             const moviesArr = Array.from(data);
-            localStorage.removeItem('saved-movies');
-            localStorage.setItem('saved-movies', JSON.stringify(moviesArr));
             moviesArr.map((movie) => {
-              return setSavedMoviesSet(savedMoviesSet => [...[...new Set(savedMoviesSet)], movie]);
+              setSavedMoviesSet(savedMoviesSet => [...[...new Set(savedMoviesSet)], movie]);
             })
+            return getFoundMoviesArray(searchMoviesInDownloaded(phrase, moviesArr));
           }
         }
       })
@@ -78,7 +97,7 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
 
   const handleSearchMoviesClick = (value) => {
     getPhrase(value);
-    localStorage.setItem('phrase', value);
+    localStorage.setItem('phrase-saved', value);
     //Сбрасываем счетчик нажатий кнопки [Ещё] и выполняем поиск
     setClicksCounter(() => 0);
     localStorage.setItem('more-btn-clicks-saved', moreButtonClicksCounter);
@@ -86,18 +105,34 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
     getFoundMoviesArray(searchMoviesInDownloaded(value, savedMoviesSet));
   }
 
-  useEffect(() => {
-    getFoundMoviesArray(searchMoviesInDownloaded(phrase, savedMoviesSet));
-  }, [onlyShort, savedMoviesSet, phrase]);
-
   const handleCheckBoxStatus = (value) => {
     getOnlyShort((value ? 1 : 0));
-    localStorage.setItem('only-short', (value ? 1 : 0));
+    localStorage.setItem('only-short-saved', (value ? 1 : 0));
   }
 
   const handleMoreButtonClick = () => {
     setClicksCounter((counter) => counter + 1);
-  };
+  }
+
+  const handleHideMoreButton = () => {
+    setShowMoreButton(false);
+  }
+
+  const handleShowMoreButton = () => {
+    setShowMoreButton(true);
+  }
+
+
+
+  //Хук для скачивания сохраненных фильмов с сервера api
+  useEffect(() => {
+    getSavedMovies();
+  }, []);
+
+  //Хук для поиска короткометражных фильмов без запроса у сервера api
+  useEffect(() => {
+    getFoundMoviesArray(searchMoviesInDownloaded(phrase, savedMoviesSet));
+  }, [onlyShort, phrase]);
 
   useEffect(() => {
     setIsSaved(() => true);
@@ -107,13 +142,6 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
     localStorage.setItem('more-btn-clicks-saved', moreButtonClicksCounter);
   }, [moreButtonClicksCounter]);
 
-
-  const handleHideMoreButton = () => {
-    setShowMoreButton(false);
-  }
-  const handleShowMoreButton = () => {
-    setShowMoreButton(true);
-  }
   return (
     <>
       <Header loggedIn={loggedIn} isMain={false} isAllMovies={true} />
@@ -123,6 +151,7 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
         <div className='movies__more-btn-wrapper'>
           <MoreButton text={'Ещё'} onClick={handleMoreButtonClick} moreButtonStatus={showMoreButton} />
         </div>
+        <Error errorText={errorText} errorStatus={errorStatus} closeBtnClick={closeBtnClick} />
       </section>
       <Footer />
     </>

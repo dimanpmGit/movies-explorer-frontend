@@ -9,22 +9,7 @@ export const register = (name, email, password) => {
     },
     body: JSON.stringify({ name, email, password })
   })
-    .then((res) => {
-      if (res.status === 201) {
-        return res.json();
-      }
-      else if (res.status === 409) {
-        return { message: 'Пользователь с таким email уже зарегистрирован' }
-      }
-    })
-    .then((data) => {
-      if ((data) && (!data.message)) {
-        return authorize(email, password);
-      }
-      else {
-        return data;
-      }
-    })
+    .then((res) => res.json())
     .catch((err) => {
       if (err) {
         return err;
@@ -84,12 +69,6 @@ export const updateUser = (name, email, token) => {
     body: JSON.stringify({ name, email })
   })
     .then(res => res.json())
-    .then(data => {
-      if (data.message) {
-        return [];
-      }
-      return data;
-    })
     .catch((err) => err);
 }
 
