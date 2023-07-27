@@ -6,7 +6,7 @@ import MoreButton from '../Buttons/MoreButton/MoreButton';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import * as mainApi from '../../utils/MainApi';
-import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
+import { SHORT_MOVIES_LIMIT, ERR_MSG_WHEN_NO_SERVER, ERR_MSG_SOMETHING_WRONG } from '../../utils/constants';
 import { Error } from '../Error/Error';
 
 const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
@@ -18,7 +18,7 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
   //Показатель, что находимся в сохраненных фильмах и должен отображаться крестик удаления фильма
   const [isSaved, setIsSaved] = useState(true);
   const [errorStatus, setErrorStatus] = useState(() => false);
-  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+  const [errorText, setErrorText] = useState(() => ERR_MSG_SOMETHING_WRONG);
   
   const [moreButtonClicksCounter, setClicksCounter] = useState(() => localStorage.getItem('more-btn-clicks-saved') ? Number(localStorage.getItem('more-btn-clicks-saved')) : 0);
   const [showMoreButton, setShowMoreButton] = useState(false);
@@ -31,7 +31,7 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
   }
 
   const handleOnError = (text) => {
-    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorText(() => text || ERR_MSG_WHEN_NO_SERVER);
     setErrorStatus(() => true);
   }
 
@@ -91,7 +91,7 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
       .catch(err => console.log(err));
   }
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (movie) => {
     getSavedMovies();
   }
 
@@ -121,8 +121,6 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
   const handleShowMoreButton = () => {
     setShowMoreButton(true);
   }
-
-
 
   //Хук для скачивания сохраненных фильмов с сервера api
   useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './MoviesCard.css';
-import { MOVIES_IMAGES_URL } from '../../utils/constants';
+import { MOVIES_IMAGES_URL, ERR_MSG_WHEN_NO_SERVER, ERR_MSG_SOMETHING_WRONG } from '../../utils/constants';
 import * as mainApi from '../../utils/MainApi';
 import { Error } from '../Error/Error';
 
@@ -12,10 +12,10 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
   const allMoviesArr = localStorage.getItem('movies') ? Array.from(JSON.parse(localStorage.getItem('movies'))) : [];
   const [savedMoviesSet, setSavedMoviesSet] = useState(() => localStorage.getItem('saved-movies') ? JSON.parse(localStorage.getItem('saved-movies')) : []);
   const [errorStatus, setErrorStatus] = useState(() => false);
-  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+  const [errorText, setErrorText] = useState(() => ERR_MSG_SOMETHING_WRONG);
 
   const handleOnError = (text) => {
-    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorText(() => text || ERR_MSG_WHEN_NO_SERVER);
     setErrorStatus(() => true);
   }
 
@@ -40,7 +40,7 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
           })        
         }
         else if (data.message) {
-          return handleOnError('Что-то пошло не так...');
+          return handleOnError(data.message);
         }
       })
       .catch((err) => {
@@ -66,8 +66,9 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
     setLikeState(() => false);
   }
 
-  const handleLikeClick = () => {
+  const handleLikeClick = (value) => {
     //Если лайк уже стоял, то снимаем лайк и удаляем фильм из сохраненных
+    value = movie;
     let movieToAdd = structuredClone(movie);
     movieToAdd['owner'] = currentUser._id;
     movieToAdd['likedMovieId'] = JSON.stringify(movie.id);
@@ -100,6 +101,10 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
     }
   };
 
+  useEffect(() => {
+
+  },[])
+
   const getLikeStatus = () => {
     if ((savedMoviesSet !== null) && (savedMoviesSet !== undefined) && (savedMoviesSet.length > 0)) {
       const likedMovie = savedMoviesSet.find((item) => item.likedMovieId == movie.id);
@@ -111,6 +116,7 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
       }
     }
   }
+
   //Актуализация статуса лайка
   useEffect(() => {
     getLikeStatus();

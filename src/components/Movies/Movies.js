@@ -68,7 +68,7 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
         return setFoundMovies(foundMovies => [...[...new Set(foundMovies)], movie]);
       })
     }
-    return;
+    return [];
   }
 
   // Скачивает сохраненные фильмы...
@@ -125,9 +125,9 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
           stopPreloader();
           handleOnError(err);
         });
-      // Скачиваем сохраненные фильмы...
-      getSavedMovies();
     }
+    // Скачиваем сохраненные фильмы...
+    //getSavedMovies();
     //Если фильмы уже скачены, сбрасываем счетчик нажатий кнопки [Ещё] и выполняем поиск
     setClicksCounter(() => 0);
     localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
