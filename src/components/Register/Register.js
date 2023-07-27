@@ -7,7 +7,7 @@ import * as auth from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
 import { Error } from '../Error/Error';
 
-const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
+const Register = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
 
   const name = useInput('', { isEmpty: true, minLength: 2 });
@@ -32,8 +32,6 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
     auth.register(name.value, email.value, password.value)
       .then((data) => {
         stopPreloader();
-        console.log('register.js');
-        console.log(data);
         if (data._id) {
           navigate('/', { replace: true });
           handleLogin();
@@ -44,12 +42,13 @@ const Register = ({ handleLogin, startPreloader, stopPreloader }) => {
         }
       })
       .catch((err) => {
-        console.log('register.js err');
         stopPreloader();
         handleOnError(err);
       })
   }
-
+  if (loggedIn) {
+    return navigate('/', { replace: true });
+  }
   return (
     <section className='register'>
       <div className='register__container'>

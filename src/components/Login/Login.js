@@ -7,7 +7,7 @@ import * as auth from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
 import { Error } from '../Error/Error';
 
-const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
+const Login = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
 
   const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
@@ -34,8 +34,6 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
     auth.authorize(email.value, password.value)
       .then((data) => {
         stopPreloader();
-        console.log('login.js');
-        console.log(data);
         if (data.token) {
           handleLogin();
           navigate('/', {replace: true});
@@ -45,12 +43,13 @@ const Login = ({ handleLogin, startPreloader, stopPreloader }) => {
         }
       })
       .catch((err) => {
-        console.log('login.js err');
         stopPreloader();
         handleOnError(err.description);
       });
   }
-
+  if (loggedIn) {
+    return navigate('/', { replace: true });
+  }
   return (
     <section className='login'>
       <div className='login__container'>

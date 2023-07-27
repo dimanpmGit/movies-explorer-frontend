@@ -84,6 +84,7 @@ function App() {
         <Routes>
           <Route path='/signin' element={
             <Login
+              loggedIn={loggedIn}
               handleLogin={handleLogin}
               startPreloader={startPreloader}
               stopPreloader={stopPreloader}
@@ -91,6 +92,7 @@ function App() {
           />
           <Route path='/signup' element={
             <Register
+              loggedIn={loggedIn}
               handleLogin={handleLogin}
               startPreloader={startPreloader}
               stopPreloader={stopPreloader}
