@@ -78,24 +78,33 @@ const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDelet
     const imageURL = MOVIES_IMAGES_URL + movie.image.url;
     delete movieToAdd['image'];
     movieToAdd['image'] = imageURL;
+
     if ((allMoviesArr !== undefined) && (allMoviesArr !== null)) {
       if ((allMoviesArr.find((item) => item.id === movie.id)) && (savedMoviesSet.find((item) => item.likedMovieId == movie.id))) {
         //Удаляем фильм и деактивируем лайк
         mainApi.deleteMovie(savedMoviesSet.find((item) => item.likedMovieId == movie.id)._id)
           .then((data) => {
+            if (data.message) {
+              //Если проблема с отправкой запроса на сервер, выводим ошибку
+              return handleOnError(mainApi.getErrorMessage(data));
+            } 
             localStorage.setItem('saved-movies', JSON.stringify(data));
-            getSavedMovies();
+            return getSavedMovies();
           })
-          .catch(err => console.log(err));
+          .catch(err => handleOnError(err));
         dislikeMovie();
       }
       else {
         //Сохраняем фильм и активируем лайк
         mainApi.saveMovie(movieToAdd)
           .then((data) => {
-            getSavedMovies();
+            if (data.message) {
+              //Если проблема с отправкой запроса на сервер, выводим ошибку
+              return handleOnError(mainApi.getErrorMessage(data));
+            }
+            return getSavedMovies();
           })
-          .catch(err => console.log(err));
+          .catch(err => handleOnError(err));
         likeMovie();
       }
     }

@@ -89,7 +89,8 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
           });
         }
         else if (data.message) {
-          return handleOnError(data.message);
+          //Если проблема с отправкой запроса на сервер, выводим ошибку
+          return handleOnError(mainApi.getErrorMessage(data));
         }
       })
       .catch((err) => {
@@ -118,7 +119,8 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
             getFoundMoviesArray(searchMoviesInDownloaded(value, moviesArr));
           }
           else if (data.message) {
-            return handleOnError(data.message);
+            //Если проблема с отправкой запроса на сервер, выводим ошибку
+            return handleOnError(mainApi.getErrorMessage(data));
           }
         })
         .catch((err) => {
@@ -145,7 +147,7 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
   };
 
   const handleLikeButtonClick = () => {
-    setLikesStatus((likesStatus) => !likesStatus);
+    //setLikesStatus((likesStatus) => !likesStatus);
   }
 
   const handleHideMoreButton = () => {

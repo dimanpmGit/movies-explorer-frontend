@@ -1,4 +1,19 @@
-import { BASE_URL } from "./constants";
+import { BASE_URL, ERR_MSG_WHEN_NO_SERVER } from "./constants";
+
+const handleResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res);
+}
+
+export const getErrorMessage = (data) => {
+  //Если проблема с отправкой запроса на сервер, выводим ошибку
+  if (data.message.toLowerCase().includes('Failed to fetch'.toLowerCase())) {
+    return ERR_MSG_WHEN_NO_SERVER;
+  }
+  return data.message;
+}
 
 export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -10,11 +25,8 @@ export const register = (name, email, password) => {
     body: JSON.stringify({ name, email, password })
   })
     .then((res) => res.json())
-    .catch((err) => {
-      if (err) {
-        return err;
-      }
-    });
+    .then(data => data)
+    .catch(err => err)
 };
 
 export const authorize = (email, password) => {
@@ -26,7 +38,7 @@ export const authorize = (email, password) => {
       },
       body: JSON.stringify({email, password})
     })
-    .then(res => res.json())
+    .then((res) => handleResponse(res))
     .then((data) => {
       if (data.token) {
         localStorage.setItem('jwt', data.token);
@@ -48,7 +60,7 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-    .then(res => res.json())
+    .then((res) => handleResponse(res))
     .then(data => {
       if (data.message) {
         return [];
@@ -68,8 +80,9 @@ export const updateUser = (name, email, token) => {
     },
     body: JSON.stringify({ name, email })
   })
-    .then(res => res.json())
-    .catch((err) => err);
+    .then((res) => res.json())
+    .then(data => data)
+    .catch(err => err)
 }
 
 export const getSavedMovies = () => {
@@ -81,7 +94,7 @@ export const getSavedMovies = () => {
       'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     }
   })
-    .then(res => res.json())
+    .then((res) => handleResponse(res))
     .then(data => {
       if (data.message) {
         return [];
@@ -101,7 +114,7 @@ export const saveMovie = (movieData) => {
     },
     body: JSON.stringify(movieData)
   })
-    .then(res => res.json())
+    .then((res) => handleResponse(res))
     .then(data => {
       if (data.message) {
         return [];
@@ -120,7 +133,7 @@ export const deleteMovie = (id) => {
       'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     }
   })
-    .then(res => res.json())
+    .then((res) => handleResponse(res))
     .then(data => {
       if (data.message) {
         return [];

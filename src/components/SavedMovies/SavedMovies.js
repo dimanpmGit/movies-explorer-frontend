@@ -78,6 +78,8 @@ const SavedMovies = ({ loggedIn, startPreloader, stopPreloader }) => {
         if (data) {
           if (data.message) {
             setSavedMoviesSet(() => []);
+            //Если проблема с отправкой запроса на сервер, выводим ошибку
+            return handleOnError(mainApi.getErrorMessage(data));
           }
           else {
             const moviesArr = Array.from(data);

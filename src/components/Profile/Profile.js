@@ -4,7 +4,7 @@ import './Profile.css';
 import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import Header from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { updateUser } from '../../utils/MainApi';
+import * as mainApi from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
 import { Error } from '../Error/Error';
 import { ERR_MSG_WHEN_NO_SERVER, ERR_MSG_SOMETHING_WRONG, GUEST_NAME } from '../../utils/constants';
@@ -38,7 +38,7 @@ const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
     setIsProfileEditing(false);
     if (jwt) {
       startPreloader();
-      updateUser(name.value, email.value, jwt)
+      mainApi.updateUser(name.value, email.value, jwt)
         .then((data) => {
           stopPreloader();
           if ((data) && (!data.message)) {
@@ -47,7 +47,8 @@ const Profile = ({ loggedIn, handleLogout, startPreloader, stopPreloader }) => {
           } else if (data.message) {
             name.onChangeInitial(currentUser.name);
             email.onChangeInitial(currentUser.email);
-            return handleOnError(data.message);
+            //Если проблема с отправкой запроса на сервер, выводим ошибку
+            return handleOnError(mainApi.getErrorMessage(data));
           }
           else {
             currentUser.name = GUEST_NAME;

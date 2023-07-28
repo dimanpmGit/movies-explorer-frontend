@@ -6,6 +6,7 @@ import SubmitButton from '../Buttons/SubmitButton/SubmitButton';
 import * as auth from '../../utils/MainApi';
 import { useInput } from '../Validation/Validation';
 import { Error } from '../Error/Error';
+import { ERR_MSG_SOMETHING_WRONG, ERR_MSG_WRONG_EMAIL_OR_PSSWD } from '../../utils/constants';
 
 const Login = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
   const navigate = useNavigate();
@@ -13,10 +14,10 @@ const Login = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
   const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
   const password = useInput('', { isEmpty: true, minLength: 8 });
   const [errorStatus, setErrorStatus] = useState(() => false);
-  const [errorText, setErrorText] = useState(() => 'Что - то пошло не так...');
+  const [errorText, setErrorText] = useState(() => ERR_MSG_SOMETHING_WRONG);
 
   const handleOnError = (text) => {
-    setErrorText(() => text || 'Неправильный email или пароль...');
+    setErrorText(() => text || ERR_MSG_WRONG_EMAIL_OR_PSSWD);
     setErrorStatus(() => true);
   }
 
@@ -38,13 +39,14 @@ const Login = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
           handleLogin();
           navigate('/', {replace: true});
         }
-        else if ((data.message) || (data === undefined)) {
-          handleOnError(data.message);
+        else if (data.message) {
+          //Если проблема с отправкой запроса на сервер, выводим ошибку
+          return handleOnError(auth.getErrorMessage(data));
         }
       })
       .catch((err) => {
         stopPreloader();
-        handleOnError(err.description);
+        handleOnError(err);
       });
   }
   if (loggedIn) {

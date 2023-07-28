@@ -42,13 +42,13 @@ const Register = ({ loggedIn, handleLogin, startPreloader, stopPreloader }) => {
            })
         }
         else if (data.message) {
-          setErrorText(() => data.message);
-          handleOnError(data.message);
+          //Если проблема с отправкой запроса на сервер, выводим ошибку
+          return handleOnError(auth.getErrorMessage(data));
         }
       })
       .catch((err) => {
         stopPreloader();
-        handleOnError(err);
+        return handleOnError(err);
       })
   }
   if (loggedIn) {

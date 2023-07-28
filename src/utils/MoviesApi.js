@@ -1,4 +1,11 @@
-import { BEATFILM_MOVIES_URL } from './constants';
+import { BEATFILM_MOVIES_URL, ERR_MSG_WHEN_NO_SERVER } from './constants';
+
+const handleResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(new Error(ERR_MSG_WHEN_NO_SERVER));
+}
 
 export const getMovies = () => {
   return fetch(BEATFILM_MOVIES_URL, {
@@ -8,14 +15,10 @@ export const getMovies = () => {
       'Content-Type': 'application/json',
     }
   })
-  .then((res) => {
-    if (res.status === 200) {
-      return res.json();
-    }
-  })
+  .then((res) => handleResponse(res))
   .then((data) => {
     return data;
   })
-  .catch(err => console.log(err));
+  .catch(err => err);
 }
 
