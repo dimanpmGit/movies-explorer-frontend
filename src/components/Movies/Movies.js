@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import * as moviesApi from '../../utils/MoviesApi';
 import * as mainApi from '../../utils/MainApi';
-import { SHORT_MOVIES_LIMIT } from '../../utils/constants';
+import { SHORT_MOVIES_LIMIT, ERR_MSG_WHEN_NO_SERVER, ERR_MSG_SOMETHING_WRONG } from '../../utils/constants';
 import { Error } from '../Error/Error';
 
 const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
@@ -29,11 +29,11 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
     setPhrase(phrase);
   }
   const [errorStatus, setErrorStatus] = useState(() => false);
-  const [errorText, setErrorText] = useState(() => 'Что-то пошло не так...');
+  const [errorText, setErrorText] = useState(() => ERR_MSG_SOMETHING_WRONG);
   const [likesStatus, setLikesStatus] = useState();
 
   const handleOnError = (text) => {
-    setErrorText(() => text || 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+    setErrorText(() => text || ERR_MSG_WHEN_NO_SERVER);
     setErrorStatus(() => true);
   }
 
