@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Portfolio.css';
 
 const Portfolio = () => {
@@ -8,13 +9,13 @@ const Portfolio = () => {
         <h2 className='portfolio__title'>Портфолио</h2>
         <ul className='portfolio__links'>
           <li className='portfolio__item'>
-            <a className='portfolio__link app__link' href='https://dimanpmgit.github.io/russian-travel/' target='_blank' rel='noreferrer'>Статичный сайт</a>
+            <Link className='portfolio__link app__link' to='https://dimanpmgit.github.io/russian-travel/' target='_blank' rel='noreferrer'>Статичный сайт</Link>
           </li>
           <li className='portfolio__item'>
-            <a className='portfolio__link app__link' href='https://dimanpmgit.github.io/russian-travel/' target='_blank' rel='noreferrer'>Адаптивный сайт</a>
+            <Link className='portfolio__link app__link' to='https://dimanpmgit.github.io/russian-travel/' target='_blank' rel='noreferrer'>Адаптивный сайт</Link>
           </li>
           <li className='portfolio__item'>
-            <a className='portfolio__link app__link' href='https://dimanpmgit.github.io/mesto/' target='_blank' rel='noreferrer'>Одностраничное приложение</a>
+            <Link className='portfolio__link app__link' to='https://dimanpmgit.github.io/mesto/' target='_blank' rel='noreferrer'>Одностраничное приложение</Link>
           </li>
         </ul>
       </div>

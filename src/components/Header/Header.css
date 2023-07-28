@@ -7,13 +7,9 @@
   background: #073042;
 }
 
-.header_none {
-  display: none;
-}
-
 .header__container {
   margin: 0 auto;
-  padding: 18px 70px;
+  padding: 15px 70px;
   max-width: 1280px;
   display: flex;
   justify-content: space-between;
@@ -34,6 +30,7 @@
 @media screen and (max-width: 768px) {
   .header__container {
     max-width: 768px;
+    padding-top: 18px;
     padding-left: 30px;
     padding-right: 30px;
   }

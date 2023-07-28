@@ -1,9 +1,9 @@
 .app {
+  background: #202020;
   min-height: 100vh;
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
-  background-color: #202020;
   color: #fff;
   font-family: Inter, Arial, sans-serif;
   font-weight: 400;

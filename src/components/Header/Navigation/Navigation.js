@@ -1,23 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navigation.css';
 
-const Navigation = ({ onMenuClick, isSavedMovies }) => {
+const Navigation = ({ isMain, onMenuClick, isAllMovies, isSavedMovies }) => {
   return (
     <div className='navigation'>
       <div className='navigation__wrapper'>
         <ul className='navigation__films'>
           <li className='navigation__item'>
-            <a className={`navigation__item-link ${isSavedMovies ? 'navigation__item-link_active ' : ''}app__link`} href='/movies'>
+            <Link className={`navigation__item-link ${isAllMovies ? 'navigation__item-link_active ' : ''}app__link`} to='/movies'>
               Фильмы
-            </a>
+            </Link>
           </li>
           <li className='navigation__item'>
-            <a className={`navigation__item-link ${isSavedMovies ? 'navigation__item-link_active ' : ''}app__link`} href='/saved-movies'>
+            <Link className={`navigation__item-link ${isSavedMovies ? 'navigation__item-link_active ' : ''}app__link`} to='/saved-movies'>
               Сохранённые фильмы
-            </a>
+            </Link>
           </li>
         </ul>
-        <a className='navigation__profile-link' href='/profile'>Аккаунт</a>
+        <Link className='navigation__profile-link' to='/profile'>
+          <p className='navigation__profile-text'>Аккаунт</p>
+          <div className={`navigation__profile-picture ${!isMain ? 'navigation__profile-picture_not-main' : ''}`} ></div>
+        </Link>
       </div>
       <button className='navigation__hamburger' type='button' onClick={onMenuClick}></button>
     </div>

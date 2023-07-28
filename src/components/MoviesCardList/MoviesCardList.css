@@ -1,5 +1,6 @@
 .movies-card-list {
   background-color: #202020;
+  transition: all .3s ease;
 }
 
 .movies-card-list__container {

@@ -22,16 +22,28 @@
 
 .login__form {
   margin: 0;
-  padding: 32px 0 0;
+  padding: 14px 0 0;
   display: flex;
   flex-direction: column;
 }
 
 .login__label {
   margin: 0;
-  padding: 7px 0 0;
+  padding: 0;
   font-size: 10px;
   color: #8b8b8b;
+}
+
+.login__input-wrapper {
+  margin: 0;
+  padding: 24px 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.login__input-wrapper:nth-of-type(2) {
+  padding-bottom: 221px;
 }
 
 .login__input {
@@ -46,32 +58,29 @@
   transition: all .3s ease;
 }
 
-.login__input_failed {
-  color: #ee3465;
-}
-
 .login__input:focus {
   border-bottom: 1px solid #4285f4;
   font-weight: 500;
 }
 
+.login__input_failed {
+  color: #ee3465;
+}
+
+.login__input_failed:focus {
+  color: #ee3465;
+  border-bottom: 1px solid #ee3465;
+}
+
 .login__err-msg {
+  position: absolute;
+  top: 75px;
+  left: 0;
   margin: 0;
-  padding: 5px 0 0;
+  padding: 0;
   color: #ee3465;
   font-size: 10px;
-  top: 0;
-  left: 0;
-  opacity: 0;
   transition: all .3s ease;
-}
-
-.login__err-msg:last-of-type {
-  padding-bottom: 200px;
-}
-
-.login__err-msg_active {
-  opacity: 1;
 }
 
 .login__submit-btn {
@@ -114,8 +123,8 @@
     padding: 231px 30px;
   }
 
-  .login__err-msg:last-of-type {
-    padding-bottom: 202px;
+  .login__input-wrapper:nth-of-type(2) {
+    padding-bottom: 223px;
   }
 }
 
@@ -130,7 +139,7 @@
   }
 
   .login__form {
-    padding-top: 70px;
+    padding-top: 54px;
     min-width: 260px;
   }
 
@@ -151,7 +160,7 @@
     font-size: 12px;
   }
 
-  .login__err-msg:last-of-type {
-    padding-bottom: 292px;
+  .login__input-wrapper:nth-of-type(2) {
+    padding-bottom: 309px;
   }
 }

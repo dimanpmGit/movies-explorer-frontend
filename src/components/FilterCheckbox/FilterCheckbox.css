@@ -52,15 +52,15 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #3ddc84;
+  background: #3e3e3e;
   top: 2px;
-  right: 2px;
+  right: 18px;
   transition: all .3s ease;
 }
 
 .filter-checkbox__btn:checked + .filter-checkbox__sliding-btn::after {
-  transform: translate(-16px);
-  background: #3e3e3e;
+  transform: translate(16px);
+  background: #3ddc84;
 }
 
 .filter-checkbox__btn:checked + .filter-checkbox__sliding-btn {

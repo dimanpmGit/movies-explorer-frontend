@@ -27,3 +27,12 @@
 **GitHub Pages**
 
 * [Ссылка на GitHub Pages](https://github.com/dimanpmGit/movies-explorer-frontend)
+
+* [Ссылка на пул реквест level-3](https://github.com/dimanpmGit/movies-explorer-frontend/pull/6)
+
+**Страница Movies Explorer**
+
+* [Ссылка на страницу](https://movies.dimanpm.nomoreparties.sbs/movies)
+
+* [Ссылка на API](https://api.movies.dimanpm.nomoreparties.sbs/movies)
+

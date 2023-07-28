@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AccountMenu.css';
 
 const AccountMenu = () => {
   return (
-    <a className='account-menu__profile-link' href='/profile'>Аккаунт</a>
+    <Link to='/profile' className='account-menu__profile-link'>Аккаунт</Link>
   )
 };
 

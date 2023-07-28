@@ -49,15 +49,13 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   column-gap: 17px;
   align-items: center;
-  cursor: pointer;
   transition: opacity .3s ease;
 }
 
-.navigation__profile-link::after {
-  content: "";
+.navigation__profile-picture {
   width: 26px;
   height: 30px;
   background-image: url('../../../images/accaunt.svg');
@@ -65,8 +63,14 @@
   background-position: center center;
   margin: 0;
   padding: 0;
-  background-color: #313131;
   border-radius: 4px;
+}
+
+.navigation__profile-picture_not-main {
+  background: #313131;
+  background-image: url('../../../images/accaunt.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .navigation__profile-link:hover {

@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AboutMe.css';
-import { studentPic } from '../../../utils/constants';
+import studentPic from '../../../images/student.jpg';
 
 const AboutMe = () => {
   return (
@@ -9,14 +10,14 @@ const AboutMe = () => {
         <h2 className='about-me__title main__title'>Студент</h2>
         <div className='about-me__info-block'>
           <div className='about-me__student-description'>
-            <h3 className='about-me__student-name'>Виталий</h3>
-            <p className='about-me__student-info'>Фронтенд-разработчик, 30 лет</p>
+            <h3 className='about-me__student-name'>Дмитрий</h3>
+            <p className='about-me__student-info'>Веб-разработчик, 41 год</p>
             <blockquote className='about-me__student-biography'>
-              Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
-              и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
-              С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+              Я родился и живу в Новосибирске, закончил факультет прикладной математики и информатики НГТУ. У меня есть жена,
+              сын, дочь и собака. Я люблю слушать музыку, а ещё увлекаюсь бегом. Решил структурировать знания и навыки в веб-разработке.
+              С 2006 года работаю в компании АО «Райффайзенбанк». Пока еще прохожу курс веб-разработки.
             </blockquote>
-            <a className='about-me__github-link' href='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</a>
+            <Link className='about-me__github-link' to='https://github.com/dimanpmGit/movies-explorer-frontend' target="_blank" rel="noreferrer">Github</Link>
           </div>
           <img className='about-me__student-photo' src={studentPic} alt='vitalii' />
         </div>
