@@ -69,13 +69,12 @@ const MoviesCardList = ({ foundMovies, moreButtonClicksCounter, showMoreButton, 
   useEffect(() => {
     setCardsOnPage(getCountCardsOnPage(foundMovies.length, cardsOnMoreButton, moreButtonClicksCounter, cardsPerPage, cardsOnPage));
   }, [moreButtonClicksCounter, cardsOnPage, foundMovies]);
-
   return (
     <div className='movies-card-list'>
       <div className='movies-card-list__container'>
         {
           foundMovies.length > 0 && foundMovies.length >= cardsOnPage &&
-          [...Array(cardsOnPage)].map((movie, i) => <MoviesCard key={foundMovies[i].id || foundMovies[i].likedMovieId} movie={foundMovies[i]} isSaved={isSaved} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleDeleteClick} />)
+          [...Array(cardsOnPage)].map((movie, i) => <MoviesCard key={foundMovies[i].id || foundMovies[i].likedMovieId} movie={foundMovies[i]} moviesSet={foundMovies} isSaved={isSaved} startPreloader={startPreloader} stopPreloader={stopPreloader} handleDeleteClick={handleDeleteClick} />)
         }
       </div>
     </div>

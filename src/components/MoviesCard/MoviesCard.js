@@ -6,7 +6,7 @@ import { MOVIES_IMAGES_URL, ERR_MSG_WHEN_NO_SERVER, ERR_MSG_SOMETHING_WRONG } fr
 import * as mainApi from '../../utils/MainApi';
 import { Error } from '../Error/Error';
 
-const MoviesCard = ({ movie, isSaved, startPreloader, stopPreloader, handleDeleteClick }) => {
+const MoviesCard = ({ movie, moviesSet, isSaved, startPreloader, stopPreloader, handleDeleteClick }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const [likeState, setLikeState] = useState(false);
   const allMoviesArr = localStorage.getItem('movies') ? Array.from(JSON.parse(localStorage.getItem('movies'))) : [];

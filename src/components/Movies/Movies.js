@@ -129,7 +129,7 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
         });
     }
     // Скачиваем сохраненные фильмы...
-    //getSavedMovies();
+    getSavedMovies();
     //Если фильмы уже скачены, сбрасываем счетчик нажатий кнопки [Ещё] и выполняем поиск
     setClicksCounter(() => 0);
     localStorage.setItem('more-btn-clicks', moreButtonClicksCounter);
@@ -147,7 +147,7 @@ const Movies = ({ loggedIn, startPreloader, stopPreloader }) => {
   };
 
   const handleLikeButtonClick = () => {
-    //setLikesStatus((likesStatus) => !likesStatus);
+    setLikesStatus((likesStatus) => !likesStatus);
   }
 
   const handleHideMoreButton = () => {
