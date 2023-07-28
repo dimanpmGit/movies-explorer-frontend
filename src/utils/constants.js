@@ -1,6 +1,6 @@
 export const BEATFILM_MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-export const BASE_URL = 'https://api.movies.dimanpm.nomoreparties.sbs';
 export const MOVIES_IMAGES_URL = 'https://api.nomoreparties.co';
+export const BASE_URL = 'https://api.movies.dimanpm.nomoreparties.sbs';
 export const EMAIL_REGXPT_PATTERN = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 export const SHORT_MOVIES_LIMIT = 40;
 export const BIG_SCREEN_RESOLUTION = 1155;

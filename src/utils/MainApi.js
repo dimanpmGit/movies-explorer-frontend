@@ -1,10 +1,7 @@
 import { BASE_URL, ERR_MSG_WHEN_NO_SERVER } from "./constants";
 
 const handleResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(res);
+  return res.json();
 }
 
 export const getErrorMessage = (data) => {
