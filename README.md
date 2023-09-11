@@ -16,6 +16,7 @@
 Растровые картинки сохранены в оптимизированном jpg.
 
 ### О проекте
+* HTML, CSS, BEM, JS, React.
 
 Протестировано в браузерах Google Chrome (в том числе с Pixel Perfect), Yandex, Firefox, Opera, Safari.
 
