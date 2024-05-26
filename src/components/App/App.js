@@ -1,137 +1,125 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import Main from '../Main/Main';
+import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-
-import './App.css';
-import PopupMenu from '../PopupMenu/PopupMenu';
+import Main from '../Main/Main';
+import Preloader from '../Preloader/Preloader';
+import { Popup } from '../Popup/Popup';
+import * as mainApi from '../../utils/MainApi';
 
 function App() {
-  const [isMain, setIsMain] = useState(true);
-  const [isOnlySaved, setIsOnlySaved] = useState(false);
-  const [noHeader, setNoHeader] = useState(false);
-  const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
-  const [isProfileEdit, setIsProfileEdit] = useState(false);
-  const [isFooterNeeds, setIsFooterNeeds] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [currentUser, setCurrentUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   
-  function handleShowPopupBtnClick() {
-    setIsPopupMenuOpen(true);
+  const handleLogin = () => {
+    setLoggedIn(() => true);
   }
 
-  function closePopup() {
-    setIsPopupMenuOpen(false);
+  const handleLogout = () => {
+    setLoggedIn(() => false);
   }
 
-  function setMainPage() {
-    setIsMain(true);
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      startPreloader();
+      mainApi.getContent(jwt)
+        .then((data) => {
+          if (data) {
+            setCurrentUser({
+              ...data,
+              _id: data._id,
+              name: data.name,
+              email: data.email
+            });
+            stopPreloader();
+            handleLogin();
+            const url = location.pathname;
+            navigate(url, { replace: true });
+          }
+        })
+        .catch((err) => {
+          handleLogout();
+          navigate('/signin', { replace: true });
+        });
+    } else {
+      handleLogout();
+    }
+  };
+
+  useEffect(() => {
+    tokenCheck();
+  }, [loggedIn]);
+
+  const startPreloader = () => {
+    setIsLoading(() => true);
   }
 
-  function setNotMainPage() {
-    setIsMain(false);
-  }
-
-  function setWithoutHeader() {
-    setNoHeader(true);
-  }
-
-  const setOnlySaved = () => {
-    return setIsOnlySaved(true);
-  }
-
-  const setAllMovies = () => {
-    return setIsOnlySaved(false);
-  }
-
-  const handleEditProfileClick = () => {
-    setIsProfileEdit(true);
-  }
-
-  const handleSaveProfileClick = () => {
-    setIsProfileEdit(false);
-  }
-
-  const setFooterNeeds = () => {
-    setIsFooterNeeds(true);
-  }
-
-  const setFooterDoesNotNeed = () => {
-    setIsFooterNeeds(false);
+  const stopPreloader = () => {
+    setIsLoading(() => false);
   }
   
+  useEffect(() => {
+    document.title = 'Movies explorer';
+    document.documentElement.setAttribute('lang', 'ru');
+  }, []);
+
   return (
-    <div className='app'>
-      <Helmet>
-        <title>Movies explorer</title>
-        <html lang="ru" />
-      </Helmet>
-      <Header 
-        isMain={isMain}
-        onMenuClick={handleShowPopupBtnClick}
-        noHeader={noHeader}
-        isSavedMovies={isOnlySaved}
-      />
-      <Routes>
-        <Route path='/' element={
-          <Main isMain={setMainPage}
-          />}
-        />
-        <Route path='/movies' element={
-          <Movies
-            onMenuClick={handleShowPopupBtnClick}
-            setAllMovies={setAllMovies}
-            onlySaved={isOnlySaved}
-            notMain={setNotMainPage}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className='app'>
+        {isLoading && <Popup element={Preloader} />}
+        <Routes>
+          <Route path='/signin' element={
+            <Login
+              loggedIn={loggedIn}
+              handleLogin={handleLogin}
+              startPreloader={startPreloader}
+              stopPreloader={stopPreloader}
+            />}
           />
-        } />
-        <Route path='/saved-movies' element={
-          <SavedMovies
-            onMenuClick={handleShowPopupBtnClick}
-            setOnlySavedMovies={setOnlySaved}
-            onlySaved={isOnlySaved}
-            notMain={setNotMainPage}
+          <Route path='/signup' element={
+            <Register
+              loggedIn={loggedIn}
+              handleLogin={handleLogin}
+              startPreloader={startPreloader}
+              stopPreloader={stopPreloader}
+            />}
           />
-        }/>
-        <Route path='/profile' element={
-          <Profile 
-            notMain={setNotMainPage}
-            getProfileEdit={handleEditProfileClick}
-            saveProfile={handleSaveProfileClick}
-            isProfileEdit={isProfileEdit}
-            setFooterDoesNotNeed={setFooterDoesNotNeed}
+          <Route path='/not-found' element={<NotFound />} />
+          <Route path='/movies' element={<ProtectedRoute element={Movies} loggedIn={loggedIn} startPreloader={startPreloader} stopPreloader={stopPreloader} />} />
+          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} loggedIn={loggedIn} startPreloader={startPreloader} stopPreloader={stopPreloader} />} />
+          <Route 
+            path='/profile'
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                handleLogout={handleLogout}
+                startPreloader={startPreloader}
+                stopPreloader={stopPreloader}
+              />}
           />
-        }/>
-        <Route path='/signin' element={
-          <Login 
-            setNoHeader={setWithoutHeader}
-            setFooterDoesNotNeed={setFooterDoesNotNeed}
-          />}
-        />
-        <Route path='/signup' element={
-          <Register 
-            setNoHeader={setWithoutHeader}
-            setFooterDoesNotNeed={setFooterDoesNotNeed}
-          />}
-        />
-        <Route path='/not-found' element={
-          <NotFound 
-            setNoHeader={setWithoutHeader}
-            setFooterDoesNotNeed={setFooterDoesNotNeed}
-          />}
-        />
-      </Routes>
-      <Footer isFooterNeeds={isFooterNeeds}/>
-      <PopupMenu isOpen={isPopupMenuOpen} onClose={closePopup} />
-    </div>
-  );
+          <Route path='/' element={
+            //loggedIn ? <Navigate to='/movies' /> : <Navigate to='/main' />
+            <Navigate to='/main' loggedIn={loggedIn} />
+          } />
+          <Route path='/main' element={<Main loggedIn={loggedIn} />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </div>
+    </CurrentUserContext.Provider>
+  )
 }
 
 export default App;

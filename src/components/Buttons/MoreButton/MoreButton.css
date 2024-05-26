@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+.more-button_none {
+  display: none;
+}
+
 .more-button__btn {
   margin: 0;
   padding: 0;

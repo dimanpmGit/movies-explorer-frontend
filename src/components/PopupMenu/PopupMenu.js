@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './PopupMenu.css';
 
 const PopupMenu = ({ isOpen, onClose }) => {
@@ -8,22 +9,22 @@ const PopupMenu = ({ isOpen, onClose }) => {
         <button className='popup-menu__close-btn app__link' onClick={onClose}></button>
         <ul className='popup-menu__menu'>
           <li className='popup-menu__item'>
-            <a className='popup-menu__link app__link' href='/'>
+            <Link className='popup-menu__link app__link' to='/'>
               Главная
-            </a>
+            </Link>
           </li>
           <li className='popup-menu__item'>
-            <a className='popup-menu__link app__link' href='/movies'>
+            <Link className='popup-menu__link app__link' to='/movies'>
               Фильмы
-            </a>
+            </Link>
           </li>
           <li className='popup-menu__item'>
-            <a className='popup-menu__link app__link' href='/saved-movies'>
+            <Link className='popup-menu__link app__link' to='/saved-movies'>
               Сохранённые фильмы
-            </a>
+            </Link>
           </li>
         </ul>
-        <a className='popup-menu__profile-link' href='/profile'>Аккаунт</a>
+        <Link className='popup-menu__profile-link' to='/profile'>Аккаунт</Link>
       </div>
     </div>
   )
