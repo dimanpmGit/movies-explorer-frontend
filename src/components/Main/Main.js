@@ -5,17 +5,22 @@ import AboutProject from '../Main/AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
-const Main = ({ isMain }) => {
-  isMain();
+const Main = ({ loggedIn }) => {
   return (
-    <main className='main'>
-      <Promo />
-      <AboutProject />
-      <Techs  />
-      <AboutMe />
-      <Portfolio />
-    </main>
+    <>
+      <Header isMain={true} loggedIn={loggedIn} />
+      <main className='main'>
+        <Promo />
+        <AboutProject />
+        <Techs  />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 .submit-button {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .submit-button__btn {
@@ -14,11 +15,20 @@
   font-size: 14px;
   font-weight: 500;
   transition: opacity .3s ease;
-  width: 100%;
+  width: 100%; 
 }
 
 .submit-button__btn:hover {
   opacity: .8;
+}
+
+.submit-button__btn:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.submit-button__btn:hover:disabled {
+  opacity: 1;
 }
 
 @media screen and (max-width: 320px) {

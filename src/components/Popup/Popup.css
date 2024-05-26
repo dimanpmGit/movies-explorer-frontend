@@ -1,0 +1,29 @@
+.popup {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: rgba(32, 32, 32, 1);
+  transition: all .3s ease;
+}
+
+.popup__container {
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 15px;
+  background: #424242;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  display: none;
+}
